@@ -163,3 +163,19 @@ def test_catalog_source_is_not_coverage(tmp_path):
     sigma_status = next(s for s in state["sources"] if s["name"] == "Sigma comunidad")
     assert sigma_status["type"] == "catalog" and sigma_status["rules"] == 3
     assert "catalog" in state["coverage"]["attack"]["analysis"]
+
+
+def test_export_downloads(running):
+    base, _ = running
+    for name, magic in (
+        ("coverage.xlsx", b"PK"),
+        ("techniques.csv", b"framework,"),
+        ("rules.csv", b"rule_id,"),
+        ("summary.md", b"# Test SOC"),
+        ("coverage.json", b"{"),
+    ):
+        code, body, headers = call(f"{base}/export/{name}")
+        assert code == 200 and body.startswith(magic), name
+        assert headers["Content-Disposition"].startswith('attachment; filename="test-soc-')
+    assert call(f"{base}/export/../../etc/passwd")[0] == 404
+    assert call(f"{base}/export/nope.txt")[0] == 404

@@ -465,12 +465,56 @@ def make_handler(ws: Workspace, allowed_hosts: set[str]):
                         "application/json",
                         {"Content-Disposition": 'attachment; filename="attack-layer.json"'},
                     )
+                if url.path.startswith("/export/"):
+                    return self._export(url.path.removeprefix("/export/"), q)
                 if url.path == "/healthz":
                     return self._json(200, {"ok": True})
                 return self._json(404, {"error": "not found"})
             except Exception:  # noqa: BLE001  a bug must not take the server down
                 traceback.print_exc()
                 return self._json(500, {"error": "internal error"})
+
+        def _export(self, name: str, q: dict[str, list[str]]) -> None:
+            from .export import CONTENT_TYPES, ExportFailed, export
+
+            files = {
+                "report.pdf": ("pdf", "techniques"),
+                "coverage.xlsx": ("xlsx", "techniques"),
+                "techniques.csv": ("csv", "techniques"),
+                "rules.csv": ("csv", "rules"),
+                "recommendations.csv": ("csv", "recommendations"),
+                "summary.md": ("md", "techniques"),
+                "coverage.json": ("json", "techniques"),
+                "report.html": ("html", "techniques"),
+            }
+            if name not in files:
+                return self._json(404, {"error": "unknown export"})
+            if not ws.results:
+                return self._json(409, {"error": "no data yet"})
+            fmt, table = files[name]
+            try:
+                data = export(ws.results, ws.rules, fmt, ws.cfg.title, table)
+            except ExportFailed as exc:
+                return self._json(501, {"error": str(exc)})
+            stamp = dt.date.today().isoformat()
+            slug = re.sub(r"[^a-z0-9]+", "-", ws.cfg.title.lower()).strip("-") or "coverage"
+            stem, ext = name.rsplit(".", 1)
+            filename = f"{slug}-{stem}-{stamp}.{ext}"
+            ctype = CONTENT_TYPES[fmt]
+            if fmt in ("pdf", "xlsx"):
+                self.send_response(200)
+                for k, v in (
+                    ("Content-Type", ctype),
+                    ("Content-Length", str(len(data))),
+                    ("Cache-Control", "no-store"),
+                    ("X-Content-Type-Options", "nosniff"),
+                    ("Content-Disposition", f'attachment; filename="{filename}"'),
+                ):
+                    self.send_header(k, v)
+                self.end_headers()
+                self.wfile.write(data)
+                return None
+            return self._send(200, data, ctype, {"Content-Disposition": f'attachment; filename="{filename}"'})
 
         def do_POST(self) -> None:  # noqa: N802
             if not self._host_ok():

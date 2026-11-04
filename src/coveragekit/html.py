@@ -47,7 +47,12 @@ td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}td:fi
 input.q{width:100%;font:inherit;padding:8px 12px;border:1px solid var(--line);border-radius:8px;margin:0 0 10px;background:var(--card)}
 footer{margin-top:48px;border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px}
 @media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.recs,.two{grid-template-columns:1fr}.trow{grid-template-columns:160px 1fr 90px}.tl{white-space:normal}}
-@media print{input.q{display:none}.rec,.kpi{break-inside:avoid}}
+@page{size:A4;margin:14mm 12mm}
+@media print{body{background:#fff;font-size:12px}.page{max-width:none;padding:0}input.q{display:none}
+.rec,.kpi,.trow,tr{break-inside:avoid}h2{break-after:avoid}.recs{grid-template-columns:1fr 1fr}
+.kpis{grid-template-columns:repeat(5,1fr)}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+tr.off{display:none}.printnote{display:block}}
+.printnote{display:none;color:var(--muted);font-size:12px;margin:0 0 8px}
 """
 
 JS = """
@@ -181,6 +186,7 @@ def render_html(results: dict[str, Coverage], rules: list[Rule], title: str = "D
     body.append(
         f'<h2>Technique detail <small>{covered} covered of {len(detail)} techniques · type to filter</small></h2>'
         f'<input class="q" id="q" type="search" placeholder="Filter by technique, tactic, level or rule">'
+        f'<p class="printnote">Printed version: covered techniques only. The uncovered ones are the light red cells in the charts above.</p>'
         + _table(["ID", "Technique", "Tactics", "Level", "Rules"], rows, attrs=' id="techs"')
     )
 

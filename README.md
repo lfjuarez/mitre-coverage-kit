@@ -93,13 +93,38 @@ How credentials are handled:
 - Every read is a GET or a search; nothing is created or changed in the SIEM. In the lab, the Elastic key above gets 403 when it tries to create a rule or write a document.
 - TLS is verified by default. Pass `--ca FILE` for a private CA; `--insecure` exists for labs and prints a warning.
 
+## Share the results
+
+`coveragekit export` writes the results in the format the reader needs, and the web app has the same list under **Export**:
+
+| Format | What it is | Command |
+|---|---|---|
+| PDF | the report, printed by a local Chrome, Chromium or Edge (8 pages for the example; uncovered techniques stay in the charts) | `coveragekit export --rules rules.csv --out report.pdf` |
+| HTML | the interactive report in one file, to mail or attach to a ticket | `--out report.html` |
+| Excel | a workbook with Summary, Techniques, Rules and Recommendations sheets, header frozen and filters on | `--out coverage.xlsx` |
+| CSV | one table: `--table techniques` (default), `rules` or `recommendations` | `--out techniques.csv` |
+| Markdown | a short summary for a ticket, a pull request or a chat message | `--out summary.md` |
+| JSON | the full `coverage.json` | `--out coverage.json` |
+
+The extension picks the format; `--format` overrides it. Nothing needs installing: the PDF uses the browser already on the machine (set `COVERAGEKIT_CHROME` to point at one), and without a browser the HTML report prints to PDF from any browser. CSV and Excel cells that start with `=`, `+`, `-` or `@` are written as text, so a rule name cannot run as a formula when the file is opened.
+
 ## Web app
 
-`coveragekit serve` runs a local web app that refreshes every source on a schedule and lets the SOC browse the result: an overview with the key figures and their change, coverage over time by level, coverage by source, next actions and changes since the previous refresh; the full ATT&CK and ATLAS matrices with filters by source, single-rule techniques and uncovered techniques, where a click opens the technique with its rules, the data each rule is missing and its Atomic Red Team tests; and pages for recommendations, rules, data sources and history, with a diff between any two refreshes. "Refresh now" pulls on demand, and the HTML report and the Navigator layer are one click away.
+`coveragekit serve` runs a local web app that refreshes every source on a schedule and lets the SOC browse the result: an overview with the key figures and their change, coverage over time by level, coverage by source, next actions and changes since the previous refresh; the full ATT&CK and ATLAS matrices with filters by source, single-rule techniques and uncovered techniques, where a click opens the technique with its rules, the data each rule is missing and its Atomic Red Team tests; and pages for recommendations, rules, data sources and history, with a diff between any two refreshes. "Refresh now" pulls on demand, and **Export** downloads the PDF, HTML, Excel, CSV, Markdown or JSON version and the Navigator layer.
 
 ```bash
 coveragekit serve --config coveragekit.toml
 ```
+
+![Overview: key figures, coverage over time by level, coverage by source, next actions and changes](docs/screenshots/serve-overview.png)
+
+![ATT&CK matrix with the soft traffic light: uncovered, Low, Medium and High](docs/screenshots/serve-matrix.png)
+
+![A technique opened from the matrix: its rules, the data each one reads, and links to MITRE and Atomic Red Team](docs/screenshots/serve-technique.png)
+
+![An uncovered technique with the catalog rules that could detect it](docs/screenshots/serve-catalog.png)
+
+The screenshots come from `lab/serve-demo.toml`: the lab exports from Splunk, Elastic and Wazuh, the synthetic example inventory, and SigmaHQ as a catalog. Some lab rules are marked tested or tuned so every level shows.
 
 ```toml
 [server]
