@@ -1,3 +1,3 @@
 """mitre-coverage-kit: measure SIEM detection coverage against MITRE ATT&CK and ATLAS."""
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"

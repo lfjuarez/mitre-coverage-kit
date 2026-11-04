@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mitre-coverage-kit"
-version = "0.2.0"
+version = "0.3.0"
 description = "Measure SIEM detection coverage against MITRE ATT&CK and ATLAS, export a Navigator layer and render a heat map."
 readme = "README.md"
 requires-python = ">=3.11"

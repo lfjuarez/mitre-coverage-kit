@@ -17,7 +17,8 @@ if [ "${REUSE:-0}" != 1 ]; then
     -e ELASTIC_PASSWORD="$LAB_PASSWORD" -e xpack.security.http.ssl.enabled=false -e xpack.security.transport.ssl.enabled=false \
     -e ES_JAVA_OPTS="-Xms768m -Xmx768m" docker.elastic.co/elasticsearch/elasticsearch:$VERSION >/dev/null
   until $ES/_cluster/health 2>/dev/null | grep -q '"status"'; do sleep 5; done
-  $ES/_security/user/kibana_system/_password -d "{\"password\":\"$LAB_PASSWORD\"}" >/dev/null
+  # Security may not be ready on the first try; retry until the password is accepted.
+  until $ES/_security/user/kibana_system/_password -d "{\"password\":\"$LAB_PASSWORD\"}" -o /dev/null -w '%{http_code}' | grep -q 200; do sleep 5; done
   docker run -d --name ck-kibana --net ck-elastic -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://ck-es:9200 \
     -e ELASTICSEARCH_USERNAME=kibana_system -e ELASTICSEARCH_PASSWORD="$LAB_PASSWORD" \
     -e XPACK_ENCRYPTEDSAVEDOBJECTS_ENCRYPTIONKEY="$KEY" -e XPACK_SECURITY_ENCRYPTIONKEY="$KEY" \

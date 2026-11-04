@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import argparse
+import datetime as dt
 import json
+import shutil
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
-from . import __version__, frameworks, importers
+from . import __version__, connectors, frameworks, importers
+from .diff import diff, format_diff
 from .html import render_html
 from .navigator import build_layer
 from .render import render_svg
@@ -84,6 +88,7 @@ def cmd_score(args: argparse.Namespace) -> None:
         _print_summary(cov)
     _write(Path(args.out), _coverage_json(results))
     print(f"wrote {args.out}")
+    _snapshot(args.history, _coverage_json(results))
 
 
 def cmd_layer(args: argparse.Namespace) -> None:
@@ -117,6 +122,7 @@ def cmd_report(args: argparse.Namespace) -> None:
     _write(out / "coverage-atlas.svg", render_svg(results["atlas"]))
     _write(out / "report.html", render_html(results, rules, title=args.title))
     print(f"wrote coverage.json, attack-layer.json, coverage-attack.svg, coverage-atlas.svg, report.html to {out}")
+    _snapshot(args.history, _coverage_json(results))
 
 
 def _keep_rows(path: str | None) -> dict[str, dict[str, str]]:
@@ -131,24 +137,86 @@ def _keep_rows(path: str | None) -> dict[str, dict[str, str]]:
         raise CliError(f"cannot read --keep-from {path}: {exc}") from exc
 
 
-def cmd_import(args: argparse.Namespace) -> None:
+def _import_to_csv(
+    siem: str, export: Path | str, data_sources: Path | str | None, keep_from: str | None, out: str
+) -> None:
     try:
-        mapped, unmapped, warnings = importers.run_import(args.siem, args.export, args.data_sources)
+        mapped, unmapped, warnings = importers.run_import(siem, export, data_sources)
     except importers.ExportError as exc:
         raise CliError(str(exc)) from exc
     for warning in warnings:
         print(f"warning: {warning}", file=sys.stderr)
-    rows = importers.to_rows(mapped, _keep_rows(args.keep_from))
+    rows = importers.to_rows(mapped, _keep_rows(keep_from))
     try:
-        importers.write_csv(rows, Path(args.out))
+        importers.write_csv(rows, Path(out))
     except OSError as exc:
-        raise CliError(f"cannot write {args.out}: {exc}") from exc
+        raise CliError(f"cannot write {out}: {exc}") from exc
     enabled = sum(r.enabled for r in mapped)
     dead = sum(r.enabled and not r.data_available for r in mapped)
-    print(f"{args.siem}: {len(mapped) + len(unmapped)} rules read, {len(mapped)} mapped to ATT&CK/ATLAS, "
-          f"{len(unmapped)} without a technique id")
+    print(
+        f"{siem}: {len(mapped) + len(unmapped)} rules read, {len(mapped)} mapped to ATT&CK/ATLAS, "
+        f"{len(unmapped)} without a technique id"
+    )
     print(f"  enabled: {enabled}  enabled without data: {dead}")
-    print(f"wrote {args.out}")
+    print(f"wrote {out}")
+
+
+def cmd_import(args: argparse.Namespace) -> None:
+    _import_to_csv(args.siem, args.export, args.data_sources, args.keep_from, args.out)
+
+
+def cmd_pull(args: argparse.Namespace) -> None:
+    if args.insecure:
+        print("warning: TLS certificate verification is disabled", file=sys.stderr)
+    http = connectors.Http(verify=not args.insecure, ca=args.ca)
+    temp = None if args.save_exports else tempfile.mkdtemp(prefix="coveragekit-")
+    out_dir = Path(args.save_exports or temp)
+    try:
+        try:
+            if args.siem == "splunk":
+                export, active = connectors.pull_splunk(args.url, out_dir, days=args.days, http=http)
+            elif args.siem == "elastic":
+                export, active = connectors.pull_elastic(
+                    args.url, out_dir, es_url=args.es_url, days=args.days, indices=args.indices, http=http
+                )
+            else:
+                export, active = connectors.pull_wazuh(
+                    args.url, out_dir, indexer_url=args.indexer_url, days=args.days, http=http
+                )
+        except connectors.ConnectorError as exc:
+            raise CliError(str(exc)) from exc
+        if active is None:
+            flag = "--es-url" if args.siem == "elastic" else "--indexer-url"
+            print(f"warning: pass {flag} to check which rules have data", file=sys.stderr)
+        _import_to_csv(args.siem, export, active, args.keep_from, args.out)
+        if args.save_exports:
+            print(f"exports saved in {out_dir}")
+    finally:
+        if temp:
+            shutil.rmtree(temp, ignore_errors=True)
+
+
+def cmd_diff(args: argparse.Namespace) -> None:
+    try:
+        before = json.loads(Path(args.before).read_text(encoding="utf-8"))
+        after = json.loads(Path(args.after).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise CliError(f"cannot read coverage file: {exc}") from exc
+    if not isinstance(before, dict) or not isinstance(after, dict):
+        raise CliError("both files must be coverage.json files written by coveragekit")
+    result = diff(before, after)
+    print(format_diff(result))
+    if args.out:
+        _write(Path(args.out), json.dumps(result, indent=2, ensure_ascii=False) + "\n")
+        print(f"wrote {args.out}")
+
+
+def _snapshot(history: str | None, payload: str) -> None:
+    if history:
+        stamp = dt.datetime.now().strftime("%Y-%m-%dT%H%M")
+        path = Path(history) / f"coverage-{stamp}.json"
+        _write(path, payload)
+        print(f"wrote {path}")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -177,10 +245,27 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out", required=True, help="output inventory CSV")
     p.set_defaults(func=cmd_import)
 
+    p = sub.add_parser("pull", help="read the rules and the active data sources straight from a SIEM (read-only)")
+    p.add_argument("siem", choices=sorted(connectors.CONNECTORS), help="which connector to use")
+    p.add_argument(
+        "--url", required=True, help="Splunk management URL (port 8089), Kibana URL, or Wazuh API URL (port 55000)"
+    )
+    p.add_argument("--es-url", help="Elasticsearch URL, to check which indices have data (elastic)")
+    p.add_argument("--indexer-url", help="Wazuh indexer URL, to check which rule groups have alerts (wazuh)")
+    p.add_argument("--indices", default="logs-*,*beat-*", help="index patterns to check for data (elastic)")
+    p.add_argument("--days", type=int, default=7, help="a source counts as active if it has events in the last N days")
+    p.add_argument("--save-exports", metavar="DIR", help="keep the raw exports in this directory")
+    p.add_argument("--ca", metavar="FILE", help="CA bundle for the SIEM's TLS certificate")
+    p.add_argument("--insecure", action="store_true", help="skip TLS verification (labs only)")
+    p.add_argument("--keep-from", help="previous inventory CSV: keep its tested, tuned and owner columns")
+    p.add_argument("--out", required=True, help="output inventory CSV")
+    p.set_defaults(func=cmd_pull)
+
     p = sub.add_parser("score", help="score coverage and write coverage.json")
     common(p)
     p.add_argument("--framework", choices=["attack", "atlas", "both"], default="both")
     p.add_argument("--out", required=True, help="output JSON file")
+    p.add_argument("--history", metavar="DIR", help="also save a dated copy of coverage.json here")
     p.set_defaults(func=cmd_score)
 
     p = sub.add_parser("layer", help="export an ATT&CK Navigator layer")
@@ -206,7 +291,14 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out-dir", required=True, help="output directory")
     p.add_argument("--name", default="SIEM detection coverage", help="layer name")
     p.add_argument("--title", default="Detection coverage report", help="HTML report title")
+    p.add_argument("--history", metavar="DIR", help="also save a dated copy of coverage.json here")
     p.set_defaults(func=cmd_report)
+
+    p = sub.add_parser("diff", help="compare two coverage.json files")
+    p.add_argument("before", help="older coverage.json")
+    p.add_argument("after", help="newer coverage.json")
+    p.add_argument("--out", help="write the comparison as JSON")
+    p.set_defaults(func=cmd_diff)
     return parser
 
 
