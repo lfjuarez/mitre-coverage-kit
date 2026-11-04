@@ -142,18 +142,21 @@ def _write(path: Path, content: str | bytes) -> Path:
 # --------------------------------------------------------------------------- Splunk
 
 
-def pull_splunk(url: str, out_dir: Path, *, days: int = 7, http: Http | None = None) -> tuple[Path, Path]:
+def pull_splunk(
+    url: str, out_dir: Path, *, days: int = 7, http: Http | None = None, env_prefix: str = "SPLUNK"
+) -> tuple[Path, Path]:
     """Correlation searches (REST) and the indexes/sourcetypes with events in the last ``days``."""
     http = http or Http()
     url = url.rstrip("/")
-    token = _env("SPLUNK_TOKEN")
-    user, password = _env("SPLUNK_USER"), _env("SPLUNK_PASSWORD")
+    p = env_prefix
+    token = _env(f"{p}_TOKEN")
+    user, password = _env(f"{p}_USER"), _env(f"{p}_PASSWORD")
     if token:
         auth = {"Authorization": f"Bearer {token}"}
     elif user and password:
         auth = {"Authorization": _basic(user, password)}
     else:
-        raise ConnectorError("set SPLUNK_TOKEN (preferred) or SPLUNK_USER and SPLUNK_PASSWORD")
+        raise ConnectorError(f"set {p}_TOKEN (preferred) or {p}_USER and {p}_PASSWORD")
     query = urllib.parse.urlencode({"output_mode": "json", "count": 0, "search": "action.correlationsearch.enabled=1"})
     rules = http.request("GET", f"{url}/servicesNS/-/-/saved/searches?{query}", auth)
     if b'"entry"' not in rules:
@@ -174,10 +177,12 @@ def pull_splunk(url: str, out_dir: Path, *, days: int = 7, http: Http | None = N
 # --------------------------------------------------------------------------- Elastic Security
 
 
-def _elastic_key() -> str:
-    key = _env("ELASTIC_API_KEY")
+def _elastic_key(prefix: str = "ELASTIC") -> str:
+    key = _env(f"{prefix}_API_KEY")
     if not key:
-        raise ConnectorError("set ELASTIC_API_KEY (an API key with read access to Kibana Security and the log indices)")
+        raise ConnectorError(
+            f"set {prefix}_API_KEY (an API key with read access to Kibana Security and the log indices)"
+        )
     if ":" in key:  # id:key form, as created by the API; Kibana shows the encoded form
         key = base64.b64encode(key.encode()).decode()
     return key
@@ -191,10 +196,11 @@ def pull_elastic(
     days: int = 7,
     indices: str = "logs-*,*beat-*",
     http: Http | None = None,
+    env_prefix: str = "ELASTIC",
 ) -> tuple[Path, Path | None]:
     """Detection rules from Kibana and, when ``es_url`` is given, the indices with events in the last ``days``."""
     http = http or Http()
-    auth = {"Authorization": f"ApiKey {_elastic_key()}", "kbn-xsrf": "true"}
+    auth = {"Authorization": f"ApiKey {_elastic_key(env_prefix)}", "kbn-xsrf": "true"}
     kibana_url = kibana_url.rstrip("/")
     page, per_page, data = 1, 1000, []
     while True:
@@ -228,12 +234,14 @@ def pull_wazuh(
     indexer_url: str | None = None,
     days: int = 7,
     http: Http | None = None,
+    env_prefix: str = "WAZUH",
 ) -> tuple[Path, Path | None]:
     """All rules from the server API and, when ``indexer_url`` is given, the rule groups seen in recent alerts."""
     http = http or Http()
-    user, password = _env("WAZUH_USER"), _env("WAZUH_PASSWORD")
+    p = env_prefix
+    user, password = _env(f"{p}_USER"), _env(f"{p}_PASSWORD")
     if not (user and password):
-        raise ConnectorError("set WAZUH_USER and WAZUH_PASSWORD (a user with the readonly role)")
+        raise ConnectorError(f"set {p}_USER and {p}_PASSWORD (a user with the readonly role)")
     api_url = api_url.rstrip("/")
     token = http.request(
         "POST", f"{api_url}/security/user/authenticate?raw=true", {"Authorization": _basic(user, password)}
@@ -254,8 +262,8 @@ def pull_wazuh(
     )
     if not indexer_url:
         return rules_path, None
-    iuser = _env("WAZUH_INDEXER_USER") or user
-    ipassword = _env("WAZUH_INDEXER_PASSWORD") or password
+    iuser = _env(f"{p}_INDEXER_USER") or user
+    ipassword = _env(f"{p}_INDEXER_PASSWORD") or password
     body = {
         "size": 0,
         "query": {"range": {"@timestamp": {"gte": f"now-{days}d"}}},
