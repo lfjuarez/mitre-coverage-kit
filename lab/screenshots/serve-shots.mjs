@@ -1,0 +1,30 @@
+// Screenshots of `coveragekit serve` for the README and posts. Needs the demo server on :8700 and a local Chrome.
+// Usage: node serve-shots.mjs <playwright-core package.json path> <output dir>
+import { createRequire } from "module";
+const require = createRequire(process.argv[2]);
+const { chromium } = require("playwright-core");
+const OUT = process.argv[3];
+const browser = await chromium.launch({ executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" });
+const page = await (await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 })).newPage();
+const go = async (hash) => { await page.goto("http://127.0.0.1:8700/" + hash); await page.waitForSelector(".card, .matrix, .rec", { timeout: 30000 }); await page.waitForTimeout(600); };
+await go("#overview");
+await page.screenshot({ path: `${OUT}/serve-overview.png` });
+await go("#matrix");
+await page.setViewportSize({ width: 1720, height: 1000 });
+await page.waitForTimeout(400);
+await page.screenshot({ path: `${OUT}/serve-matrix.png` });
+await page.screenshot({ path: `${OUT}/serve-matrix-full.png`, fullPage: true });
+await page.click('[data-t="T1003"]');
+await page.waitForTimeout(500);
+await page.screenshot({ path: `${OUT}/serve-technique.png` });
+await page.keyboard.press("Escape");
+await page.click('[data-t="T1005"]');
+await page.waitForTimeout(500);
+await page.screenshot({ path: `${OUT}/serve-catalog.png` });
+await page.setViewportSize({ width: 1440, height: 900 });
+await go("#overview");
+await page.click("details.menu summary");
+await page.waitForTimeout(300);
+await page.screenshot({ path: `${OUT}/serve-export.png` });
+await browser.close();
+console.log("ok");

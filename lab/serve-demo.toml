@@ -28,6 +28,11 @@ siem = "wazuh"
 export = "out/wazuh/rules-local.json"
 data_sources = "out/wazuh/active-groups.txt"
 
+[[source]]                       # synthetic example inventory (examples/rules.csv), to show every level
+name = "Inventario SOC (ejemplo)"
+type = "inventory"
+path = "../examples/rules.csv"
+
 [[source]]                       # available rules, not deployed: suggestions only, never coverage
 name = "Sigma comunidad"
 type = "catalog"

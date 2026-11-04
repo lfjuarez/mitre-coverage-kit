@@ -110,6 +110,23 @@ def cmd_render(args: argparse.Namespace) -> None:
     print(f"wrote {args.out}")
 
 
+def cmd_export(args: argparse.Namespace) -> None:
+    from .export import ExportFailed, export
+
+    results, rules = _prepare(args, ["attack", "atlas"])
+    fmt = args.format or Path(args.out).suffix.lstrip(".").lower()
+    try:
+        data = export(results, rules, fmt, args.title, args.table)
+    except ExportFailed as exc:
+        raise CliError(str(exc)) from exc
+    try:
+        Path(args.out).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.out).write_bytes(data)
+    except OSError as exc:
+        raise CliError(f"cannot write {args.out}: {exc}") from exc
+    print(f"wrote {args.out}")
+
+
 def cmd_html(args: argparse.Namespace) -> None:
     results, rules = _prepare(args, ["attack", "atlas"])
     _write(Path(args.out), render_html(results, rules, title=args.title))
@@ -331,6 +348,19 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out", required=True, help="output HTML file")
     p.add_argument("--title", default="Detection coverage report", help="report title")
     p.set_defaults(func=cmd_html)
+
+    p = sub.add_parser("export", help="export results to share: PDF, Excel, CSV, Markdown, JSON or HTML")
+    common(p)
+    p.add_argument("--out", required=True, help="output file; the extension picks the format unless --format is given")
+    p.add_argument("--format", choices=["pdf", "xlsx", "csv", "md", "json", "html"], help="output format")
+    p.add_argument(
+        "--table",
+        choices=["techniques", "rules", "recommendations"],
+        default="techniques",
+        help="which table for CSV (default: techniques)",
+    )
+    p.add_argument("--title", default="Detection coverage report", help="title for PDF, HTML, Excel and Markdown")
+    p.set_defaults(func=cmd_export)
 
     p = sub.add_parser("report", help="write coverage.json, the layer, both SVGs and the HTML report")
     common(p)

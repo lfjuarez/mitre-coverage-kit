@@ -18,6 +18,10 @@ main{padding:22px 30px 48px;min-width:0}
 .top{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}.top h1{font-size:22px;margin:0;letter-spacing:-.01em}.when{color:var(--muted)}
 .sp{margin-left:auto}.btn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer}.btn[disabled]{opacity:.6;cursor:default}
 .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.menu{position:relative}.menu summary{list-style:none;display:inline-block}.menu summary::-webkit-details-marker{display:none}
+.mlist{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(19,33,58,.14);padding:8px;min-width:270px;z-index:5}
+.mlist a{display:block;padding:7px 10px;border-radius:6px;color:var(--ink);font-weight:500}.mlist a:hover{background:var(--soft)}.mlist a em{display:block;font-style:normal;font-weight:400;font-size:12px;color:var(--muted)}
+.mh2{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
 .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
 .pill{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px 5px 10px;font-weight:500;max-width:100%}
 .pill i{flex:none;width:8px;height:8px;border-radius:4px;background:var(--green)}.pill.warn i{background:var(--amber)}.pill.cat{border-style:dashed}.pill.cat i{background:var(--muted)}.pill.err i{background:var(--red)}.pill em{font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -40,7 +44,7 @@ input.q,select{font:inherit;padding:6px 11px;border:1px solid var(--line);border
 .mh{background:var(--nav);color:#fff;border-radius:6px 6px 0 0;padding:6px 6px 5px;font-size:10.5px;line-height:1.25;min-height:46px}.mh b{display:block;font-size:11px}.mh span{color:#9ec5f4}
 .mc{font-size:9.8px;line-height:1.2;padding:4px 5px;margin-top:3px;border-radius:3px;min-height:30px;overflow:hidden;cursor:pointer;border:0;text-align:left;width:100%;display:block;font-family:inherit}.mc b{display:block}
 .mc b{display:flex;justify-content:space-between;gap:4px}.mc b i{font-style:normal;font-size:7px;letter-spacing:-1px;opacity:.9}
-.mc:hover{box-shadow:0 0 0 2px var(--ink)}.mc.frag{outline:2px dashed #13213a;outline-offset:-2px}.mc.dim{opacity:.25}
+.mc:hover{box-shadow:0 0 0 2px var(--ink)}.mc{position:relative}.mc.frag::after{content:"";position:absolute;right:0;bottom:0;border-style:solid;border-width:0 0 9px 9px;border-color:transparent transparent #13213a transparent}.mc.dim{opacity:.25}
 table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:8px 10px;white-space:nowrap}
 td{padding:8px 10px;border-bottom:1px solid var(--soft);vertical-align:top}td:first-child,th:first-child{padding-left:0}
 .tag{display:inline-block;font-size:11.5px;border-radius:10px;padding:1px 8px;border:1px solid var(--line);white-space:nowrap}
@@ -96,8 +100,16 @@ function header(title, sub) {
   const busy = S.refreshing;
   return `<div class="top"><h1>${esc(title)}</h1><span class="when">${esc(sub || "")}</span><span class="sp"></span>
   <button class="btn" id="refresh" ${busy ? "disabled" : ""}>${busy ? "Refreshing…" : "Refresh now"}</button>
-  <a class="btn ghost" href="/report.html" target="_blank" rel="noopener">Export report</a>
-  <a class="btn ghost" href="/attack-layer.json">Navigator layer</a></div>`;
+  <details class="menu"><summary class="btn ghost">Export ▾</summary><div class="mlist">
+    <span class="mh2">To share</span>
+    <a href="/export/report.pdf">PDF report</a>
+    <a href="/export/report.html">HTML report <em>interactive, one file</em></a>
+    <a href="/export/coverage.xlsx">Excel workbook <em>summary, techniques, rules, actions</em></a>
+    <a href="/export/summary.md">Markdown summary <em>for a ticket or chat</em></a>
+    <span class="mh2">Data</span>
+    <a href="/export/techniques.csv">Techniques CSV</a><a href="/export/rules.csv">Rules CSV</a><a href="/export/recommendations.csv">Recommendations CSV</a>
+    <a href="/export/coverage.json">coverage.json</a><a href="/attack-layer.json">ATT&amp;CK Navigator layer</a>
+  </div></details></div>`;
 }
 function pills() {
   return `<div class="pills">${S.sources.map((s) => {
@@ -180,13 +192,16 @@ function matrix() {
     }).join("");
     return `<div><div class="mh"><b>${esc(t.tactic)}</b><span>${cov_}/${cells.length} · ${Math.round((100 * cov_) / Math.max(cells.length, 1))}%</span></div>${items}</div>`;
   }).join("");
-  const srcChips = [`<button class="chip${view.source ? "" : " on"}" data-src="">All sources</button>`].concat(sourceNames().map((n) => `<button class="chip${view.source === n ? " on" : ""}" data-src="${esc(n)}">${esc(n)}</button>`)).join("");
+  const names = sourceNames();
+  const srcChips = names.length > 8
+    ? `<select id="msrc" aria-label="Source"><option value="">All sources (${names.length})</option>${names.map((n) => `<option ${view.source === n ? "selected" : ""}>${esc(n)}</option>`).join("")}</select>`
+    : [`<button class="chip${view.source ? "" : " on"}" data-src="">All sources</button>`].concat(names.map((n) => `<button class="chip${view.source === n ? " on" : ""}" data-src="${esc(n)}">${esc(n)}</button>`)).join("");
   const only = [["", "All"], ["fragile", "Single rule only"], ["uncovered", "Uncovered only"]].map(([k, l]) => `<button class="chip${view.only === k ? " on" : ""}" data-only="${k}">${l}</button>`).join("");
   const fws = Object.keys(S.coverage).map((k) => `<button class="chip${view.fw === k ? " on" : ""}" data-fw="${k}">${FW[k] || k}</button>`).join("");
   return header(`${FW[view.fw]} matrix`, "click a technique for its rules, data sources and tests") + `
   <div class="filters">${fws}<span style="width:12px"></span>${only}<input class="q" id="mq" type="search" placeholder="Find a technique" value="${esc(view.q)}"></div>
-  <div class="filters">${srcChips}<span class="legend sp">${LN.map((n, i) => `<span><i style="background:${LF[i]}"></i>${n} ${MARK[i]}</span>`).join("")}<span><i style="background:#fff;outline:2px dashed #13213a;outline-offset:-2px"></i>Single rule</span></span></div>
-  <div class="matrix" style="grid-template-columns:repeat(${c.tactics.length},minmax(92px,1fr))">${cols}</div>`;
+  <div class="filters">${srcChips}<span class="legend sp">${LN.map((n, i) => `<span><i style="background:${LF[i]}"></i>${n} ${MARK[i]}</span>`).join("")}<span><i style="background:linear-gradient(135deg,#fff 55%,#13213a 55%)"></i>Single rule</span></span></div>
+  <div class="matrix" style="grid-template-columns:repeat(${c.tactics.length},minmax(84px,1fr))">${cols}</div>`;
 }
 
 function technique(id) {
@@ -283,6 +298,7 @@ function bind() {
   const mq = $("mq"); if (mq) mq.oninput = () => { view.q = mq.value; const pos = mq.selectionStart; render(); const n = $("mq"); n.focus(); n.setSelectionRange(pos, pos); };
   const rq = $("rq"); if (rq) rq.oninput = () => { view.rq = rq.value; const pos = rq.selectionStart; render(); const n = $("rq"); n.focus(); n.setSelectionRange(pos, pos); };
   const rs = $("rsrc"); if (rs) rs.onchange = () => { view.rsrc = rs.value; render(); };
+  const ms = $("msrc"); if (ms) ms.onchange = () => { view.source = ms.value; render(); };
   const hf = $("hf"), ht = $("ht"); if (hf) hf.onchange = ht.onchange = () => { view.from = hf.value; view.to = ht.value; render(); };
 }
 
@@ -298,6 +314,7 @@ function render() {
   $("main").innerHTML = (pages[page] || overview)();
   bind();
 }
+document.addEventListener("click", (e) => { document.querySelectorAll("details.menu[open]").forEach((d) => { if (!d.contains(e.target)) d.open = false; }); });
 window.addEventListener("hashchange", () => { $("drawer").classList.remove("open"); render(); });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("drawer").classList.remove("open"); });
 load();
