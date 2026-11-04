@@ -72,13 +72,19 @@ Each technique takes the best level across all SIEMs, so the matrix shows what t
 
 ## Integration lab
 
-`lab/` runs the importers against real SIEMs in containers, one at a time: Splunk Enterprise with 14 correlation searches, Elastic Security with 16 detection rules (three of them mapped to ATLAS) and a Wazuh manager with 10 custom rules on top of its default ruleset. The detections come from one catalog (`lab/catalog.py`) with different TTPs per SIEM and some overlap, and some of the data sources they need are never loaded, so dead rules appear on purpose. Each `lab/<siem>/run.sh` starts the container, loads rules and sample events, and writes the export and the active sources to `lab/out/<siem>/`. The importers were also run against the full Wazuh default ruleset (4,499 rules) and the public SigmaHQ repository (3,162 rules).
+`lab/` runs the importers against real SIEMs in containers, one at a time: Splunk Enterprise with 14 correlation searches, Elastic Security with 16 detection rules (three of them mapped to ATLAS) and a Wazuh manager with 10 custom rules on top of its default ruleset. The detections come from one catalog (`lab/catalog.py`) with different TTPs per SIEM and some overlap, and some of the data sources they need are never loaded, so dead rules appear on purpose. On Apple Silicon, Splunk runs under Rosetta; the lab app disables the KV store, which needs CPU instructions Rosetta does not emulate. `lab/wazuh/run-full.sh` brings up the full Wazuh stack (indexer, manager and dashboard) from the official wazuh-docker repository for the screenshots. Each `lab/<siem>/run.sh` starts the container, loads rules and sample events, and writes the export and the active sources to `lab/out/<siem>/`. The importers were also run against the full Wazuh default ruleset (4,499 rules) and the public SigmaHQ repository (3,162 rules).
 
 ![Importing the lab exports from Splunk, Elastic, Wazuh and SigmaHQ](lab/screenshots/terminal-import.png)
 
 ![One coverage view across Splunk, Elastic and Wazuh](lab/screenshots/terminal-unified.png)
 
+![The Splunk lab correlation searches with their MITRE annotations](lab/screenshots/splunk-correlation-searches.png)
+
 ![The Elastic lab rules in Kibana](lab/screenshots/elastic-kibana-rules.png)
+
+![Wazuh MITRE ATT&CK dashboard with the lab alerts](lab/screenshots/wazuh-mitre-dashboard.png)
+
+![Wazuh alerts from real sshd and sudo logs, mapped to ATT&CK](lab/screenshots/wazuh-mitre-events.png)
 
 The run also surfaced a real migration issue: ATT&CK v20 retired T1562 (Impair Defenses), so rules still tagged `T1562.*` are reported as unmapped until they are remapped to the new Defense Impairment techniques.
 

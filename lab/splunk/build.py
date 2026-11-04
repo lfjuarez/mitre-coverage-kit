@@ -9,6 +9,8 @@ from catalog import DETECTIONS, DISABLED, LOADED  # noqa: E402
 
 app = HERE / "coverage_lab" / "default"
 app.mkdir(parents=True, exist_ok=True)
+# KV store needs AVX, which Rosetta does not emulate; disabling it lets Splunk Web start on Apple Silicon.
+(app / "server.conf").write_text("[kvstore]\ndisabled = true\n")
 (app / "app.conf").write_text("[ui]\nis_visible = 0\nlabel = Coverage lab\n\n[package]\nid = coverage_lab\n")
 indexes = sorted({src[0] for _, _, _, s in DETECTIONS if "splunk" in s for src in [s["splunk"]]})
 (app / "indexes.conf").write_text("".join(
