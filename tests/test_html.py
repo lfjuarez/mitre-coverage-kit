@@ -23,3 +23,14 @@ def test_report_writes_html_too(tmp_path):
     data = json.loads((tmp_path / "coverage.json").read_text())
     assert data["attack"]["analysis"]["recommendations"][0]["key"] == "restore-data"
     assert data["attack"]["analysis"]["fragile"]
+
+
+def test_cli_catalog_flag_keeps_coverage(tmp_path):
+    cat = tmp_path / "catalog.csv"
+    cat.write_text("rule_id,name,techniques,enabled,data_available,source\nS1,Sigma rule,T1005,true,true,Sigma\n")
+    plain, with_cat = tmp_path / "a.json", tmp_path / "b.json"
+    assert main(["score", "--rules", "examples/rules.csv", "--out", str(plain)]) == 0
+    assert main(["score", "--rules", "examples/rules.csv", "--catalog", str(cat), "--out", str(with_cat)]) == 0
+    a, b = json.loads(plain.read_text())["attack"], json.loads(with_cat.read_text())["attack"]
+    assert a["totals"] == b["totals"]
+    assert [e["id"] for e in b["analysis"]["catalog"]] == ["T1005"]

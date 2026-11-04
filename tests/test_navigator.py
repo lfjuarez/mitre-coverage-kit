@@ -17,7 +17,7 @@ def test_layer_schema(layer):
     assert data["name"] == "Test layer"
     assert data["domain"] == "enterprise-attack"
     assert data["versions"] == {"attack": "20", "navigator": "5.1.0", "layer": "4.5"}
-    assert data["gradient"]["colors"] == ["#f0efec", "#9ec5f4", "#3987e5", "#184f95"]
+    assert data["gradient"]["colors"] == ["#f6d5d0", "#dc9a2a", "#4a9e5c", "#1e6e42"]
     assert (data["gradient"]["minValue"], data["gradient"]["maxValue"]) == (0, 100)
     assert len(data["legendItems"]) == 4
     assert data["layout"] == {"layout": "side", "showID": True, "showName": True}

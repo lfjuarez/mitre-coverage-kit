@@ -72,3 +72,24 @@ def test_no_recommendations_without_problems(attack):
         and "tune-rules" not in keys
         and "add-redundancy" not in keys
     )
+
+
+def test_catalog_suggests_but_never_counts(attack):
+    deployed = [make("a", ["T1059"], tested=True, tuned=True)]
+    catalog = [
+        make("s1", ["T1003.001"], sources=["logsource:windows/process_creation"]),  # data arrives: ready
+        make(
+            "s2", ["T1003"], data=False, sources=["logsource:windows/security"], missing=["logsource:windows/security"]
+        ),
+        make("s3", ["T1059.001"]),  # T1059 is already covered: not suggested
+        make("s4", ["T1110"], enabled=False),  # deprecated in the catalog: ignored
+    ]
+    with_catalog = scoring.score(deployed, attack, catalog)
+    without = scoring.score(deployed, attack)
+    assert with_catalog.totals == without.totals  # coverage does not move
+    entries = {e["id"]: e for e in with_catalog.analysis["catalog"]}
+    assert set(entries) == {"T1003"}
+    assert entries["T1003"]["ready_count"] == 1 and entries["T1003"]["needs_data_count"] == 1
+    rec = next(r for r in with_catalog.analysis["recommendations"] if r["key"] == "deploy-catalog")
+    assert rec["impact"].startswith("1 uncovered technique has a public rule")
+    assert "deploy-catalog" not in [r["key"] for r in without.analysis["recommendations"]]

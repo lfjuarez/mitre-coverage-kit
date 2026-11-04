@@ -84,8 +84,11 @@ def source_breakdown(rules: list[Rule], known: set[str]) -> list[dict[str, Any]]
     return sorted(out, key=lambda x: -x["covered"])
 
 
-def score(rules: list[Rule], package: dict[str, Any]) -> Coverage:
-    """Score ``rules`` against one framework map (``attack`` or ``atlas``)."""
+def score(rules: list[Rule], package: dict[str, Any], catalog: list[Rule] | None = None) -> Coverage:
+    """Score ``rules`` against one framework map (``attack`` or ``atlas``).
+
+    ``catalog`` rules (available, not deployed) never count as coverage; they only feed the recommendations.
+    """
     framework = package["framework"]
     levels, refs = technique_levels(rules)
     known = technique_ids(package)
@@ -156,7 +159,7 @@ def score(rules: list[Rule], package: dict[str, Any]) -> Coverage:
     ]
     return Coverage(
         sources=source_breakdown(own, known),
-        analysis=analyze(own, cells, tactic_stats, dead, unmapped, framework, package["version"]),
+        analysis=analyze(own, cells, tactic_stats, dead, unmapped, framework, package["version"], catalog),
         framework=framework,
         version=package["version"],
         cells=cells,

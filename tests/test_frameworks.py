@@ -69,9 +69,7 @@ def test_write_and_load_from_directory(tmp_path, mini_attack):
         frameworks.load("atlas", tmp_path)
 
 
-@pytest.mark.skipif(
-    not (LOCAL_ATTACK.exists() and LOCAL_ATLAS.exists()), reason="local MITRE source files absent"
-)
+@pytest.mark.skipif(not (LOCAL_ATTACK.exists() and LOCAL_ATLAS.exists()), reason="local MITRE source files absent")
 def test_full_files_match_bundled_data(attack, atlas):
     built_attack = frameworks.build_attack(LOCAL_ATTACK)
     built_atlas = frameworks.build_atlas(LOCAL_ATLAS)

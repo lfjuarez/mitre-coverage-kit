@@ -63,7 +63,7 @@ from .navigator import build_layer
 from .rules import Rule, RuleError, load_rules
 from .scoring import Coverage, rule_quality, score
 
-SOURCE_TYPES = ("splunk", "elastic", "wazuh", "import", "inventory")
+SOURCE_TYPES = ("splunk", "elastic", "wazuh", "import", "inventory", "catalog")
 STAMP = "%Y-%m-%dT%H%M%S-%f"
 
 
@@ -130,6 +130,7 @@ def load_config(path: str | Path) -> Config:
             "wazuh": ["url"],
             "import": ["siem", "export"],
             "inventory": ["path"],
+            "catalog": ["path"] if opts.get("path") else ["siem", "export"],
         }
         missing = [k for k in needs[kind] if not opts.get(k)]
         if missing:
@@ -161,6 +162,7 @@ class Workspace:
         self.refreshing = False
         self.results: dict[str, Coverage] = {}
         self.rules: list[Rule] = []
+        self.catalog: list[Rule] | None = None
         self.status: dict[str, Any] = self._read_json(self.dir / "status.json") or {"sources": {}, "updated": None}
         self.next_refresh: str | None = None
 
@@ -174,14 +176,14 @@ class Workspace:
     # ------------------------------------------------------------------ refresh
 
     def _inventory_for(self, src: Source) -> Path:
-        if src.type == "inventory":
+        if src.type == "inventory" or (src.type == "catalog" and src.options.get("path")):
             return Path(src.options["path"])
         out = self.dir / "inventories" / f"{src.slug}.csv"
         previous = {}  # the last inventory of this source keeps its manual tested/tuned/owner columns
         if out.is_file():
             with open(out, newline="", encoding="utf-8") as fh:
                 previous = {r["rule_id"]: r for r in csv.DictReader(fh) if r.get("rule_id")}
-        if src.type == "import":
+        if src.type in ("import", "catalog"):
             export, active = src.options["export"], src.options.get("data_sources")
         else:
             o = src.options
@@ -221,12 +223,17 @@ class Workspace:
         try:
             statuses: dict[str, Any] = {}
             rules: list[Rule] = []
+            catalog: list[Rule] = []
             seen: set[str] = set()
             for src in self.cfg.sources:
                 started = _now()
                 try:
                     path = self._inventory_for(src)
                     loaded = load_rules(path)
+                    if src.type == "catalog":  # available rules: suggestions only, never coverage
+                        catalog.extend(loaded)
+                        statuses[src.name] = {"ok": True, "type": src.type, "at": started, "rules": len(loaded)}
+                        continue
                     for r in loaded:
                         r.source = src.name if src.type != "inventory" or not r.source else r.source
                         if r.rule_id in seen:
@@ -252,7 +259,10 @@ class Workspace:
                         "last_ok": prev.get("at") if prev.get("ok") else prev.get("last_ok"),
                     }
                     fallback = self.dir / "inventories" / f"{src.slug}.csv"
-                    if fallback.is_file():  # keep the source in the picture with its last good inventory
+                    if fallback.is_file() and src.type == "catalog":
+                        catalog.extend(load_rules(fallback))
+                        statuses[src.name]["stale"] = True
+                    elif fallback.is_file():  # keep the source in the picture with its last good inventory
                         loaded = load_rules(fallback)
                         for r in loaded:
                             r.source = src.name
@@ -264,7 +274,8 @@ class Workspace:
             if not rules:
                 raise RuleError("no source produced rules")
             packages = {n: frameworks.load(n, self.cfg.frameworks_dir) for n in ("attack", "atlas")}
-            results = {n: score(rules, p) for n, p in packages.items()}
+            cat = catalog if any(s.type == "catalog" for s in self.cfg.sources) else None
+            results = {n: score(rules, p, cat) for n, p in packages.items()}
             stamp = dt.datetime.now().strftime(STAMP)
             payload: dict[str, Any] = {"generator": f"mitre-coverage-kit {__version__}", "taken_at": _now()}
             payload.update({n: c.to_dict() for n, c in results.items()})
@@ -272,7 +283,7 @@ class Workspace:
                 json.dumps(payload, ensure_ascii=False), encoding="utf-8"
             )
             with self.lock:
-                self.results, self.rules = results, rules
+                self.results, self.rules, self.catalog = results, rules, cat
                 self.status = {"sources": statuses, "updated": _now()}
             (self.dir / "status.json").write_text(json.dumps(self.status, indent=1), encoding="utf-8")
             return {"started": True, "ok": all(s["ok"] for s in statuses.values())}
@@ -283,12 +294,15 @@ class Workspace:
     def load_latest(self) -> bool:
         """Rebuild the in-memory result from the inventories on disk, without touching the SIEMs."""
         rules: list[Rule] = []
+        catalog: list[Rule] = []
         seen: set[str] = set()
         for src in self.cfg.sources:
-            path = (
-                Path(src.options["path"]) if src.type == "inventory" else self.dir / "inventories" / f"{src.slug}.csv"
-            )
+            own = src.type == "inventory" or (src.type == "catalog" and src.options.get("path"))
+            path = Path(src.options["path"]) if own else self.dir / "inventories" / f"{src.slug}.csv"
             if not path.is_file():
+                continue
+            if src.type == "catalog":
+                catalog.extend(load_rules(path))
                 continue
             for r in load_rules(path):
                 r.source = r.source if src.type == "inventory" and r.source else src.name
@@ -299,9 +313,10 @@ class Workspace:
         if not rules:
             return False
         packages = {n: frameworks.load(n, self.cfg.frameworks_dir) for n in ("attack", "atlas")}
+        cat = catalog if any(s.type == "catalog" for s in self.cfg.sources) else None
         with self.lock:
-            self.rules = rules
-            self.results = {n: score(rules, p) for n, p in packages.items()}
+            self.rules, self.catalog = rules, cat
+            self.results = {n: score(rules, p, cat) for n, p in packages.items()}
         return True
 
     # ------------------------------------------------------------------ views

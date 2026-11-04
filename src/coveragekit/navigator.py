@@ -4,11 +4,12 @@ from __future__ import annotations
 
 from typing import Any
 
+from .palette import LEVEL_FILL
 from .scoring import LEVEL_NAMES, Coverage
 
 LEVEL_SCORES = {0: 0, 1: 33, 2: 66, 3: 100}
-LEVEL_COLORS = {0: "#f0efec", 1: "#9ec5f4", 2: "#3987e5", 3: "#184f95"}
-GRADIENT = ["#f0efec", "#9ec5f4", "#3987e5", "#184f95"]
+LEVEL_COLORS = LEVEL_FILL
+GRADIENT = [LEVEL_FILL[n] for n in range(4)]
 
 
 def build_layer(

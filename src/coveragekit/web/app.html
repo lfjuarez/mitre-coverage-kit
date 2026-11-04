@@ -6,7 +6,7 @@
 <title>coveragekit</title>
 <style>
 :root{--bg:#f4f3ef;--card:#fff;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--line:#e1e0d9;--soft:#f0efec;--nav:#13213a;--nav2:#24375a;--blue:#2a78d6;--amber:#b8690f;--green:#2f7d4f;--red:#b42318;
---l0:#f0efec;--l1:#9ec5f4;--l2:#3987e5;--l3:#184f95}
+--l0:#f6d5d0;--l1:#dc9a2a;--l2:#4a9e5c;--l3:#1e6e42}
 *{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--ink);font:14px/1.45 "Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--blue);text-decoration:none}button{font:inherit}
 .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
@@ -20,7 +20,7 @@ main{padding:22px 30px 48px;min-width:0}
 .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
 .pill{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px 5px 10px;font-weight:500;max-width:100%}
-.pill i{flex:none;width:8px;height:8px;border-radius:4px;background:var(--green)}.pill.warn i{background:var(--amber)}.pill.err i{background:var(--red)}.pill em{font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill i{flex:none;width:8px;height:8px;border-radius:4px;background:var(--green)}.pill.warn i{background:var(--amber)}.pill.cat{border-style:dashed}.pill.cat i{background:var(--muted)}.pill.err i{background:var(--red)}.pill em{font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
 .card h3{margin:0 0 12px;font-size:14px;font-weight:600;color:var(--ink2)}
@@ -39,11 +39,12 @@ input.q,select{font:inherit;padding:6px 11px;border:1px solid var(--line);border
 .matrix{display:grid;gap:4px;overflow-x:auto;padding-bottom:6px}
 .mh{background:var(--nav);color:#fff;border-radius:6px 6px 0 0;padding:6px 6px 5px;font-size:10.5px;line-height:1.25;min-height:46px}.mh b{display:block;font-size:11px}.mh span{color:#9ec5f4}
 .mc{font-size:9.8px;line-height:1.2;padding:4px 5px;margin-top:3px;border-radius:3px;min-height:30px;overflow:hidden;cursor:pointer;border:0;text-align:left;width:100%;display:block;font-family:inherit}.mc b{display:block}
-.mc:hover{outline:2px solid var(--ink)}.mc.frag{box-shadow:inset 0 0 0 2px var(--amber)}.mc.dim{opacity:.25}
+.mc b{display:flex;justify-content:space-between;gap:4px}.mc b i{font-style:normal;font-size:7px;letter-spacing:-1px;opacity:.9}
+.mc:hover{box-shadow:0 0 0 2px var(--ink)}.mc.frag{outline:2px dashed #13213a;outline-offset:-2px}.mc.dim{opacity:.25}
 table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:8px 10px;white-space:nowrap}
 td{padding:8px 10px;border-bottom:1px solid var(--soft);vertical-align:top}td:first-child,th:first-child{padding-left:0}
 .tag{display:inline-block;font-size:11.5px;border-radius:10px;padding:1px 8px;border:1px solid var(--line);white-space:nowrap}
-.tag.dead{background:#fbf1df;border-color:#f1d9ad;color:#8a4e0a}.tag.disabled{background:var(--soft);color:var(--muted)}.tag.low{background:#eaf3fd}.tag.medium{background:#d6e7fb}.tag.high{background:#c4dbf7}
+.tag.dead{background:#f6d5d0;border-color:#efb9b0;color:#8a2318}.tag.disabled{background:var(--soft);color:var(--muted)}.tag.low{background:#f8e6c4;border-color:#efd29a}.tag.medium{background:#d7ecdb;border-color:#b7dcbf}.tag.high{background:#1e6e42;border-color:#1e6e42;color:#fff}
 code{font:12px "SF Mono",Menlo,Consolas,monospace;background:#f1f0ed;padding:1px 5px;border-radius:4px}
 .recs{display:grid;grid-template-columns:1fr 1fr;gap:14px}.rec{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}.rec h4{margin:0 0 4px;font-size:15px}.rec .im{font-weight:600;margin:0 0 6px}.rec p{margin:0 0 8px;color:var(--ink2)}.rec ul{margin:0;padding-left:18px;color:var(--ink2);font-size:13px}
 .drawer{position:fixed;top:0;right:0;width:440px;max-width:100%;height:100vh;background:#fff;border-left:1px solid var(--line);box-shadow:-12px 0 30px rgba(19,33,58,.12);padding:22px 24px;overflow:auto;transform:translateX(105%);transition:transform .18s ease;z-index:10}
@@ -66,6 +67,7 @@ code{font:12px "SF Mono",Menlo,Consolas,monospace;background:#f1f0ed;padding:1px
 <script>
 "use strict";
 const LF = ["var(--l0)", "var(--l1)", "var(--l2)", "var(--l3)"], LN = ["None", "Low", "Medium", "High"];
+const INK = ["#8a2318", "#0b0b0b", "#fff", "#fff"], MARK = ["", "●", "●●", "●●●"];
 const FW = {attack: "ATT&CK Enterprise", atlas: "ATLAS"};
 let S = null, view = {fw: "attack", source: "", only: "", q: "", rstate: "", rsrc: "", rq: ""};
 const $ = (id) => document.getElementById(id);
@@ -99,8 +101,9 @@ function header(title, sub) {
 }
 function pills() {
   return `<div class="pills">${S.sources.map((s) => {
-    const cls = !s.at ? "warn" : !s.ok ? (s.stale ? "warn" : "err") : s.dead ? "warn" : "";
-    const what = !s.at ? "not pulled yet" : !s.ok ? (s.stale ? "using last good pull · " : "") + s.error : `${s.type === "inventory" ? "inventory" : s.type === "import" ? "import" : "pulled"} ${ago(s.at)} · ${s.rules} rules${s.dead ? " · " + s.dead + " dead" : ""}`;
+    const cls = s.type === "catalog" ? "cat" : !s.at ? "warn" : !s.ok ? (s.stale ? "warn" : "err") : s.dead ? "warn" : "";
+    const kind = {inventory: "inventory", import: "import", catalog: "catalog, not counted"}[s.type] || "pulled";
+    const what = !s.at ? "not pulled yet" : !s.ok ? (s.stale ? "using last good pull · " : "") + s.error : `${kind} ${ago(s.at)} · ${s.rules} rules${s.dead ? " · " + s.dead + " dead" : ""}`;
     return `<span class="pill ${cls}" title="${esc(what)}"><i></i>${esc(s.name)}<em>${esc(what)}</em></span>`;
   }).join("")}</div>`;
 }
@@ -153,7 +156,7 @@ function overview() {
   ${kpi("Techniques at High", t.by_level.High, `${t.by_level.Medium} Medium · ${t.by_level.Low} Low`)}
   ${kpi("Dead rules", dead, ch ? `${resolved} resolved since the previous refresh` : "enabled rules without data", null, dead ? "amber" : "")}
   ${kpi("Fragile techniques", a.fragile.length, "depend on a single rule", null, a.fragile.length ? "amber" : "")}
-  <div class="card s7"><h3>Coverage over time · ATT&CK</h3>${trendSvg()}<div class="legend"><span><i style="background:${LF[3]}"></i>High</span><span><i style="background:${LF[2]}"></i>Medium</span><span><i style="background:${LF[1]}"></i>Low</span><span>— total covered</span></div></div>
+  <div class="card s7"><h3>Coverage over time · ATT&CK</h3>${trendSvg()}<div class="legend"><span><i style="background:${LF[3]}"></i>High ●●●</span><span><i style="background:${LF[2]}"></i>Medium ●●</span><span><i style="background:${LF[1]}"></i>Low ●</span><span>— total covered</span></div></div>
   <div class="card s5"><h3>Coverage by source</h3>${bars}</div>
   <div class="card s6"><h3>Next actions <a href="#recommendations" style="float:right;font-size:13px">All</a></h3>${recs}</div>
   <div class="card s6"><h3>Changes since the previous refresh</h3><ul class="ch">${changes}</ul></div></div>`;
@@ -173,8 +176,7 @@ function matrix() {
     const items = cells.map((x) => {
       const frag = x.level > 0 && x.rules.length === 1;
       let dim = (view.only === "fragile" && !frag) || (view.only === "uncovered" && x.level > 0) || (q && !(x.id + " " + x.name).toLowerCase().includes(q));
-      const txt = x.level >= 2 ? "#fff" : "#0b0b0b";
-      return `<button class="mc${frag ? " frag" : ""}${dim ? " dim" : ""}" style="background:${LF[x.level]};color:${txt}" data-t="${esc(x.id)}" title="${esc(x.id + " " + x.name + " · " + LN[x.level])}"><b>${esc(x.id)}</b>${esc(x.name)}</button>`;
+      return `<button class="mc${frag ? " frag" : ""}${dim ? " dim" : ""}" style="background:${LF[x.level]};color:${INK[x.level]}" data-t="${esc(x.id)}" title="${esc(x.id + " " + x.name + " · " + LN[x.level])}"><b>${esc(x.id)}<i>${MARK[x.level]}</i></b>${esc(x.name)}</button>`;
     }).join("");
     return `<div><div class="mh"><b>${esc(t.tactic)}</b><span>${cov_}/${cells.length} · ${Math.round((100 * cov_) / Math.max(cells.length, 1))}%</span></div>${items}</div>`;
   }).join("");
@@ -183,7 +185,7 @@ function matrix() {
   const fws = Object.keys(S.coverage).map((k) => `<button class="chip${view.fw === k ? " on" : ""}" data-fw="${k}">${FW[k] || k}</button>`).join("");
   return header(`${FW[view.fw]} matrix`, "click a technique for its rules, data sources and tests") + `
   <div class="filters">${fws}<span style="width:12px"></span>${only}<input class="q" id="mq" type="search" placeholder="Find a technique" value="${esc(view.q)}"></div>
-  <div class="filters">${srcChips}<span class="legend sp">${LN.map((n, i) => `<span><i style="background:${LF[i]}"></i>${n}</span>`).join("")}<span><i style="background:#fff;box-shadow:inset 0 0 0 2px var(--amber)"></i>Single rule</span></span></div>
+  <div class="filters">${srcChips}<span class="legend sp">${LN.map((n, i) => `<span><i style="background:${LF[i]}"></i>${n} ${MARK[i]}</span>`).join("")}<span><i style="background:#fff;outline:2px dashed #13213a;outline-offset:-2px"></i>Single rule</span></span></div>
   <div class="matrix" style="grid-template-columns:repeat(${c.tactics.length},minmax(92px,1fr))">${cols}</div>`;
 }
 
@@ -200,12 +202,23 @@ function technique(id) {
     <span class="tag ${r.state}">${esc(r.state)}</span> ${r.tested ? '<span class="tag">tested</span>' : ""} ${r.tuned ? '<span class="tag">tuned</span>' : ""}
     ${r.missing.length ? `<div class="amber" style="margin-top:6px">missing data: ${r.missing.map((m) => `<code>${esc(m)}</code>`).join(" ")}</div>` : r.data_sources.length ? `<div class="muted" style="margin-top:6px">reads ${r.data_sources.map((m) => `<code>${esc(m)}</code>`).join(" ")}</div>` : ""}</div>`).join("");
   $("drawer").innerHTML = `<button class="x" aria-label="Close" id="dx">×</button><div class="muted">${esc(cells.map((y) => y.tactic).join(" · "))}</div>
-  <h2>${esc(id)} ${esc(x.name)}</h2><span class="tag" style="background:${LF[lv]};color:${lv >= 2 ? "#fff" : "#0b0b0b"}">${LN[lv]}</span>
+  <h2>${esc(id)} ${esc(x.name)}</h2><span class="tag" style="background:${LF[lv]};color:${INK[lv]}">${LN[lv]} ${MARK[lv]}</span>
   <p><a href="${mitre}" target="_blank" rel="noopener">MITRE page</a>${atomic}</p>
   <h3 style="font-size:14px;margin:18px 0 0">${rules.length ? rules.length + " rule" + (rules.length > 1 ? "s" : "") : "No rule covers this technique"}${view.source ? ` in ${esc(view.source)}` : ""}${view.source && all.length > rules.length ? ` <span class="muted">· ${all.length} across all sources</span>` : ""}</h3>${list}
-  ${rules.length === 1 && lv > 0 ? '<p class="amber" style="margin-top:14px">A single rule carries this technique. If it breaks, the technique goes dark.</p>' : ""}`;
+  ${rules.length === 1 && lv > 0 ? '<p class="amber" style="margin-top:14px">A single rule carries this technique. If it breaks, the technique goes dark.</p>' : ""}
+  ${catalogFor(id)}`;
   $("drawer").classList.add("open");
   $("dx").onclick = () => $("drawer").classList.remove("open");
+}
+
+function catalogFor(id) {
+  const e = (cov().analysis.catalog || []).find((x) => x.id === id);
+  if (!e || view.source) return "";
+  const li = (r, ready) => `<div class="rl"><b>${esc(r.name)}</b><span class="muted">${esc(r.rule_id)} · ${esc(r.source)}</span><br>
+    ${ready ? '<span class="tag medium">reads data you collect</span>' : `<span class="tag">needs ${r.missing.concat(r.missing.length ? [] : r.data_sources).map(esc).join(", ") || "a new source"}</span>`}</div>`;
+  return `<h3 style="font-size:14px;margin:22px 0 0">Available in the catalog, not deployed</h3>
+  <p class="muted" style="margin:4px 0 0">${e.ready_count} rule${e.ready_count === 1 ? "" : "s"} read data you already collect · ${e.needs_data_count} need a new source. They do not count as coverage until they run in your SIEM.</p>
+  ${e.ready.map((r) => li(r, true)).join("")}${e.needs_data.slice(0, e.ready.length ? 2 : 5).map((r) => li(r, false)).join("")}`;
 }
 
 function recommendations() {

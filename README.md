@@ -128,7 +128,7 @@ env_prefix = "ELASTIC_CLOUD"    # reads ELASTIC_CLOUD_API_KEY
 
 [[source]]
 name = "Sigma"
-type = "import"                 # any exported file or directory, read with an importer
+type = "catalog"                # available rules: suggested for gaps, never counted as coverage
 siem = "sigma"
 export = "sigma/rules"
 data_sources = "logsources.txt"
@@ -187,9 +187,25 @@ The run also surfaced a real migration issue: ATT&CK v20 retired T1562 (Impair D
 4. **Add a second rule where one carries the technique**: techniques that depend on a single rule, highest level first.
 5. **Tune the tested rules**: how many techniques would reach High.
 6. **Remap rules that point at retired techniques**, when the inventory references ids that are not in the loaded matrix.
-7. **Leave pre-compromise tactics for last**: Reconnaissance and Resource Development are marked so they do not distort the average.
+7. **Deploy available rules where nothing detects**, when a catalog is given (below).
+8. **Leave pre-compromise tactics for last**: Reconnaissance and Resource Development are marked so they do not distort the average.
 
 The numbers behind the recommendations are also in `coverage.json` under `analysis` (`fragile`, `recoverable`, `dead_by_source`, `untested_rules`, `untuned_rules`, `weak_tactics` and the `recommendations` themselves), so another tool can read them without the HTML.
+
+## Catalogs: rules you could deploy
+
+A rule repository such as SigmaHQ is not coverage: its rules only count once they are converted, deployed and tested in your SIEM. Pass it as a catalog and it feeds the recommendations without touching the numbers:
+
+```bash
+coveragekit import sigma --export sigma/rules --data-sources logsources.txt --out sigma.csv
+coveragekit report --rules splunk.csv elastic.csv --catalog sigma.csv --out-dir out/
+```
+
+For every technique nothing detects, the report and the web app list the catalog rules that cover it, those that read data you already collect first. In `coveragekit serve`, a source with `type = "catalog"` does the same.
+
+## Colours
+
+Levels use a soft traffic light: uncovered in light red, Low amber, Medium green, High dark green. The palette passes a colour-vision-deficiency check; since amber and green sit near the limit for protanopia, every cell also carries a mark (●, ●●, ●●●) and the level is always written out in tables and panels.
 
 ## How scoring works
 
