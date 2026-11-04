@@ -1,5 +1,5 @@
 {
-  "generator": "mitre-coverage-kit 0.1.0",
+  "generator": "mitre-coverage-kit 0.2.0",
   "attack": {
     "framework": "attack",
     "version": "20.0",
@@ -2722,6 +2722,735 @@
         "reason": "enabled but no data available"
       }
     ],
+    "sources": [
+      {
+        "source": "Splunk ES",
+        "rules": 42,
+        "covered": 35,
+        "only_here": 30
+      },
+      {
+        "source": "EDR",
+        "rules": 10,
+        "covered": 10,
+        "only_here": 7
+      },
+      {
+        "source": "Zeek",
+        "rules": 4,
+        "covered": 6,
+        "only_here": 6
+      },
+      {
+        "source": "Entra ID",
+        "rules": 2,
+        "covered": 3,
+        "only_here": 1
+      },
+      {
+        "source": "Okta",
+        "rules": 2,
+        "covered": 3,
+        "only_here": 3
+      },
+      {
+        "source": "CloudTrail",
+        "rules": 2,
+        "covered": 3,
+        "only_here": 1
+      },
+      {
+        "source": "WAF",
+        "rules": 2,
+        "covered": 2,
+        "only_here": 2
+      },
+      {
+        "source": "VPN",
+        "rules": 1,
+        "covered": 2,
+        "only_here": 1
+      },
+      {
+        "source": "Proxy",
+        "rules": 2,
+        "covered": 2,
+        "only_here": 1
+      },
+      {
+        "source": "Kubernetes audit",
+        "rules": 1,
+        "covered": 1,
+        "only_here": 1
+      },
+      {
+        "source": "Proofpoint",
+        "rules": 3,
+        "covered": 1,
+        "only_here": 1
+      },
+      {
+        "source": "DLP",
+        "rules": 1,
+        "covered": 0,
+        "only_here": 0
+      },
+      {
+        "source": "TIP",
+        "rules": 1,
+        "covered": 0,
+        "only_here": 0
+      }
+    ],
+    "analysis": {
+      "fragile": [
+        {
+          "id": "T1047",
+          "name": "Windows Management Instrumentation",
+          "level": 3,
+          "rule": "R-003"
+        },
+        {
+          "id": "T1106",
+          "name": "Native API",
+          "level": 3,
+          "rule": "R-015"
+        },
+        {
+          "id": "T1110",
+          "name": "Brute Force",
+          "level": 3,
+          "rule": "R-029"
+        },
+        {
+          "id": "T1129",
+          "name": "Shared Modules",
+          "level": 3,
+          "rule": "R-015"
+        },
+        {
+          "id": "T1136",
+          "name": "Create Account",
+          "level": 3,
+          "rule": "R-019"
+        },
+        {
+          "id": "T1486",
+          "name": "Data Encrypted for Impact",
+          "level": 3,
+          "rule": "R-068"
+        },
+        {
+          "id": "T1490",
+          "name": "Inhibit System Recovery",
+          "level": 3,
+          "rule": "R-069"
+        },
+        {
+          "id": "T1558",
+          "name": "Steal or Forge Kerberos Tickets",
+          "level": 3,
+          "rule": "R-027"
+        },
+        {
+          "id": "T1569",
+          "name": "System Services",
+          "level": 3,
+          "rule": "R-009"
+        },
+        {
+          "id": "T1621",
+          "name": "Multi-Factor Authentication Request Generation",
+          "level": 3,
+          "rule": "R-028"
+        },
+        {
+          "id": "T1018",
+          "name": "Remote System Discovery",
+          "level": 2,
+          "rule": "R-056"
+        },
+        {
+          "id": "T1036",
+          "name": "Masquerading",
+          "level": 2,
+          "rule": "R-047"
+        },
+        {
+          "id": "T1040",
+          "name": "Network Sniffing",
+          "level": 2,
+          "rule": "R-037"
+        },
+        {
+          "id": "T1046",
+          "name": "Network Service Discovery",
+          "level": 2,
+          "rule": "R-057"
+        },
+        {
+          "id": "T1087",
+          "name": "Account Discovery",
+          "level": 2,
+          "rule": "R-056"
+        },
+        {
+          "id": "T1127",
+          "name": "Trusted Developer Utilities Proxy Execution",
+          "level": 2,
+          "rule": "R-016"
+        },
+        {
+          "id": "T1187",
+          "name": "Forced Authentication",
+          "level": 2,
+          "rule": "R-036"
+        },
+        {
+          "id": "T1190",
+          "name": "Exploit Public-Facing Application",
+          "level": 2,
+          "rule": "R-040"
+        },
+        {
+          "id": "T1197",
+          "name": "BITS Jobs",
+          "level": 2,
+          "rule": "R-012"
+        },
+        {
+          "id": "T1489",
+          "name": "Service Stop",
+          "level": 2,
+          "rule": "R-048"
+        },
+        {
+          "id": "T1505",
+          "name": "Server Software Component",
+          "level": 2,
+          "rule": "R-021"
+        },
+        {
+          "id": "T1528",
+          "name": "Steal Application Access Token",
+          "level": 2,
+          "rule": "R-034"
+        },
+        {
+          "id": "T1539",
+          "name": "Steal Web Session Cookie",
+          "level": 2,
+          "rule": "R-038"
+        },
+        {
+          "id": "T1546",
+          "name": "Event Triggered Execution",
+          "level": 2,
+          "rule": "R-020"
+        },
+        {
+          "id": "T1557",
+          "name": "Adversary-in-the-Middle",
+          "level": 2,
+          "rule": "R-037"
+        },
+        {
+          "id": "T1559",
+          "name": "Inter-Process Communication",
+          "level": 2,
+          "rule": "R-013"
+        },
+        {
+          "id": "T1572",
+          "name": "Protocol Tunneling",
+          "level": 2,
+          "rule": "R-062"
+        },
+        {
+          "id": "T1606",
+          "name": "Forge Web Credentials",
+          "level": 2,
+          "rule": "R-038"
+        },
+        {
+          "id": "T1027",
+          "name": "Obfuscated Files or Information",
+          "level": 1,
+          "rule": "R-046"
+        },
+        {
+          "id": "T1072",
+          "name": "Software Deployment Tools",
+          "level": 1,
+          "rule": "R-017"
+        },
+        {
+          "id": "T1112",
+          "name": "Modify Registry",
+          "level": 1,
+          "rule": "R-049"
+        },
+        {
+          "id": "T1133",
+          "name": "External Remote Services",
+          "level": 1,
+          "rule": "R-041"
+        },
+        {
+          "id": "T1134",
+          "name": "Access Token Manipulation",
+          "level": 1,
+          "rule": "R-053"
+        },
+        {
+          "id": "T1135",
+          "name": "Network Share Discovery",
+          "level": 1,
+          "rule": "R-055"
+        },
+        {
+          "id": "T1140",
+          "name": "Deobfuscate/Decode Files or Information",
+          "level": 1,
+          "rule": "R-046"
+        },
+        {
+          "id": "T1176",
+          "name": "Software Extensions",
+          "level": 1,
+          "rule": "R-023"
+        },
+        {
+          "id": "T1203",
+          "name": "Exploitation for Client Execution",
+          "level": 1,
+          "rule": "R-014"
+        },
+        {
+          "id": "T1555",
+          "name": "Credentials from Password Stores",
+          "level": 1,
+          "rule": "R-035"
+        },
+        {
+          "id": "T1567",
+          "name": "Exfiltration Over Web Service",
+          "level": 1,
+          "rule": "R-065"
+        },
+        {
+          "id": "T1573",
+          "name": "Encrypted Channel",
+          "level": 1,
+          "rule": "R-063"
+        },
+        {
+          "id": "T1578",
+          "name": "Modify Cloud Compute Infrastructure",
+          "level": 1,
+          "rule": "R-051"
+        },
+        {
+          "id": "T1595",
+          "name": "Active Scanning",
+          "level": 1,
+          "rule": "R-070"
+        },
+        {
+          "id": "T1609",
+          "name": "Container Administration Command",
+          "level": 1,
+          "rule": "R-010"
+        }
+      ],
+      "recoverable": [
+        {
+          "id": "T1048",
+          "name": "Exfiltration Over Alternative Protocol",
+          "rules": [
+            "R-066"
+          ]
+        },
+        {
+          "id": "T1091",
+          "name": "Replication Through Removable Media",
+          "rules": [
+            "R-043"
+          ]
+        },
+        {
+          "id": "T1115",
+          "name": "Clipboard Data",
+          "rules": [
+            "R-067"
+          ]
+        },
+        {
+          "id": "T1200",
+          "name": "Hardware Additions",
+          "rules": [
+            "R-043"
+          ]
+        },
+        {
+          "id": "T1556",
+          "name": "Modify Authentication Process",
+          "rules": [
+            "R-025"
+          ]
+        },
+        {
+          "id": "T1560",
+          "name": "Archive Collected Data",
+          "rules": [
+            "R-066"
+          ]
+        },
+        {
+          "id": "T1570",
+          "name": "Lateral Tool Transfer",
+          "rules": [
+            "R-061"
+          ]
+        }
+      ],
+      "dead_by_source": [],
+      "untested_rules": 21,
+      "low_techniques": 16,
+      "untuned_rules": 27,
+      "medium_techniques": 26,
+      "weak_tactics": [
+        {
+          "tactic": "Collection",
+          "tactic_id": "TA0009",
+          "techniques": 17,
+          "covered": 1,
+          "percent": 5.9,
+          "mean_level": 0.12,
+          "uncovered": [
+            {
+              "id": "T1005",
+              "name": "Data from Local System"
+            },
+            {
+              "id": "T1025",
+              "name": "Data from Removable Media"
+            },
+            {
+              "id": "T1039",
+              "name": "Data from Network Shared Drive"
+            },
+            {
+              "id": "T1056",
+              "name": "Input Capture"
+            },
+            {
+              "id": "T1074",
+              "name": "Data Staged"
+            },
+            {
+              "id": "T1113",
+              "name": "Screen Capture"
+            },
+            {
+              "id": "T1114",
+              "name": "Email Collection"
+            },
+            {
+              "id": "T1115",
+              "name": "Clipboard Data"
+            },
+            {
+              "id": "T1119",
+              "name": "Automated Collection"
+            },
+            {
+              "id": "T1123",
+              "name": "Audio Capture"
+            },
+            {
+              "id": "T1125",
+              "name": "Video Capture"
+            },
+            {
+              "id": "T1185",
+              "name": "Browser Session Hijacking"
+            },
+            {
+              "id": "T1213",
+              "name": "Data from Information Repositories"
+            },
+            {
+              "id": "T1530",
+              "name": "Data from Cloud Storage"
+            },
+            {
+              "id": "T1560",
+              "name": "Archive Collected Data"
+            },
+            {
+              "id": "T1602",
+              "name": "Data from Configuration Repository"
+            }
+          ]
+        },
+        {
+          "tactic": "Exfiltration",
+          "tactic_id": "TA0010",
+          "techniques": 10,
+          "covered": 1,
+          "percent": 10.0,
+          "mean_level": 0.1,
+          "uncovered": [
+            {
+              "id": "T1011",
+              "name": "Exfiltration Over Other Network Medium"
+            },
+            {
+              "id": "T1020",
+              "name": "Automated Exfiltration"
+            },
+            {
+              "id": "T1029",
+              "name": "Scheduled Transfer"
+            },
+            {
+              "id": "T1030",
+              "name": "Data Transfer Size Limits"
+            },
+            {
+              "id": "T1041",
+              "name": "Exfiltration Over C2 Channel"
+            },
+            {
+              "id": "T1048",
+              "name": "Exfiltration Over Alternative Protocol"
+            },
+            {
+              "id": "T1052",
+              "name": "Exfiltration Over Physical Medium"
+            },
+            {
+              "id": "T1537",
+              "name": "Transfer Data to Cloud Account"
+            },
+            {
+              "id": "T1700",
+              "name": "AI-Enabled Exfiltration"
+            }
+          ]
+        },
+        {
+          "tactic": "Defense Impairment",
+          "tactic_id": "TA0112",
+          "techniques": 18,
+          "covered": 2,
+          "percent": 11.1,
+          "mean_level": 0.11,
+          "uncovered": [
+            {
+              "id": "T1207",
+              "name": "Rogue Domain Controller"
+            },
+            {
+              "id": "T1222",
+              "name": "File and Directory Permissions Modification"
+            },
+            {
+              "id": "T1484",
+              "name": "Domain or Tenant Policy Modification"
+            },
+            {
+              "id": "T1553",
+              "name": "Subvert Trust Controls"
+            },
+            {
+              "id": "T1556",
+              "name": "Modify Authentication Process"
+            },
+            {
+              "id": "T1599",
+              "name": "Network Boundary Bridging"
+            },
+            {
+              "id": "T1600",
+              "name": "Weaken Encryption"
+            },
+            {
+              "id": "T1601",
+              "name": "Modify System Image"
+            },
+            {
+              "id": "T1647",
+              "name": "Plist File Modification"
+            },
+            {
+              "id": "T1666",
+              "name": "Modify Cloud Resource Hierarchy"
+            },
+            {
+              "id": "T1685",
+              "name": "Disable or Modify Tools"
+            },
+            {
+              "id": "T1686",
+              "name": "Disable or Modify System Firewall"
+            },
+            {
+              "id": "T1687",
+              "name": "Exploitation for Defense Impairment"
+            },
+            {
+              "id": "T1688",
+              "name": "Safe Mode Boot"
+            },
+            {
+              "id": "T1689",
+              "name": "Downgrade Attack"
+            },
+            {
+              "id": "T1690",
+              "name": "Prevent Command History Logging"
+            }
+          ]
+        }
+      ],
+      "pre_compromise": [
+        "Reconnaissance",
+        "Resource Development"
+      ],
+      "recommendations": [
+        {
+          "key": "restore-data",
+          "title": "Restore the data behind the dead rules",
+          "impact": "Recovers 7 techniques without writing a rule.",
+          "body": "6 enabled rules read a source that is not arriving. They count as coverage in the SIEM and never fire. Fixing ingestion is the cheapest gain in this inventory.",
+          "items": [
+            {
+              "text": "R-025 ESCU - Authentication Package Registered in LSA · T1547.002;T1556 · Splunk ES"
+            },
+            {
+              "text": "R-043 USB - Removable Media Execution Detected · T1091;T1200 · EDR"
+            },
+            {
+              "text": "R-050 ESCU - Timestomping of Executable · T1070.006 · Splunk ES"
+            },
+            {
+              "text": "R-061 ESCU - PsExec Service Installed Remotely · T1570;T1021.002 · Splunk ES"
+            },
+            {
+              "text": "R-066 DLP - Archive Created Then Sent to External Address · T1560.001;T1048 · DLP"
+            },
+            {
+              "text": "R-067 ESCU - Clipboard Data Read by Unsigned Process · T1115 · EDR"
+            }
+          ]
+        },
+        {
+          "key": "test-rules",
+          "title": "Test the rules nobody has run",
+          "impact": "16 techniques move from Low to Medium.",
+          "body": "21 enabled rules have data but were never exercised. Run the Atomic Red Team test for each technique and record the result in the tested column.",
+          "items": [
+            {
+              "text": "R-010 Container - Exec into Running Pod from External Address · T1609",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1609"
+            },
+            {
+              "text": "R-014 ESCU - Exploit Code Executed from Browser Child Process · T1203, T1204",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1203"
+            },
+            {
+              "text": "R-017 ESCU - Remote Software Deployment Tool Pushing Script · T1072",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1072"
+            },
+            {
+              "text": "R-023 ESCU - Browser Extension Installed by Non-Admin · T1176",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1176"
+            },
+            {
+              "text": "R-033 AWS - Access Key Used from New ASN · T1078, T1552",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1078"
+            },
+            {
+              "text": "R-035 ESCU - Credentials from Web Browsers Accessed · T1555",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1555"
+            },
+            {
+              "text": "R-041 VPN - Impossible Travel for Valid Account · T1078, T1133",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1078"
+            },
+            {
+              "text": "R-046 ESCU - Suspicious Obfuscated Script Content · T1027, T1140",
+              "link": "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1027"
+            }
+          ]
+        },
+        {
+          "key": "close-gaps",
+          "title": "Close the gaps where the attacker operates",
+          "impact": "Collection, Exfiltration, Defense Impairment below 20%.",
+          "body": "These tactics sit after initial access, where a missed technique means a longer dwell time. Start with techniques your current data sources can already see.",
+          "items": [
+            {
+              "text": "Collection 1/17 · uncovered: T1005 Data from Local System, T1025 Data from Removable Media, T1039 Data from Network Shared Drive and 13 more"
+            },
+            {
+              "text": "Exfiltration 1/10 · uncovered: T1011 Exfiltration Over Other Network Medium, T1020 Automated Exfiltration, T1029 Scheduled Transfer and 6 more"
+            },
+            {
+              "text": "Defense Impairment 2/18 · uncovered: T1207 Rogue Domain Controller, T1222 File and Directory Permissions Modification, T1484 Domain or Tenant Policy Modification and 13 more"
+            }
+          ]
+        },
+        {
+          "key": "add-redundancy",
+          "title": "Add a second rule where one carries the technique",
+          "impact": "43 techniques depend on a single rule.",
+          "body": "If that rule breaks, is tuned too far or its source changes, the technique goes dark with no warning. Prioritise the ones at High, which are the ones the SOC relies on.",
+          "items": [
+            {
+              "text": "T1047 Windows Management Instrumentation · High · only R-003"
+            },
+            {
+              "text": "T1106 Native API · High · only R-015"
+            },
+            {
+              "text": "T1110 Brute Force · High · only R-029"
+            },
+            {
+              "text": "T1129 Shared Modules · High · only R-015"
+            },
+            {
+              "text": "T1136 Create Account · High · only R-019"
+            },
+            {
+              "text": "T1486 Data Encrypted for Impact · High · only R-068"
+            },
+            {
+              "text": "T1490 Inhibit System Recovery · High · only R-069"
+            },
+            {
+              "text": "T1558 Steal or Forge Kerberos Tickets · High · only R-027"
+            }
+          ]
+        },
+        {
+          "key": "tune-rules",
+          "title": "Tune the tested rules",
+          "impact": "27 rules are tested but not tuned; 26 techniques could reach High.",
+          "body": "Tuning means reviewing false positives after the test and adjusting thresholds and allow-lists. Record it in the tuned column.",
+          "items": []
+        },
+        {
+          "key": "pre-compromise",
+          "title": "Leave pre-compromise tactics for last",
+          "impact": "Reconnaissance and Resource Development are expected to be low.",
+          "body": "They happen outside your network, before the first alert. A SIEM rarely sees them; threat intelligence covers them better than detection rules. They are marked in the chart so they do not distort the average.",
+          "items": []
+        }
+      ]
+    },
     "unmapped_rules": []
   },
   "atlas": {
@@ -3920,6 +4649,327 @@
         "reason": "enabled but no data available"
       }
     ],
+    "sources": [
+      {
+        "source": "LLM gateway",
+        "rules": 4,
+        "covered": 3,
+        "only_here": 3
+      },
+      {
+        "source": "Model registry",
+        "rules": 2,
+        "covered": 3,
+        "only_here": 3
+      },
+      {
+        "source": "API gateway",
+        "rules": 3,
+        "covered": 2,
+        "only_here": 2
+      },
+      {
+        "source": "Agent runtime",
+        "rules": 2,
+        "covered": 1,
+        "only_here": 1
+      },
+      {
+        "source": "DLP",
+        "rules": 1,
+        "covered": 0,
+        "only_here": 0
+      }
+    ],
+    "analysis": {
+      "fragile": [
+        {
+          "id": "AML.T0040",
+          "name": "AI Model Inference API Access",
+          "level": 2,
+          "rule": "R-077"
+        },
+        {
+          "id": "AML.T0054",
+          "name": "LLM Jailbreak",
+          "level": 2,
+          "rule": "R-076"
+        },
+        {
+          "id": "AML.T0010",
+          "name": "AI Supply Chain Compromise",
+          "level": 1,
+          "rule": "R-083"
+        },
+        {
+          "id": "AML.T0020",
+          "name": "Poison Training Data",
+          "level": 1,
+          "rule": "R-084"
+        },
+        {
+          "id": "AML.T0024",
+          "name": "Exfiltration via AI Inference API",
+          "level": 1,
+          "rule": "R-078"
+        },
+        {
+          "id": "AML.T0035",
+          "name": "AI Artifact Collection",
+          "level": 1,
+          "rule": "R-083"
+        },
+        {
+          "id": "AML.T0053",
+          "name": "AI Agent Tool Invocation",
+          "level": 1,
+          "rule": "R-081"
+        },
+        {
+          "id": "AML.T0056",
+          "name": "Extract LLM System Prompt",
+          "level": 1,
+          "rule": "R-079"
+        }
+      ],
+      "recoverable": [
+        {
+          "id": "AML.T0029",
+          "name": "Denial of AI Service",
+          "rules": [
+            "R-085"
+          ]
+        },
+        {
+          "id": "AML.T0057",
+          "name": "LLM Data Leakage",
+          "rules": [
+            "R-080"
+          ]
+        },
+        {
+          "id": "AML.T0086",
+          "name": "Exfiltration via AI Agent Tool Invocation",
+          "rules": [
+            "R-082"
+          ]
+        }
+      ],
+      "dead_by_source": [],
+      "untested_rules": 5,
+      "low_techniques": 6,
+      "untuned_rules": 3,
+      "medium_techniques": 2,
+      "weak_tactics": [
+        {
+          "tactic": "Credential Access",
+          "tactic_id": "AML.TA0013",
+          "techniques": 6,
+          "covered": 0,
+          "percent": 0.0,
+          "mean_level": 0.0,
+          "uncovered": [
+            {
+              "id": "AML.T0055",
+              "name": "Unsecured Credentials"
+            },
+            {
+              "id": "AML.T0082",
+              "name": "RAG Credential Harvesting"
+            },
+            {
+              "id": "AML.T0083",
+              "name": "Credentials from AI Agent Configuration"
+            },
+            {
+              "id": "AML.T0090",
+              "name": "OS Credential Dumping"
+            },
+            {
+              "id": "AML.T0098",
+              "name": "AI Agent Tool Credential Harvesting"
+            },
+            {
+              "id": "AML.T0106",
+              "name": "Exploitation for Credential Access"
+            }
+          ]
+        },
+        {
+          "tactic": "Discovery",
+          "tactic_id": "AML.TA0008",
+          "techniques": 9,
+          "covered": 0,
+          "percent": 0.0,
+          "mean_level": 0.0,
+          "uncovered": [
+            {
+              "id": "AML.T0007",
+              "name": "Discover AI Artifacts"
+            },
+            {
+              "id": "AML.T0013",
+              "name": "Discover AI Model Ontology"
+            },
+            {
+              "id": "AML.T0014",
+              "name": "Discover AI Model Family"
+            },
+            {
+              "id": "AML.T0062",
+              "name": "Discover LLM Hallucinations"
+            },
+            {
+              "id": "AML.T0063",
+              "name": "Discover AI Model Outputs"
+            },
+            {
+              "id": "AML.T0069",
+              "name": "Discover LLM System Information"
+            },
+            {
+              "id": "AML.T0075",
+              "name": "Cloud Service Discovery"
+            },
+            {
+              "id": "AML.T0084",
+              "name": "Discover AI Agent Configuration"
+            },
+            {
+              "id": "AML.T0089",
+              "name": "Process Discovery"
+            }
+          ]
+        },
+        {
+          "tactic": "Lateral Movement",
+          "tactic_id": "AML.TA0015",
+          "techniques": 2,
+          "covered": 0,
+          "percent": 0.0,
+          "mean_level": 0.0,
+          "uncovered": [
+            {
+              "id": "AML.T0052",
+              "name": "Phishing"
+            },
+            {
+              "id": "AML.T0091",
+              "name": "Use Alternate Authentication Material"
+            }
+          ]
+        }
+      ],
+      "pre_compromise": [
+        "Reconnaissance",
+        "Resource Development"
+      ],
+      "recommendations": [
+        {
+          "key": "restore-data",
+          "title": "Restore the data behind the dead rules",
+          "impact": "Recovers 3 techniques without writing a rule.",
+          "body": "3 enabled rules read a source that is not arriving. They count as coverage in the SIEM and never fire. Fixing ingestion is the cheapest gain in this inventory.",
+          "items": [
+            {
+              "text": "R-080 LLM - sensitive data leaked in completion · AML.T0057 · DLP"
+            },
+            {
+              "text": "R-082 Agent - exfiltration via tool call to external URL · AML.T0086 · Agent runtime"
+            },
+            {
+              "text": "R-085 LLM - denial of service by oversized prompts · AML.T0029 · API gateway"
+            }
+          ]
+        },
+        {
+          "key": "test-rules",
+          "title": "Test the rules nobody has run",
+          "impact": "6 techniques move from Low to Medium.",
+          "body": "5 enabled rules have data but were never exercised. Run the Atomic Red Team test for each technique and record the result in the tested column.",
+          "items": [
+            {
+              "text": "R-078 LLM - high-volume extraction of model outputs · AML.T0024"
+            },
+            {
+              "text": "R-079 LLM - system prompt disclosure in model response · AML.T0056"
+            },
+            {
+              "text": "R-081 Agent - tool invocation outside allow-list · AML.T0053"
+            },
+            {
+              "text": "R-083 MLOps - model artifact downloaded outside registry · AML.T0010, AML.T0035"
+            },
+            {
+              "text": "R-084 MLOps - training dataset modified after approval · AML.T0020"
+            }
+          ]
+        },
+        {
+          "key": "close-gaps",
+          "title": "Close the gaps where the attacker operates",
+          "impact": "Credential Access, Discovery, Lateral Movement below 20%.",
+          "body": "These tactics sit after initial access, where a missed technique means a longer dwell time. Start with techniques your current data sources can already see.",
+          "items": [
+            {
+              "text": "Credential Access 0/6 · uncovered: AML.T0055 Unsecured Credentials, AML.T0082 RAG Credential Harvesting, AML.T0083 Credentials from AI Agent Configuration and 3 more"
+            },
+            {
+              "text": "Discovery 0/9 · uncovered: AML.T0007 Discover AI Artifacts, AML.T0013 Discover AI Model Ontology, AML.T0014 Discover AI Model Family and 6 more"
+            },
+            {
+              "text": "Lateral Movement 0/2 · uncovered: AML.T0052 Phishing, AML.T0091 Use Alternate Authentication Material"
+            }
+          ]
+        },
+        {
+          "key": "add-redundancy",
+          "title": "Add a second rule where one carries the technique",
+          "impact": "8 techniques depend on a single rule.",
+          "body": "If that rule breaks, is tuned too far or its source changes, the technique goes dark with no warning. Prioritise the ones at High, which are the ones the SOC relies on.",
+          "items": [
+            {
+              "text": "AML.T0040 AI Model Inference API Access · Medium · only R-077"
+            },
+            {
+              "text": "AML.T0054 LLM Jailbreak · Medium · only R-076"
+            },
+            {
+              "text": "AML.T0010 AI Supply Chain Compromise · Low · only R-083"
+            },
+            {
+              "text": "AML.T0020 Poison Training Data · Low · only R-084"
+            },
+            {
+              "text": "AML.T0024 Exfiltration via AI Inference API · Low · only R-078"
+            },
+            {
+              "text": "AML.T0035 AI Artifact Collection · Low · only R-083"
+            },
+            {
+              "text": "AML.T0053 AI Agent Tool Invocation · Low · only R-081"
+            },
+            {
+              "text": "AML.T0056 Extract LLM System Prompt · Low · only R-079"
+            }
+          ]
+        },
+        {
+          "key": "tune-rules",
+          "title": "Tune the tested rules",
+          "impact": "3 rules are tested but not tuned; 2 techniques could reach High.",
+          "body": "Tuning means reviewing false positives after the test and adjusting thresholds and allow-lists. Record it in the tuned column.",
+          "items": []
+        },
+        {
+          "key": "pre-compromise",
+          "title": "Leave pre-compromise tactics for last",
+          "impact": "Reconnaissance and Resource Development are expected to be low.",
+          "body": "They happen outside your network, before the first alert. A SIEM rarely sees them; threat intelligence covers them better than detection rules. They are marked in the chart so they do not distort the average.",
+          "items": []
+        }
+      ]
+    },
     "unmapped_rules": []
   }
 }

@@ -2,7 +2,7 @@
 
 Detection coverage is usually a belief: someone says "we cover credential access" and nobody can say how many techniques, how well, or whether the data behind the rules even arrives. `mitre-coverage-kit` turns that belief into a measurement. It reads the rules of one or several SIEMs (Splunk ES, Elastic Security, Wazuh, Microsoft Sentinel or Sigma), scores every MITRE ATT&CK Enterprise technique and every MITRE ATLAS technique from 0 to 3, exports an ATT&CK Navigator layer you can show the SOC, and renders a heat-map SVG. It also lists dead rules, the ones that are enabled but can never fire because their data source is missing.
 
-![ATT&CK coverage heat map for the synthetic example inventory](examples/output/coverage-attack.svg)
+![HTML report for the synthetic example inventory: key figures, coverage by tactic and recommendations](examples/output/report.png)
 
 ## Quick start
 
@@ -14,9 +14,10 @@ cd mitre-coverage-kit
 uv venv .venv && uv pip install -e ".[dev]"
 ```
 
-Then three commands:
+Then one command per output:
 
 ```bash
+coveragekit html   --rules examples/rules.csv --out examples/output/report.html
 coveragekit score  --rules examples/rules.csv --out examples/output/coverage.json
 coveragekit layer  --rules examples/rules.csv --out examples/output/attack-layer.json
 coveragekit render --rules examples/rules.csv --framework attack --out examples/output/coverage-attack.svg
@@ -36,7 +37,7 @@ R-008,ESCU - Rundll32 Loading DLL from User Profile,T1218.011,true,true,false,fa
 R-080,LLM - sensitive data leaked in completion,AML.T0057,true,false,false,false,ai-secops,DLP
 ```
 
-`techniques` is a semicolon-separated list of ATT&CK or ATLAS ids; sub-technique ids such as `T1059.001` or `AML.T0051.000` are accepted. Booleans accept `true/false`, `yes/no` and `1/0`. Rule ids must be unique and every rule needs at least one well-formed technique id. Ids that are well-formed but absent from the loaded matrices are reported as warnings, not errors. The required columns are `rule_id`, `techniques`, `enabled` and `data_available`; the rest are optional.
+`techniques` is a semicolon-separated list of ATT&CK or ATLAS ids; sub-technique ids such as `T1059.001` or `AML.T0051.000` are accepted. Booleans accept `true/false`, `yes/no` and `1/0`. Rule ids must be unique and every rule needs at least one well-formed technique id. Ids that are well-formed but absent from the loaded matrices are reported as warnings, not errors. The required columns are `rule_id`, `techniques`, `enabled` and `data_available`; the rest are optional. `data_sources` lists what the rule reads, as `kind:value` separated by semicolons (for example `index:wineventlog;sourcetype:XmlWinEventLog:Security`); the importers fill it in. `missing_data` is the subset the import could not find in `--data-sources`; the report groups the dead rules by it, so one missing sourcetype that silences four rules shows up as one line.
 
 ## Import from your SIEM
 
@@ -88,6 +89,20 @@ Each technique takes the best level across all SIEMs, so the matrix shows what t
 
 The run also surfaced a real migration issue: ATT&CK v20 retired T1562 (Impair Defenses), so rules still tagged `T1562.*` are reported as unmapped until they are remapped to the new Defense Impairment techniques.
 
+## The report
+
+`report.html` is a single file with no external assets, so it can be mailed, dropped into a ticket or printed to PDF from the browser. It shows the key figures, a row of cells per tactic (hover gives the technique, its level and its rules), coverage by source when the inventory comes from several SIEMs, the dead rules, and a searchable table of every technique. The same page carries the recommendations, which are computed from the inventory with plain rules and ordered by effort:
+
+1. **Restore the data behind the dead rules**: how many techniques come back without writing a rule, and which missing sources silence them (from the `missing_data` column the importers fill in).
+2. **Test the rules nobody has run**: enabled rules with data that were never exercised, with a link to the Atomic Red Team test for each technique.
+3. **Close the gaps where the attacker operates**: the post-access tactics under 20 % and their uncovered techniques.
+4. **Add a second rule where one carries the technique**: techniques that depend on a single rule, highest level first.
+5. **Tune the tested rules**: how many techniques would reach High.
+6. **Remap rules that point at retired techniques**, when the inventory references ids that are not in the loaded matrix.
+7. **Leave pre-compromise tactics for last**: Reconnaissance and Resource Development are marked so they do not distort the average.
+
+The numbers behind the recommendations are also in `coverage.json` under `analysis` (`fragile`, `recoverable`, `dead_by_source`, `untested_rules`, `untuned_rules`, `weak_tactics` and the `recommendations` themselves), so another tool can read them without the HTML.
+
 ## How scoring works
 
 Each rule gets a quality level:
@@ -111,9 +126,12 @@ Dead rules are enabled rules whose `data_available` is false. They look like cov
 - `tactics`: per tactic, the technique count, covered count, percent and mean level.
 - `cells`: one entry per tactic and technique with `framework`, `tactic`, `tactic_id`, `id`, `name`, `level` and the `rules` that reference it.
 - `dead_rules` and `unmapped_rules`.
+- `analysis`: the statistics and recommendations described above.
 - `sources`: with more than one SIEM, rules, techniques covered and techniques covered only there, per SIEM.
 
 `attack-layer.json` is an ATT&CK Navigator layer (layer format 4.5, Enterprise domain) with scores 0, 33, 66 and 100 and a comment per technique that lists the contributing rules. To use it, open the [ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/), choose Open Existing Layer, then Upload from local, and select the file.
+
+`report.html` is the HTML report described above.
 
 `coverage-attack.svg` and `coverage-atlas.svg` are self-contained SVGs: a fingerprint matrix with one column per tactic and one cell per technique, horizontal bars with the percentage of techniques covered per tactic, a legend and a footer with totals.
 
