@@ -8,10 +8,10 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from . import __version__, frameworks
+from . import __version__, frameworks, importers
 from .navigator import build_layer
 from .render import render_svg
-from .rules import RuleError, load_rules, unknown_technique_warnings
+from .rules import RuleError, merge_inventories, unknown_technique_warnings
 from .scoring import Coverage, score
 
 
@@ -29,7 +29,7 @@ def _write(path: Path, text: str) -> None:
 
 def _prepare(args: argparse.Namespace, names: list[str]) -> dict[str, Coverage]:
     try:
-        rules = load_rules(args.rules)
+        rules = merge_inventories(args.rules)
         packages = {n: frameworks.load(n, args.frameworks_dir) for n in names}
     except (RuleError, frameworks.FrameworkError, OSError, json.JSONDecodeError) as exc:
         raise CliError(str(exc)) from exc
@@ -56,6 +56,11 @@ def _print_summary(coverage: Coverage) -> None:
         covered = f"{x['covered']}/{x['techniques']}"
         print(f"  {x['tactic'].ljust(width)}  {covered:>9}  {x['percent']:>7.1f}%  {x['mean_level']:>10.2f}")
     print(f"  dead rules: {len(coverage.dead_rules)}  unmapped rules: {len(coverage.unmapped_rules)}")
+    if coverage.sources:
+        width = max(len(x["source"]) for x in coverage.sources)
+        print(f"  {'Source'.ljust(width)}  {'Rules':>6}  {'Techniques':>10}  {'Only here':>9}")
+        for x in coverage.sources:
+            print(f"  {x['source'].ljust(width)}  {x['rules']:>6}  {x['covered']:>10}  {x['only_here']:>9}")
 
 
 def _coverage_json(results: dict[str, Coverage]) -> str:
@@ -106,6 +111,38 @@ def cmd_report(args: argparse.Namespace) -> None:
     print(f"wrote coverage.json, attack-layer.json, coverage-attack.svg, coverage-atlas.svg to {out}")
 
 
+def _keep_rows(path: str | None) -> dict[str, dict[str, str]]:
+    if not path:
+        return {}
+    import csv
+
+    try:
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            return {row["rule_id"]: row for row in csv.DictReader(fh) if row.get("rule_id")}
+    except (OSError, KeyError) as exc:
+        raise CliError(f"cannot read --keep-from {path}: {exc}") from exc
+
+
+def cmd_import(args: argparse.Namespace) -> None:
+    try:
+        mapped, unmapped, warnings = importers.run_import(args.siem, args.export, args.data_sources)
+    except importers.ExportError as exc:
+        raise CliError(str(exc)) from exc
+    for warning in warnings:
+        print(f"warning: {warning}", file=sys.stderr)
+    rows = importers.to_rows(mapped, _keep_rows(args.keep_from))
+    try:
+        importers.write_csv(rows, Path(args.out))
+    except OSError as exc:
+        raise CliError(f"cannot write {args.out}: {exc}") from exc
+    enabled = sum(r.enabled for r in mapped)
+    dead = sum(r.enabled and not r.data_available for r in mapped)
+    print(f"{args.siem}: {len(mapped) + len(unmapped)} rules read, {len(mapped)} mapped to ATT&CK/ATLAS, "
+          f"{len(unmapped)} without a technique id")
+    print(f"  enabled: {enabled}  enabled without data: {dead}")
+    print(f"wrote {args.out}")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="coveragekit",
@@ -115,12 +152,22 @@ def build_parser() -> argparse.ArgumentParser:
     sub = parser.add_subparsers(dest="command", required=True)
 
     def common(p: argparse.ArgumentParser) -> None:
-        p.add_argument("--rules", required=True, help="rule inventory (.csv or .json)")
+        p.add_argument(
+            "--rules", required=True, nargs="+", help="rule inventory (.csv or .json); several files are merged"
+        )
         p.add_argument("--frameworks-dir", help="directory with maps written by 'coveragekit fetch'")
 
     p = sub.add_parser("fetch", help="download ATT&CK and ATLAS and write the minimal maps")
     p.add_argument("--dest", required=True, help="output directory")
     p.set_defaults(func=cmd_fetch)
+
+    p = sub.add_parser("import", help="convert a SIEM rule export into a rule inventory CSV")
+    p.add_argument("siem", choices=sorted(importers.IMPORTERS), help="where the export comes from")
+    p.add_argument("--export", required=True, help="export file or directory (see README for each SIEM)")
+    p.add_argument("--data-sources", help="sources with recent events (CSV or one per line)")
+    p.add_argument("--keep-from", help="previous inventory CSV: keep its tested, tuned and owner columns")
+    p.add_argument("--out", required=True, help="output inventory CSV")
+    p.set_defaults(func=cmd_import)
 
     p = sub.add_parser("score", help="score coverage and write coverage.json")
     common(p)

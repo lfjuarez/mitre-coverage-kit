@@ -1,0 +1,6 @@
+title: AWS CloudTrail Disabled
+id: 33333333-3333-3333-3333-333333333333
+status: stable
+tags: [attack.defense-impairment, attack.t1562.008]
+logsource: {product: aws, service: cloudtrail}
+detection: {sel: {eventName: StopLogging}, condition: sel}

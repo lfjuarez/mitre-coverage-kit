@@ -1,0 +1,2 @@
+title,disabled,action.correlationsearch.enabled,action.correlationsearch.annotations,search
+ESCU - Kerberoasting,0,1,"{""mitre_attack"": [""T1558.003""]}","index=wineventlog sourcetype=XmlWinEventLog:Security EventCode=4769"

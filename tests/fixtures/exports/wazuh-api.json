@@ -1,0 +1,5 @@
+{"data": {"affected_items": [
+ {"id": 5712, "level": 10, "status": "enabled", "description": "sshd: brute force", "groups": ["syslog", "sshd", "authentication_failures"], "mitre": {"id": ["T1110"], "tactic": ["Credential Access"], "technique": ["Brute Force"]}},
+ {"id": 92000, "level": 4, "status": "disabled", "description": "x", "groups": ["sysmon"], "mitre": {"id": ["T1059.001"]}},
+ {"id": 1, "level": 3, "status": "enabled", "description": "no mitre", "groups": ["syslog"], "mitre": {}}
+], "total_affected_items": 3}}

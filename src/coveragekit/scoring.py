@@ -30,6 +30,7 @@ class Coverage:
     tactics: list[dict[str, Any]] = field(default_factory=list)
     totals: dict[str, Any] = field(default_factory=dict)
     dead_rules: list[dict[str, str]] = field(default_factory=list)
+    sources: list[dict[str, Any]] = field(default_factory=list)
     unmapped_rules: list[dict[str, str]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -40,6 +41,7 @@ class Coverage:
             "tactics": self.tactics,
             "cells": self.cells,
             "dead_rules": self.dead_rules,
+            "sources": self.sources,
             "unmapped_rules": self.unmapped_rules,
         }
 
@@ -54,6 +56,29 @@ def technique_levels(rules: list[Rule]) -> tuple[dict[str, int], dict[str, list[
             levels[tid] = max(levels.get(tid, 0), quality)
             refs.setdefault(tid, []).append(rule.rule_id)
     return levels, refs
+
+
+def source_breakdown(rules: list[Rule], known: set[str]) -> list[dict[str, Any]]:
+    """Per source (SIEM), techniques covered and techniques that only that source covers.
+
+    Empty when the inventory has a single source, so single-SIEM reports stay unchanged.
+    """
+    groups: dict[str, list[Rule]] = {}
+    for rule in rules:
+        groups.setdefault(rule.source or "unspecified", []).append(rule)
+    if len(groups) < 2:
+        return []
+    covered = {
+        name: {tid for tid, lv in technique_levels(group)[0].items() if lv > 0 and tid in known}
+        for name, group in groups.items()
+    }
+    out = []
+    for name, techs in covered.items():
+        others = set().union(*(t for n, t in covered.items() if n != name))
+        out.append(
+            {"source": name, "rules": len(groups[name]), "covered": len(techs), "only_here": len(techs - others)}
+        )
+    return sorted(out, key=lambda x: -x["covered"])
 
 
 def score(rules: list[Rule], package: dict[str, Any]) -> Coverage:
@@ -127,6 +152,7 @@ def score(rules: list[Rule], package: dict[str, Any]) -> Coverage:
         if not any(parent_id(t) in known for t in r.valid_techniques)
     ]
     return Coverage(
+        sources=source_breakdown(own, known),
         framework=framework,
         version=package["version"],
         cells=cells,

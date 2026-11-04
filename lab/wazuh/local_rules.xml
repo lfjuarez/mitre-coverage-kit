@@ -1,0 +1,74 @@
+<group name="lab,sysmon,">
+  <rule id="100100" level="10">
+    <match>LABDETECT lsass-access</match>
+    <description>LSASS memory access</description>
+    <mitre><id>T1003.001</id></mitre>
+    <group>credential_access,</group>
+  </rule>
+</group>
+<group name="lab,windows,">
+  <rule id="100101" level="10">
+    <match>LABDETECT sched-task</match>
+    <description>Scheduled task created</description>
+    <mitre><id>T1053.005</id></mitre>
+    <group>windows_security,</group>
+  </rule>
+</group>
+<group name="lab,sshd,">
+  <rule id="100102" level="10">
+    <match>LABDETECT ssh-brute</match>
+    <description>SSH brute force</description>
+    <mitre><id>T1110.001</id></mitre>
+    <group>authentication_failures,</group>
+  </rule>
+</group>
+<group name="lab,sudo,">
+  <rule id="100103" level="10">
+    <match>LABDETECT sudo-abuse</match>
+    <description>Unexpected sudo to root</description>
+    <mitre><id>T1548.003</id></mitre>
+    <group>privilege_escalation,</group>
+  </rule>
+</group>
+<group name="lab,syscheck,">
+  <rule id="100104" level="10">
+    <match>LABDETECT cron-persist</match>
+    <description>Crontab modified</description>
+    <mitre><id>T1053.003</id></mitre>
+    <group>cron,</group>
+  </rule>
+  <rule id="100105" level="10">
+    <match>LABDETECT ssh-keys</match>
+    <description>authorized_keys modified</description>
+    <mitre><id>T1098.004</id></mitre>
+    <group>ssh_keys,</group>
+  </rule>
+  <rule id="100106" level="10">
+    <match>LABDETECT web-shell</match>
+    <description>Web shell written to the web root</description>
+    <mitre><id>T1505.003</id></mitre>
+    <group>web,</group>
+  </rule>
+</group>
+<group name="lab,rootcheck,">
+  <rule id="100107" level="10">
+    <match>LABDETECT rootkit</match>
+    <description>Rootkit indicators on host</description>
+    <mitre><id>T1014</id></mitre>
+    <group>rootkit,</group>
+  </rule>
+</group>
+<group name="lab,audit,">
+  <rule id="100108" level="10">
+    <match>LABDETECT hist-clear</match>
+    <description>Shell history cleared</description>
+    <mitre><id>T1070.003</id></mitre>
+    <group>audit_command,</group>
+  </rule>
+  <rule id="100109" level="10">
+    <match>LABDETECT crypto-miner</match>
+    <description>Cryptominer process</description>
+    <mitre><id>T1496.001</id></mitre>
+    <group>audit_command,</group>
+  </rule>
+</group>

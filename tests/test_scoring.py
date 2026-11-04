@@ -74,7 +74,8 @@ def test_to_dict_is_json_serialisable(mini_attack):
 
     cov = scoring.score([make("a", ["T1059"])], mini_attack)
     data = json.loads(json.dumps(cov.to_dict()))
-    assert set(data) == {"framework", "version", "totals", "tactics", "cells", "dead_rules", "unmapped_rules"}
+    keys = {"framework", "version", "totals", "tactics", "cells", "dead_rules", "unmapped_rules", "sources"}
+    assert set(data) == keys
     assert set(data["cells"][0]) == {"framework", "tactic", "tactic_id", "id", "name", "level", "rules"}
 
 

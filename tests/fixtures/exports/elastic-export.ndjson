@@ -1,0 +1,5 @@
+{"rule_id":"e1","name":"Encoded PowerShell","enabled":true,"type":"query","index":["logs-endpoint.events.process-*","winlogbeat-*"],"threat":[{"framework":"MITRE ATT&CK","tactic":{"id":"TA0002","name":"Execution"},"technique":[{"id":"T1059","name":"Command and Scripting Interpreter","subtechnique":[{"id":"T1059.001","name":"PowerShell"}]}]}]}
+{"rule_id":"e2","name":"Exfil over DNS","enabled":true,"type":"esql","query":"FROM logs-network.dns-* | WHERE dns.question.name LIKE \"*.*\"","threat":[{"framework":"MITRE ATT&CK","technique":[{"id":"T1048"}]}]}
+{"rule_id":"e3","name":"Prompt injection to LLM","enabled":false,"type":"query","index":["logs-llm-*"],"threat":[{"framework":"MITRE ATLAS","technique":[{"id":"AML.T0051"}]}]}
+{"rule_id":"e4","name":"ML anomaly","enabled":true,"type":"machine_learning","threat":[]}
+{"exported_count":4,"missing_rules":[]}

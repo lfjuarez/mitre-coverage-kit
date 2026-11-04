@@ -1,0 +1,8 @@
+# Log sources an example SOC actually collects (product/category or product/service).
+logsource:windows/process_creation
+logsource:windows/security
+logsource:windows/ps_script
+logsource:windows/registry_set
+logsource:linux/auditd
+logsource:aws/cloudtrail
+logsource:okta/okta
