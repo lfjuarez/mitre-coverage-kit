@@ -10,10 +10,10 @@ from typing import Any
 
 from . import __version__
 from .analysis import PRE_COMPROMISE
+from .palette import LEVEL_FILL, LEVEL_INK, LEVEL_MARK  # noqa: F401
 from .rules import Rule
 from .scoring import LEVEL_NAMES, Coverage
 
-LEVEL_FILL = {0: "#f0efec", 1: "#9ec5f4", 2: "#3987e5", 3: "#184f95"}
 LABEL = {"attack": "MITRE ATT&CK Enterprise", "atlas": "MITRE ATLAS"}
 SHORT = {"attack": "ATT&CK", "atlas": "ATLAS"}
 TONE = {"restore-data": "amber", "remap-retired": "amber", "tune-rules": "green", "pre-compromise": "grey"}
@@ -31,7 +31,7 @@ h2{font-size:19px;margin:40px 0 14px;letter-spacing:-.01em}h2 small{font-weight:
 .levels{display:flex;height:14px;border-radius:4px;overflow:hidden;margin:18px 0 8px}.levels i{display:block;height:100%}
 .legend{display:flex;gap:22px;color:var(--ink2);font-size:13px}.legend i,.lv{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid rgba(0,0,0,.06)}
 .trow{display:grid;grid-template-columns:270px 1fr 110px;align-items:center;min-height:28px}.tl{color:var(--ink2);font-size:14px;white-space:nowrap}
-.cells{display:flex;flex-wrap:wrap;gap:3px}.cells i{display:block;width:14px;height:14px;border-radius:3px;border:1px solid rgba(0,0,0,.05)}
+.cells{display:flex;flex-wrap:wrap;gap:3px}.cells i{display:flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:3px;border:1px solid rgba(0,0,0,.05)}.cells i b{font-size:7px;line-height:1;letter-spacing:-1.5px;margin-left:-1.5px}
 .tn{text-align:right;color:var(--ink2);font-size:13px}.tn b{color:var(--ink);font-size:14px}
 .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:1px 7px;margin-left:6px;vertical-align:1px}
 .recs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
@@ -68,7 +68,8 @@ def _tactic_rows(cov: Coverage) -> str:
         squares = []
         for c in cells:
             title = f"{c['id']} {c['name']} · {LEVEL_NAMES[c['level']]}" + (f" · {', '.join(c['rules'])}" if c["rules"] else "")
-            squares.append(f'<i style="background:{LEVEL_FILL[c["level"]]}" title="{E(title)}"></i>')
+            mark = f'<b style="color:{LEVEL_INK[c["level"]]}">{"•" * c["level"]}</b>' if c["level"] else ""
+            squares.append(f'<i style="background:{LEVEL_FILL[c["level"]]}" title="{E(title)}">{mark}</i>')
         tag = ' <span class="tag">pre-compromise</span>' if t["tactic"] in PRE_COMPROMISE else ""
         out.append(
             f'<div class="trow"><div class="tl">{E(t["tactic"])}{tag}</div><div class="cells">{"".join(squares)}</div>'
@@ -138,7 +139,7 @@ def render_html(results: dict[str, Coverage], rules: list[Rule], title: str = "D
     level_bar = "".join(
         f'<i style="background:{LEVEL_FILL[n]};width:{100 * tot["by_level"][LEVEL_NAMES[n]] / max(tot["distinct_techniques"], 1):.2f}%"></i>'
         for n in (3, 2, 1, 0))
-    legend = "".join(f'<span><i style="background:{LEVEL_FILL[n]}"></i>{LEVEL_NAMES[n]} ({tot["by_level"][LEVEL_NAMES[n]]})</span>' for n in range(4))
+    legend = "".join(f'<span><i style="background:{LEVEL_FILL[n]}"></i>{LEVEL_NAMES[n]} {LEVEL_MARK[n]} ({tot["by_level"][LEVEL_NAMES[n]]})</span>' for n in range(4))
 
     body: list[str] = []
     for k in order:  # each framework: its chart, then what to do about it
@@ -174,7 +175,7 @@ def render_html(results: dict[str, Coverage], rules: list[Rule], title: str = "D
         cls = ' class="off"' if d["level"] == 0 else ""
         rows.append(
             f'<tr{cls}><td>{E(d["id"])}</td><td>{E(d["name"])}</td><td>{E(", ".join(dict.fromkeys(d["tactics"])))}</td>'
-            f'<td><span class="lv" style="background:{LEVEL_FILL[d["level"]]}"></span>{LEVEL_NAMES[d["level"]]}</td><td>{E(", ".join(sorted(d["rules"])))}</td></tr>'
+            f'<td><span class="lv" style="background:{LEVEL_FILL[d["level"]]}"></span>{LEVEL_NAMES[d["level"]]} {LEVEL_MARK[d["level"]]}</td><td>{E(", ".join(sorted(d["rules"])))}</td></tr>'
         )
     covered = sum(1 for d in detail.values() if d["level"] > 0)
     body.append(

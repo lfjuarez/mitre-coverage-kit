@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from xml.sax.saxutils import escape
 
+from .palette import LEVEL_FILL, LEVEL_INK, LEVEL_MARK  # noqa: F401
 from .scoring import LEVEL_NAMES, Coverage
 
 SURFACE = "#fcfcfb"
@@ -11,7 +12,6 @@ TEXT = "#0b0b0b"
 TEXT_2 = "#52514e"
 TEXT_3 = "#898781"
 HAIRLINE = "#e1e0d9"
-LEVEL_FILL = {0: "#f0efec", 1: "#9ec5f4", 2: "#3987e5", 3: "#184f95"}
 BAR = "#2a78d6"
 FONT = "Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif"
 

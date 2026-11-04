@@ -40,8 +40,9 @@ def test_contains_labels_legend_and_footer(attack):
 def test_none_cells_have_hairline_stroke_and_header_is_rotated(attack):
     cov, root = parse(attack)
     none_cells = [
-        r for r in root.iter("{http://www.w3.org/2000/svg}rect")
-        if r.find("s:title", NS) is not None and r.get("fill") == "#f0efec"
+        r
+        for r in root.iter("{http://www.w3.org/2000/svg}rect")
+        if r.find("s:title", NS) is not None and r.get("fill") == "#f6d5d0"
     ]
     assert none_cells and all(r.get("stroke") == "#e1e0d9" for r in none_cells)
     rotated = [t for t in root.iter("{http://www.w3.org/2000/svg}text") if "rotate(-90)" in (t.get("transform") or "")]

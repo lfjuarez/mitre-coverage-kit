@@ -28,9 +28,9 @@ siem = "wazuh"
 export = "out/wazuh/rules-local.json"
 data_sources = "out/wazuh/active-groups.txt"
 
-[[source]]
+[[source]]                       # available rules, not deployed: suggestions only, never coverage
 name = "Sigma comunidad"
-type = "import"
+type = "catalog"
 siem = "sigma"
 export = "out/sigma-src/rules"
 data_sources = "sigma/active-logsources.txt"

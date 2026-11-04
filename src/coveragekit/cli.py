@@ -43,7 +43,13 @@ def _prepare(args: argparse.Namespace, names: list[str]) -> tuple[dict[str, Cove
         known |= frameworks.technique_ids(package)
     for warning in unknown_technique_warnings(rules, known):
         print(f"warning: {warning}", file=sys.stderr)
-    return {n: score(rules, p) for n, p in packages.items()}, rules
+    catalog = None
+    if getattr(args, "catalog", None):
+        try:
+            catalog = merge_inventories(args.catalog)
+        except (RuleError, OSError) as exc:
+            raise CliError(f"catalog: {exc}") from exc
+    return {n: score(rules, p, catalog) for n, p in packages.items()}, rules
 
 
 def _names(choice: str) -> list[str]:
@@ -257,6 +263,12 @@ def build_parser() -> argparse.ArgumentParser:
             "--rules", required=True, nargs="+", help="rule inventory (.csv or .json); several files are merged"
         )
         p.add_argument("--frameworks-dir", help="directory with maps written by 'coveragekit fetch'")
+        p.add_argument(
+            "--catalog",
+            nargs="+",
+            metavar="CSV",
+            help="rules available but not deployed (e.g. 'import sigma' output): suggested for gaps, never counted",
+        )
 
     p = sub.add_parser("fetch", help="download ATT&CK and ATLAS and write the minimal maps")
     p.add_argument("--dest", required=True, help="output directory")

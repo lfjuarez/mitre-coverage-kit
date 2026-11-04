@@ -1,5 +1,5 @@
 {
-  "generator": "mitre-coverage-kit 0.2.0",
+  "generator": "mitre-coverage-kit 0.3.0",
   "attack": {
     "framework": "attack",
     "version": "20.0",
@@ -3319,6 +3319,7 @@
         "Reconnaissance",
         "Resource Development"
       ],
+      "catalog": [],
       "recommendations": [
         {
           "key": "restore-data",
@@ -4864,6 +4865,7 @@
         "Reconnaissance",
         "Resource Development"
       ],
+      "catalog": [],
       "recommendations": [
         {
           "key": "restore-data",

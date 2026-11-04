@@ -15,6 +15,7 @@ PRE_COMPROMISE = ("Reconnaissance", "Resource Development")
 WEAK_PERCENT = 20.0
 ATOMIC = "https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/"
 MAX_ITEMS = 8
+CATALOG_EXAMPLES = 5
 
 
 def _item(text: str, link: str | None = None) -> dict[str, str]:
@@ -29,8 +30,13 @@ def analyze(
     unmapped_rules: list[dict[str, str]],
     framework: str,
     version: str,
+    catalog: list[Rule] | None = None,
 ) -> dict[str, Any]:
-    """Statistics and recommendations for one framework. ``rules`` are the rules attributed to it."""
+    """Statistics and recommendations for one framework. ``rules`` are the rules attributed to it.
+
+    ``catalog`` holds rules that are available but not deployed (for example the SigmaHQ repository). They never
+    count as coverage; they only suggest what to deploy for uncovered techniques.
+    """
     level: dict[str, int] = {}
     rules_of: dict[str, set[str]] = {}
     name_of: dict[str, str] = {}
@@ -128,6 +134,62 @@ def analyze(
                 "items": items,
             }
         )
+    # Catalog: public rules for the techniques nobody covers, the ones that read data you already collect first.
+    suggestions: dict[str, dict[str, Any]] = {}
+    for r in catalog or []:
+        if not r.enabled:
+            continue
+        for tid in {parent_id(t) for t in r.valid_techniques}:
+            if tid in level and level[tid] == 0:
+                entry = suggestions.setdefault(tid, {"id": tid, "name": name_of[tid], "ready": [], "needs_data": []})
+                item = {
+                    "rule_id": r.rule_id,
+                    "name": r.name,
+                    "source": r.source,
+                    "data_sources": r.data_sources,
+                    "missing": r.missing_data,
+                }
+                entry["ready" if r.data_available else "needs_data"].append(item)
+    for entry in suggestions.values():  # counts in full, examples capped so the JSON stays small
+        entry["ready_count"], entry["needs_data_count"] = len(entry["ready"]), len(entry["needs_data"])
+        entry["ready"] = sorted(entry["ready"], key=lambda x: x["name"])[:CATALOG_EXAMPLES]
+        entry["needs_data"] = sorted(entry["needs_data"], key=lambda x: x["name"])[:CATALOG_EXAMPLES]
+    catalog_list = sorted(
+        suggestions.values(), key=lambda e: (-e["ready_count"], -e["needs_data_count"], e["id"])
+    )
+    ready = [e for e in catalog_list if e["ready"]]
+    if catalog is not None and catalog_list:
+        items = []
+        for e in catalog_list[:MAX_ITEMS]:
+            pick = (e["ready"] or e["needs_data"])[0]
+            where = (
+                "with data you collect"
+                if e["ready"]
+                else "needs " + ", ".join(pick["missing"] or pick["data_sources"] or ["a new source"])
+            )
+            count = e["ready_count"] or e["needs_data_count"]
+            items.append(
+                _item(f"{e['id']} {e['name']} · {count} rule{'s' if count != 1 else ''} {where}, e.g. {pick['name']}")
+            )
+        has = "s have" if len(ready) != 1 else " has"
+        impact = (
+            f"{len(ready)} uncovered technique{has} a public rule that reads data you already collect."
+            if ready
+            else f"{len(catalog_list)} uncovered techniques have public rules, "
+            "but they need sources you do not collect."
+        )
+        recs.append(
+            {
+                "key": "deploy-catalog",
+                "title": "Deploy available rules where nothing detects",
+                "impact": impact,
+                "body": "These rules come from the catalog (for example the SigmaHQ repository). "
+                "They are not coverage until they are converted, deployed and tested in your SIEM, "
+                "so they are listed here and not in the matrix.",
+                "items": items,
+            }
+        )
+
     if weak:
         items = []
         for t in weak:
@@ -215,5 +277,6 @@ def analyze(
         "medium_techniques": medium,
         "weak_tactics": weak,
         "pre_compromise": pre,
+        "catalog": catalog_list,
         "recommendations": recs,
     }

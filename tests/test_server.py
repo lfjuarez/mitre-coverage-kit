@@ -145,3 +145,21 @@ def test_api_protections(running):
     assert call(base + "/api/refresh", "POST")[0] == 403  # no custom header: a cross-site form cannot do this
     code, body, _ = call(base + "/api/refresh", "POST", {"X-Coveragekit": "1"})
     assert code == 202 and json.loads(body)["started"]
+
+
+def test_catalog_source_is_not_coverage(tmp_path):
+    sigma = Path(__file__).parent / "fixtures" / "exports" / "sigma"
+    body = (
+        TWO_SPLUNKS + f'\n[[source]]\nname = "Sigma comunidad"\ntype = "catalog"\nsiem = "sigma"\nexport = "{sigma}"\n'
+    )
+    ws = Workspace(load_config(write_config(tmp_path, body)))
+    (tmp_path / "b").mkdir()
+    base = Workspace(load_config(write_config(tmp_path / "b", TWO_SPLUNKS)))
+    ws.refresh()
+    base.refresh()
+    state = ws.state()
+    assert state["coverage"]["attack"]["totals"] == base.state()["coverage"]["attack"]["totals"]
+    assert all(r["source"] != "Sigma comunidad" for r in state["rules"])
+    sigma_status = next(s for s in state["sources"] if s["name"] == "Sigma comunidad")
+    assert sigma_status["type"] == "catalog" and sigma_status["rules"] == 3
+    assert "catalog" in state["coverage"]["attack"]["analysis"]
