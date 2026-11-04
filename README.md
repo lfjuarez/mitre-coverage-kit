@@ -1,6 +1,6 @@
 # mitre-coverage-kit
 
-Detection coverage is usually a belief: someone says "we cover credential access" and nobody can say how many techniques, how well, or whether the data behind the rules even arrives. `mitre-coverage-kit` turns that belief into a measurement. It reads the rules of one or several SIEMs (Splunk ES, Elastic Security, Wazuh, Microsoft Sentinel or Sigma), scores every MITRE ATT&CK Enterprise technique and every MITRE ATLAS technique from 0 to 3, exports an ATT&CK Navigator layer you can show the SOC, and renders a heat-map SVG. It also lists dead rules, the ones that are enabled but can never fire because their data source is missing.
+Detection coverage is usually a belief: someone says "we cover credential access" and nobody can say how many techniques, how well, or whether the data behind the rules even arrives. `mitre-coverage-kit` turns that belief into a measurement. It reads the rules of one or several SIEMs, from exported files or straight from their APIs, (Splunk ES, Elastic Security, Wazuh, Microsoft Sentinel or Sigma), scores every MITRE ATT&CK Enterprise technique and every MITRE ATLAS technique from 0 to 3, exports an ATT&CK Navigator layer you can show the SOC, and renders a heat-map SVG. It also lists dead rules, the ones that are enabled but can never fire because their data source is missing.
 
 ![HTML report for the synthetic example inventory: key figures, coverage by tactic and recommendations](examples/output/report.png)
 
@@ -92,6 +92,51 @@ How credentials are handled:
   Wazuh has no API keys, so a `readonly` user gets a short-lived token for each run.
 - Every read is a GET or a search; nothing is created or changed in the SIEM. In the lab, the Elastic key above gets 403 when it tries to create a rule or write a document.
 - TLS is verified by default. Pass `--ca FILE` for a private CA; `--insecure` exists for labs and prints a warning.
+
+## Web app
+
+`coveragekit serve` runs a local web app that refreshes every source on a schedule and lets the SOC browse the result: an overview with the key figures and their change, coverage over time by level, coverage by source, next actions and changes since the previous refresh; the full ATT&CK and ATLAS matrices with filters by source, single-rule techniques and uncovered techniques, where a click opens the technique with its rules, the data each rule is missing and its Atomic Red Team tests; and pages for recommendations, rules, data sources and history, with a diff between any two refreshes. "Refresh now" pulls on demand, and the HTML report and the Navigator layer are one click away.
+
+```bash
+coveragekit serve --config coveragekit.toml
+```
+
+```toml
+[server]
+title = "Example SOC"
+data_dir = "coveragekit-data"   # inventories, history and status
+refresh_hours = 6
+
+[[source]]
+name = "Splunk Producción"
+type = "splunk"
+url = "https://splunk-prod.example.com:8089"
+env_prefix = "SPLUNK_PROD"      # reads SPLUNK_PROD_TOKEN
+
+[[source]]
+name = "Splunk DR"
+type = "splunk"
+url = "https://splunk-dr.example.com:8089"
+env_prefix = "SPLUNK_DR"
+
+[[source]]
+name = "Elastic Cloud"
+type = "elastic"
+url = "https://kibana.example.com"
+es_url = "https://es.example.com"
+env_prefix = "ELASTIC_CLOUD"    # reads ELASTIC_CLOUD_API_KEY
+
+[[source]]
+name = "Sigma"
+type = "import"                 # any exported file or directory, read with an importer
+siem = "sigma"
+export = "sigma/rules"
+data_sources = "logsources.txt"
+```
+
+Add as many sources of each type as you have, each with its own name and its own `env_prefix`; the matrix, the coverage by source and the history keep them apart. A source that fails keeps its last good inventory and shows the error in the status strip, so one unreachable SIEM does not empty the dashboard.
+
+The server listens on `127.0.0.1` by default and is meant for one analyst or for a team behind a reverse proxy that handles sign-in. It rejects requests whose `Host` is not the configured one (DNS rebinding), requires a custom header on the refresh endpoint (cross-site requests cannot send it), sends a strict Content-Security-Policy and refuses credentials in the config file. `lab/serve-demo.toml` builds a workspace from the lab exports without any SIEM running.
 
 ## Track coverage over time
 

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>coveragekit</title>
+<style>
+:root{--bg:#f4f3ef;--card:#fff;--ink:#0b0b0b;--ink2:#52514e;--muted:#898781;--line:#e1e0d9;--soft:#f0efec;--nav:#13213a;--nav2:#24375a;--blue:#2a78d6;--amber:#b8690f;--green:#2f7d4f;--red:#b42318;
+--l0:#f0efec;--l1:#9ec5f4;--l2:#3987e5;--l3:#184f95}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--bg);color:var(--ink);font:14px/1.45 "Avenir Next","Segoe UI","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}button{font:inherit}
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+nav{background:var(--nav);color:#c9d3e3;padding:22px 14px;display:flex;flex-direction:column;gap:3px;position:sticky;top:0;height:100vh}
+.brand{color:#f4f4f1;font-weight:700;font-size:17px;letter-spacing:-.01em;margin:0 10px 22px}.brand span{color:#9ec5f4}
+nav a{color:#c9d3e3;padding:8px 10px;border-radius:7px;font-weight:500;display:flex;justify-content:space-between}nav a.on{background:var(--nav2);color:#fff}nav a em{font-style:normal;font-size:12px;color:#8fa0ba}
+.ws{margin-top:auto;font-size:12px;color:#8fa0ba;padding:0 10px;line-height:1.55}.ws b{color:#f4f4f1}
+main{padding:22px 30px 48px;min-width:0}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}.top h1{font-size:22px;margin:0;letter-spacing:-.01em}.when{color:var(--muted)}
+.sp{margin-left:auto}.btn{background:var(--blue);color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer}.btn[disabled]{opacity:.6;cursor:default}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.pills{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.pill{display:flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 12px 5px 10px;font-weight:500;max-width:100%}
+.pill i{flex:none;width:8px;height:8px;border-radius:4px;background:var(--green)}.pill.warn i{background:var(--amber)}.pill.err i{background:var(--red)}.pill em{font-style:normal;color:var(--muted);font-weight:400;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.card h3{margin:0 0 12px;font-size:14px;font-weight:600;color:var(--ink2)}
+.k{grid-column:span 3}.k .v{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1.1}.k .d{font-weight:600;font-size:13px;margin-left:6px}.k .s{color:var(--muted);font-size:13px;margin-top:4px}
+.up{color:var(--green)}.down{color:var(--amber)}.amber{color:var(--amber)}.muted{color:var(--muted)}
+.s7{grid-column:span 7}.s5{grid-column:span 5}.s6{grid-column:span 6}.s12{grid-column:span 12}
+.legend{display:flex;gap:16px;font-size:12.5px;color:var(--ink2);flex-wrap:wrap}.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.06)}
+.sb{display:grid;grid-template-columns:130px 1fr 130px;align-items:center;gap:10px;height:30px}.sn{color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{height:10px;background:var(--soft);border-radius:5px;overflow:hidden}.track i{display:block;height:100%;background:var(--blue);border-radius:0 5px 5px 0}.sv{font-size:12.5px;color:var(--muted);text-align:right}.sv b{color:var(--ink)}
+.rc{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--soft)}.rc:last-child{border:0}.rc p{margin:2px 0 0;color:var(--ink2);font-size:13px}
+.rn{flex:none;width:24px;height:24px;border-radius:12px;background:var(--nav);color:#fff;font-weight:600;font-size:12px;display:flex;align-items:center;justify-content:center}
+ul.ch{list-style:none;margin:0;padding:0}ul.ch li{padding:6px 0;border-bottom:1px solid var(--soft);font-size:13.5px}ul.ch li:last-child{border:0}
+.filters{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.chip{background:#fff;border:1px solid var(--line);border-radius:16px;padding:4px 11px;font-size:12.5px;cursor:pointer;color:var(--ink)}.chip.on{background:var(--nav);color:#fff;border-color:var(--nav)}
+input.q,select{font:inherit;padding:6px 11px;border:1px solid var(--line);border-radius:8px;background:#fff}input.q{min-width:240px}
+.matrix{display:grid;gap:4px;overflow-x:auto;padding-bottom:6px}
+.mh{background:var(--nav);color:#fff;border-radius:6px 6px 0 0;padding:6px 6px 5px;font-size:10.5px;line-height:1.25;min-height:46px}.mh b{display:block;font-size:11px}.mh span{color:#9ec5f4}
+.mc{font-size:9.8px;line-height:1.2;padding:4px 5px;margin-top:3px;border-radius:3px;min-height:30px;overflow:hidden;cursor:pointer;border:0;text-align:left;width:100%;display:block;font-family:inherit}.mc b{display:block}
+.mc:hover{outline:2px solid var(--ink)}.mc.frag{box-shadow:inset 0 0 0 2px var(--amber)}.mc.dim{opacity:.25}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th{text-align:left;color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:8px 10px;white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--soft);vertical-align:top}td:first-child,th:first-child{padding-left:0}
+.tag{display:inline-block;font-size:11.5px;border-radius:10px;padding:1px 8px;border:1px solid var(--line);white-space:nowrap}
+.tag.dead{background:#fbf1df;border-color:#f1d9ad;color:#8a4e0a}.tag.disabled{background:var(--soft);color:var(--muted)}.tag.low{background:#eaf3fd}.tag.medium{background:#d6e7fb}.tag.high{background:#c4dbf7}
+code{font:12px "SF Mono",Menlo,Consolas,monospace;background:#f1f0ed;padding:1px 5px;border-radius:4px}
+.recs{display:grid;grid-template-columns:1fr 1fr;gap:14px}.rec{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}.rec h4{margin:0 0 4px;font-size:15px}.rec .im{font-weight:600;margin:0 0 6px}.rec p{margin:0 0 8px;color:var(--ink2)}.rec ul{margin:0;padding-left:18px;color:var(--ink2);font-size:13px}
+.drawer{position:fixed;top:0;right:0;width:440px;max-width:100%;height:100vh;background:#fff;border-left:1px solid var(--line);box-shadow:-12px 0 30px rgba(19,33,58,.12);padding:22px 24px;overflow:auto;transform:translateX(105%);transition:transform .18s ease;z-index:10}
+.drawer.open{transform:none}.drawer h2{margin:4px 0 6px;font-size:20px}.drawer .x{float:right;background:none;border:0;font-size:22px;cursor:pointer;color:var(--muted)}
+.rl{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-top:10px}.rl b{display:block}
+.empty{color:var(--muted);padding:40px 0;text-align:center}
+.banner{background:#fbf1df;border:1px solid #f1d9ad;color:#6d3d08;border-radius:10px;padding:10px 14px;margin-bottom:16px}
+@media (max-width:1100px){.k{grid-column:span 6}.s7,.s5,.s6{grid-column:span 12}.recs{grid-template-columns:1fr}}
+@media (max-width:760px){.app{grid-template-columns:1fr}nav{position:static;height:auto;flex-direction:row;flex-wrap:wrap}.ws{display:none}.brand{width:100%;margin-bottom:8px}main{padding:16px}.k{grid-column:span 12}}
+</style>
+</head>
+<body>
+<div class="app">
+<nav id="nav"><div class="brand">coverage<span>kit</span></div>
+<a href="#overview">Overview</a><a href="#matrix">Matrix</a><a href="#recommendations">Recommendations</a><a href="#rules">Rules</a><a href="#sources">Data sources</a><a href="#history">History</a>
+<div class="ws" id="ws"></div></nav>
+<main id="main"><div class="empty">Loading…</div></main>
+</div>
+<aside class="drawer" id="drawer" aria-live="polite"></aside>
+<script>
+"use strict";
+const LF = ["var(--l0)", "var(--l1)", "var(--l2)", "var(--l3)"], LN = ["None", "Low", "Medium", "High"];
+const FW = {attack: "ATT&CK Enterprise", atlas: "ATLAS"};
+let S = null, view = {fw: "attack", source: "", only: "", q: "", rstate: "", rsrc: "", rq: ""};
+const $ = (id) => document.getElementById(id);
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"}[c]));
+const fmt = (iso) => { if (!iso) return "never"; const d = new Date(iso); return d.toLocaleString(undefined, {month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"}); };
+const ago = (iso) => { if (!iso) return ""; const m = Math.round((Date.now() - new Date(iso)) / 60000); return m < 1 ? "just now" : m < 60 ? m + " min ago" : m < 1440 ? Math.round(m / 60) + " h ago" : Math.round(m / 1440) + " d ago"; };
+const parent = (t) => (t.match(/^(AML\.T\d{4}|T\d{4})/) || [t])[0];
+
+async function load() {
+  const r = await fetch("/api/state", {cache: "no-store"});
+  S = await r.json();
+  render();
+  if (S.refreshing) setTimeout(load, 3000);
+}
+async function refresh() {
+  const b = $("refresh"); if (b) { b.disabled = true; b.textContent = "Refreshing…"; }
+  await fetch("/api/refresh", {method: "POST", headers: {"X-Coveragekit": "1"}});
+  setTimeout(load, 1500);
+}
+
+function cov() { return S.coverage[view.fw] || S.coverage.attack; }
+function rulesById() { const m = {}; S.rules.forEach((r) => (m[r.id] = r)); return m; }
+function sourceNames() { return [...new Set(S.rules.map((r) => r.source).filter(Boolean))].sort(); }
+
+function header(title, sub) {
+  const busy = S.refreshing;
+  return `<div class="top"><h1>${esc(title)}</h1><span class="when">${esc(sub || "")}</span><span class="sp"></span>
+  <button class="btn" id="refresh" ${busy ? "disabled" : ""}>${busy ? "Refreshing…" : "Refresh now"}</button>
+  <a class="btn ghost" href="/report.html" target="_blank" rel="noopener">Export report</a>
+  <a class="btn ghost" href="/attack-layer.json">Navigator layer</a></div>`;
+}
+function pills() {
+  return `<div class="pills">${S.sources.map((s) => {
+    const cls = !s.at ? "warn" : !s.ok ? (s.stale ? "warn" : "err") : s.dead ? "warn" : "";
+    const what = !s.at ? "not pulled yet" : !s.ok ? (s.stale ? "using last good pull · " : "") + s.error : `${s.type === "inventory" ? "inventory" : s.type === "import" ? "import" : "pulled"} ${ago(s.at)} · ${s.rules} rules${s.dead ? " · " + s.dead + " dead" : ""}`;
+    return `<span class="pill ${cls}" title="${esc(what)}"><i></i>${esc(s.name)}<em>${esc(what)}</em></span>`;
+  }).join("")}</div>`;
+}
+function kpi(label, value, sub, delta, tone) {
+  const d = delta === undefined || delta === null || Math.abs(delta) < 0.05 ? "" : `<span class="d ${delta > 0 ? "up" : "down"}">${delta > 0 ? "▲" : "▼"} ${Math.abs(delta).toFixed(1)} pts</span>`;
+  return `<div class="card k"><h3>${esc(label)}</h3><div class="v ${tone || ""}">${esc(value)}${d}</div><div class="s">${esc(sub)}</div></div>`;
+}
+
+function trendSvg() {
+  const h = S.history.filter((x) => x[view.fw]);
+  if (h.length < 2) return `<div class="empty">The trend appears after the second refresh.</div>`;
+  const W = 640, H = 220, P = 40, pts = h.slice(-12);
+  const tot = cov().totals.distinct_techniques;
+  const peak = Math.max(...pts.map((x) => x[view.fw].percent)), tick = peak > 40 ? 20 : 10;
+  const max = Math.max(tick, Math.ceil(peak / tick) * tick);
+  const X = (i) => P + (i * (W - 2 * P)) / Math.max(pts.length - 1, 1), Y = (v) => H - 30 - (v / max) * (H - 60);
+  let g = "";
+  for (let v = 0; v <= max; v += tick) g += `<line x1="${P}" x2="${W - P}" y1="${Y(v)}" y2="${Y(v)}" stroke="#ebeae5"/><text x="${P - 8}" y="${Y(v) + 4}" text-anchor="end" font-size="11" fill="#898781">${Math.round(v)}%</text>`;
+  let base = pts.map(() => 0), areas = "";
+  [3, 2, 1].forEach((lv) => {
+    const top = pts.map((p, i) => base[i] + (100 * p[view.fw].by_level[LN[lv]]) / tot);
+    const poly = top.map((t, i) => `${X(i)},${Y(t)}`).concat(base.map((b, i) => `${X(i)},${Y(b)}`).reverse()).join(" ");
+    areas += `<polygon points="${poly}" fill="${LF[lv]}"/>`; base = top;
+  });
+  const line = pts.map((p, i) => `${X(i)},${Y(p[view.fw].percent)}`).join(" ");
+  const dots = pts.map((p, i) => `<circle cx="${X(i)}" cy="${Y(p[view.fw].percent)}" r="4" fill="#fff" stroke="#0b0b0b" stroke-width="2"><title>${esc(fmt(p.taken_at))}: ${p[view.fw].percent}% · ${p[view.fw].covered} techniques</title></circle>`).join("");
+  const step = Math.ceil(pts.length / 6);
+  const labels = pts.map((p, i) => (i % step === 0 || i === pts.length - 1) ? `<text x="${X(i)}" y="${H - 8}" text-anchor="middle" font-size="11" fill="#898781">${esc(fmt(p.taken_at).replace(/,.*$/, ""))}</text>` : "").join("");
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Coverage over time">${g}${areas}<polyline points="${line}" fill="none" stroke="#0b0b0b" stroke-width="2"/>${dots}${labels}</svg>`;
+}
+
+function overview() {
+  const c = S.coverage.attack, t = c.totals, a = c.analysis, ch = S.change && S.change.frameworks.attack;
+  const delta = ch ? ch.percent_after - ch.percent_before : null;
+  const dead = c.dead_rules.length, resolved = ch ? ch.resolved_dead_rules.length : 0;
+  const srcs = c.sources.length ? c.sources : sourceNames().map((n) => ({source: n, covered: t.distinct_covered, only_here: t.distinct_covered}));
+  const mx = Math.max(1, ...srcs.map((s) => s.covered));
+  const bars = srcs.slice(0, 8).map((s) => `<div class="sb"><span class="sn" title="${esc(s.source)}">${esc(s.source)}</span><span class="track"><i style="width:${(100 * s.covered) / mx}%"></i></span><span class="sv"><b>${s.covered}</b> · ${s.only_here} only here</span></div>`).join("");
+  const recs = a.recommendations.slice(0, 4).map((r, i) => `<div class="rc"><span class="rn">${i + 1}</span><div><b>${esc(r.title)}</b><p>${esc(r.impact)}</p></div></div>`).join("") || `<div class="empty">Nothing to do.</div>`;
+  let changes = `<li class="muted">The comparison appears after the second refresh.</li>`;
+  if (ch) {
+    const items = ch.improved.slice(0, 6).map((x) => `<li><span class="up">▲</span> ${esc(x.id)} ${esc(x.name)} <span class="muted">${LN[x.before]} → ${LN[x.after]}</span></li>`)
+      .concat(ch.regressed.slice(0, 4).map((x) => `<li><span class="down">▼</span> ${esc(x.id)} ${esc(x.name)} <span class="muted">${LN[x.before]} → ${LN[x.after]}</span></li>`));
+    if (ch.new_dead_rules.length) items.push(`<li><span class="down">▼</span> ${ch.new_dead_rules.length} rules stopped receiving data</li>`);
+    if (resolved) items.push(`<li><span class="up">▲</span> ${resolved} dead rules came back</li>`);
+    changes = items.join("") || `<li class="muted">No change since the previous refresh.</li>`;
+  }
+  return header("Detection coverage", `updated ${fmt(S.updated)}${S.next_refresh ? " · next refresh " + fmt(S.next_refresh) : ""}`) + pills() + `<div class="grid">
+  ${kpi("ATT&CK techniques covered", t.percent.toFixed(0) + "%", `${t.distinct_covered} of ${t.distinct_techniques}${ch ? " · vs previous refresh" : ""}`, delta)}
+  ${kpi("Techniques at High", t.by_level.High, `${t.by_level.Medium} Medium · ${t.by_level.Low} Low`)}
+  ${kpi("Dead rules", dead, ch ? `${resolved} resolved since the previous refresh` : "enabled rules without data", null, dead ? "amber" : "")}
+  ${kpi("Fragile techniques", a.fragile.length, "depend on a single rule", null, a.fragile.length ? "amber" : "")}
+  <div class="card s7"><h3>Coverage over time · ATT&CK</h3>${trendSvg()}<div class="legend"><span><i style="background:${LF[3]}"></i>High</span><span><i style="background:${LF[2]}"></i>Medium</span><span><i style="background:${LF[1]}"></i>Low</span><span>— total covered</span></div></div>
+  <div class="card s5"><h3>Coverage by source</h3>${bars}</div>
+  <div class="card s6"><h3>Next actions <a href="#recommendations" style="float:right;font-size:13px">All</a></h3>${recs}</div>
+  <div class="card s6"><h3>Changes since the previous refresh</h3><ul class="ch">${changes}</ul></div></div>`;
+}
+
+function levelFor(cell, byId) {
+  if (!view.source) return {level: cell.level, rules: cell.rules};
+  const rs = cell.rules.filter((id) => byId[id] && byId[id].source === view.source);
+  return {level: Math.max(0, ...rs.map((id) => byId[id].level)), rules: rs};
+}
+function matrix() {
+  const c = cov(), byId = rulesById(), q = view.q.toLowerCase();
+  const by = {}; c.cells.forEach((x) => (by[x.tactic_id] = by[x.tactic_id] || []).push(x));
+  const cols = c.tactics.map((t) => {
+    const cells = by[t.tactic_id].map((x) => ({...x, ...levelFor(x, byId)})).sort((a, b) => b.level - a.level || a.id.localeCompare(b.id));
+    const cov_ = cells.filter((x) => x.level > 0).length;
+    const items = cells.map((x) => {
+      const frag = x.level > 0 && x.rules.length === 1;
+      let dim = (view.only === "fragile" && !frag) || (view.only === "uncovered" && x.level > 0) || (q && !(x.id + " " + x.name).toLowerCase().includes(q));
+      const txt = x.level >= 2 ? "#fff" : "#0b0b0b";
+      return `<button class="mc${frag ? " frag" : ""}${dim ? " dim" : ""}" style="background:${LF[x.level]};color:${txt}" data-t="${esc(x.id)}" title="${esc(x.id + " " + x.name + " · " + LN[x.level])}"><b>${esc(x.id)}</b>${esc(x.name)}</button>`;
+    }).join("");
+    return `<div><div class="mh"><b>${esc(t.tactic)}</b><span>${cov_}/${cells.length} · ${Math.round((100 * cov_) / Math.max(cells.length, 1))}%</span></div>${items}</div>`;
+  }).join("");
+  const srcChips = [`<button class="chip${view.source ? "" : " on"}" data-src="">All sources</button>`].concat(sourceNames().map((n) => `<button class="chip${view.source === n ? " on" : ""}" data-src="${esc(n)}">${esc(n)}</button>`)).join("");
+  const only = [["", "All"], ["fragile", "Single rule only"], ["uncovered", "Uncovered only"]].map(([k, l]) => `<button class="chip${view.only === k ? " on" : ""}" data-only="${k}">${l}</button>`).join("");
+  const fws = Object.keys(S.coverage).map((k) => `<button class="chip${view.fw === k ? " on" : ""}" data-fw="${k}">${FW[k] || k}</button>`).join("");
+  return header(`${FW[view.fw]} matrix`, "click a technique for its rules, data sources and tests") + `
+  <div class="filters">${fws}<span style="width:12px"></span>${only}<input class="q" id="mq" type="search" placeholder="Find a technique" value="${esc(view.q)}"></div>
+  <div class="filters">${srcChips}<span class="legend sp">${LN.map((n, i) => `<span><i style="background:${LF[i]}"></i>${n}</span>`).join("")}<span><i style="background:#fff;box-shadow:inset 0 0 0 2px var(--amber)"></i>Single rule</span></span></div>
+  <div class="matrix" style="grid-template-columns:repeat(${c.tactics.length},minmax(92px,1fr))">${cols}</div>`;
+}
+
+function technique(id) {
+  const c = cov(), byId = rulesById();
+  const cells = c.cells.filter((x) => x.id === id); if (!cells.length) return;
+  const x = cells[0];
+  const all = x.rules.map((rid) => byId[rid]).filter(Boolean);
+  const rules = view.source ? all.filter((r) => r.source === view.source) : all;
+  const mitre = view.fw === "attack" ? `https://attack.mitre.org/techniques/${id}/` : `https://atlas.mitre.org/techniques/${id}`;
+  const lv = rules.length ? Math.max(...rules.map((r) => r.level)) : 0;
+  const atomic = view.fw === "attack" ? ` · <a href="https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/${id}" target="_blank" rel="noopener">Atomic Red Team tests</a>` : "";
+  const list = rules.map((r) => `<div class="rl"><b>${esc(r.name || r.id)}</b><span class="muted">${esc(r.id)} · ${esc(r.source)}</span><br>
+    <span class="tag ${r.state}">${esc(r.state)}</span> ${r.tested ? '<span class="tag">tested</span>' : ""} ${r.tuned ? '<span class="tag">tuned</span>' : ""}
+    ${r.missing.length ? `<div class="amber" style="margin-top:6px">missing data: ${r.missing.map((m) => `<code>${esc(m)}</code>`).join(" ")}</div>` : r.data_sources.length ? `<div class="muted" style="margin-top:6px">reads ${r.data_sources.map((m) => `<code>${esc(m)}</code>`).join(" ")}</div>` : ""}</div>`).join("");
+  $("drawer").innerHTML = `<button class="x" aria-label="Close" id="dx">×</button><div class="muted">${esc(cells.map((y) => y.tactic).join(" · "))}</div>
+  <h2>${esc(id)} ${esc(x.name)}</h2><span class="tag" style="background:${LF[lv]};color:${lv >= 2 ? "#fff" : "#0b0b0b"}">${LN[lv]}</span>
+  <p><a href="${mitre}" target="_blank" rel="noopener">MITRE page</a>${atomic}</p>
+  <h3 style="font-size:14px;margin:18px 0 0">${rules.length ? rules.length + " rule" + (rules.length > 1 ? "s" : "") : "No rule covers this technique"}${view.source ? ` in ${esc(view.source)}` : ""}${view.source && all.length > rules.length ? ` <span class="muted">· ${all.length} across all sources</span>` : ""}</h3>${list}
+  ${rules.length === 1 && lv > 0 ? '<p class="amber" style="margin-top:14px">A single rule carries this technique. If it breaks, the technique goes dark.</p>' : ""}`;
+  $("drawer").classList.add("open");
+  $("dx").onclick = () => $("drawer").classList.remove("open");
+}
+
+function recommendations() {
+  const out = Object.keys(S.coverage).map((k) => {
+    const recs = S.coverage[k].analysis.recommendations;
+    if (!recs.length) return "";
+    return `<h2 style="font-size:17px;margin:22px 0 12px">${FW[k] || k}</h2><div class="recs">${recs.map((r, i) => `<div class="rec"><h4>${i + 1}. ${esc(r.title)}</h4><p class="im">${esc(r.impact)}</p><p>${esc(r.body)}</p>${r.items.length ? `<ul>${r.items.map((it) => `<li>${esc(it.text)}${it.link ? ` <a href="${esc(it.link)}" target="_blank" rel="noopener">Atomic test</a>` : ""}</li>`).join("")}</ul>` : ""}</div>`).join("")}</div>`;
+  }).join("");
+  return header("Recommendations", "computed from the inventory, ordered by effort") + (out || `<div class="empty">Nothing to recommend.</div>`);
+}
+
+function rules() {
+  const states = ["", "dead", "disabled", "low", "medium", "high"];
+  const counts = {}; S.rules.forEach((r) => (counts[r.state] = (counts[r.state] || 0) + 1));
+  const q = view.rq.toLowerCase();
+  const list = S.rules.filter((r) => (!view.rstate || r.state === view.rstate) && (!view.rsrc || r.source === view.rsrc) && (!q || (r.id + " " + r.name + " " + r.techniques.join(" ") + " " + r.owner).toLowerCase().includes(q)));
+  const chips = states.map((s) => `<button class="chip${view.rstate === s ? " on" : ""}" data-rstate="${s}">${s ? s[0].toUpperCase() + s.slice(1) : "All"} <span class="muted">${s ? counts[s] || 0 : S.rules.length}</span></button>`).join("");
+  const opts = `<option value="">All sources</option>` + sourceNames().map((n) => `<option ${view.rsrc === n ? "selected" : ""}>${esc(n)}</option>`).join("");
+  const rows = list.slice(0, 500).map((r) => `<tr><td><code>${esc(r.id)}</code></td><td>${esc(r.name)}</td><td>${r.techniques.map((t) => `<a href="#matrix" data-goto="${esc(parent(t))}">${esc(t)}</a>`).join(", ")}</td><td>${esc(r.source)}</td><td><span class="tag ${r.state}">${esc(r.state)}</span></td><td>${r.missing.map((m) => `<code>${esc(m)}</code>`).join(" ")}</td></tr>`).join("");
+  return header("Rules", `${list.length} of ${S.rules.length}`) + `<div class="filters">${chips}<select id="rsrc">${opts}</select><input class="q" id="rq" type="search" placeholder="Rule, technique or owner" value="${esc(view.rq)}"></div>
+  <div class="card"><table><thead><tr><th>Rule</th><th>Name</th><th>Techniques</th><th>Source</th><th>State</th><th>Missing data</th></tr></thead><tbody>${rows || `<tr><td colspan="6" class="muted">No rule matches.</td></tr>`}</tbody></table></div>`;
+}
+
+function sources() {
+  const a = S.coverage.attack.analysis;
+  const rows = S.sources.map((s) => `<tr><td><b>${esc(s.name)}</b></td><td>${esc(s.type)}</td><td>${s.at ? esc(fmt(s.at)) : "never"}</td><td>${s.ok ? '<span class="up">ok</span>' : s.at ? `<span class="down">${esc(s.error || "error")}</span>` : ""}</td><td>${s.rules ?? ""}</td><td>${s.dead ?? ""}</td></tr>`).join("");
+  const miss = a.dead_by_source.map((d) => `<tr><td><code>${esc(d.source)}</code></td><td>${d.rules.length}</td><td>${d.rules.slice(0, 6).map((r) => `<code>${esc(r)}</code>`).join(" ")}${d.rules.length > 6 ? " …" : ""}</td></tr>`).join("");
+  const rec = a.recoverable.map((r) => `<li>${esc(r.id)} ${esc(r.name)} <span class="muted">· ${r.rules.map(esc).join(", ")}</span></li>`).join("");
+  return header("Data sources", "what each SIEM sent in the last pull, and what is missing") + pills() + `<div class="grid">
+  <div class="card s12"><h3>Sources</h3><table><thead><tr><th>Name</th><th>Type</th><th>Last refresh</th><th>Status</th><th>Rules</th><th>Dead</th></tr></thead><tbody>${rows}</tbody></table></div>
+  <div class="card s7"><h3>Missing data and the rules it silences</h3>${miss ? `<table><thead><tr><th>Source</th><th>Rules</th><th>Which</th></tr></thead><tbody>${miss}</tbody></table>` : `<div class="empty">Every enabled rule has data.</div>`}</div>
+  <div class="card s5"><h3>Techniques that come back when the data arrives</h3>${rec ? `<ul class="ch">${rec}</ul>` : `<div class="empty">None.</div>`}</div></div>`;
+}
+
+async function history() {
+  const h = S.history;
+  const rows = h.slice().reverse().map((x) => `<tr><td>${esc(fmt(x.taken_at))}</td><td>${x.attack.percent}%</td><td>${x.attack.covered}</td><td>${x.attack.by_level.High}</td><td>${x.attack.dead}</td><td>${x.atlas ? x.atlas.percent + "%" : ""}</td></tr>`).join("");
+  const opt = (sel) => h.map((x) => `<option value="${esc(x.id)}" ${x.id === sel ? "selected" : ""}>${esc(fmt(x.taken_at))}</option>`).join("");
+  const from = view.from || (h.length > 1 ? h[h.length - 2].id : ""), to = view.to || (h.length ? h[h.length - 1].id : "");
+  $("main").innerHTML = header("History", `${h.length} refreshes`) + `<div class="grid"><div class="card s12"><h3>Compare</h3>
+  <div class="filters">From <select id="hf">${opt(from)}</select> to <select id="ht">${opt(to)}</select></div><div id="diff"><div class="muted">Loading…</div></div></div>
+  <div class="card s12"><h3>Refreshes</h3><table><thead><tr><th>When</th><th>ATT&CK</th><th>Techniques</th><th>High</th><th>Dead rules</th><th>ATLAS</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
+  bind();
+  if (h.length < 2) { $("diff").innerHTML = `<div class="muted">Two refreshes are needed to compare.</div>`; return; }
+  const d = await (await fetch(`/api/diff?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`)).json();
+  $("diff").innerHTML = Object.entries(d.frameworks || {}).map(([k, x]) => `<p><b>${FW[k] || k}</b>: ${x.covered_before} → ${x.covered_after} techniques (${x.percent_before}% → ${x.percent_after}%)</p>
+    <ul class="ch">${x.improved.map((c) => `<li><span class="up">▲</span> ${esc(c.id)} ${esc(c.name)} <span class="muted">${LN[c.before]} → ${LN[c.after]}</span></li>`).join("")}
+    ${x.regressed.map((c) => `<li><span class="down">▼</span> ${esc(c.id)} ${esc(c.name)} <span class="muted">${LN[c.before]} → ${LN[c.after]}</span></li>`).join("")}
+    ${x.new_dead_rules.length ? `<li><span class="down">▼</span> new dead rules: ${x.new_dead_rules.map((r) => `<code>${esc(r.rule_id)}</code>`).join(" ")}</li>` : ""}
+    ${x.resolved_dead_rules.length ? `<li><span class="up">▲</span> dead rules resolved: ${x.resolved_dead_rules.map((r) => `<code>${esc(r.rule_id)}</code>`).join(" ")}</li>` : ""}
+    ${!(x.improved.length || x.regressed.length || x.new_dead_rules.length || x.resolved_dead_rules.length) ? '<li class="muted">No change.</li>' : ""}</ul>`).join("");
+}
+
+function bind() {
+  const b = $("refresh"); if (b) b.onclick = refresh;
+  document.querySelectorAll("[data-src]").forEach((e) => (e.onclick = () => { view.source = e.dataset.src; render(); }));
+  document.querySelectorAll("[data-only]").forEach((e) => (e.onclick = () => { view.only = e.dataset.only; render(); }));
+  document.querySelectorAll("[data-fw]").forEach((e) => (e.onclick = () => { view.fw = e.dataset.fw; view.source = ""; render(); }));
+  document.querySelectorAll("[data-t]").forEach((e) => (e.onclick = () => technique(e.dataset.t)));
+  document.querySelectorAll("[data-rstate]").forEach((e) => (e.onclick = () => { view.rstate = e.dataset.rstate; render(); }));
+  document.querySelectorAll("[data-goto]").forEach((e) => (e.onclick = () => { view.fw = e.dataset.goto.startsWith("AML") ? "atlas" : "attack"; setTimeout(() => technique(e.dataset.goto), 50); }));
+  const mq = $("mq"); if (mq) mq.oninput = () => { view.q = mq.value; const pos = mq.selectionStart; render(); const n = $("mq"); n.focus(); n.setSelectionRange(pos, pos); };
+  const rq = $("rq"); if (rq) rq.oninput = () => { view.rq = rq.value; const pos = rq.selectionStart; render(); const n = $("rq"); n.focus(); n.setSelectionRange(pos, pos); };
+  const rs = $("rsrc"); if (rs) rs.onchange = () => { view.rsrc = rs.value; render(); };
+  const hf = $("hf"), ht = $("ht"); if (hf) hf.onchange = ht.onchange = () => { view.from = hf.value; view.to = ht.value; render(); };
+}
+
+function render() {
+  if (!S) return;
+  const page = (location.hash || "#overview").slice(1);
+  document.querySelectorAll("#nav a").forEach((a) => a.classList.toggle("on", a.getAttribute("href") === "#" + page));
+  $("ws").innerHTML = `Workspace<br><b>${esc(S.title)}</b><br>${S.rules.length} rules · ${S.sources.length} sources<br>coveragekit ${esc(S.version)}`;
+  document.title = `${S.title} · coveragekit`;
+  if (!S.coverage.attack) { $("main").innerHTML = header("Detection coverage", "") + pills() + `<div class="banner">No data yet. Check the sources above, then press Refresh now.</div>`; bind(); return; }
+  if (page === "history") return history();
+  const pages = {overview, matrix, recommendations, rules, sources};
+  $("main").innerHTML = (pages[page] || overview)();
+  bind();
+}
+window.addEventListener("hashchange", () => { $("drawer").classList.remove("open"); render(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") $("drawer").classList.remove("open"); });
+load();
+</script>
+</body>
+</html>

@@ -174,14 +174,27 @@ def cmd_pull(args: argparse.Namespace) -> None:
     try:
         try:
             if args.siem == "splunk":
-                export, active = connectors.pull_splunk(args.url, out_dir, days=args.days, http=http)
+                export, active = connectors.pull_splunk(
+                    args.url, out_dir, days=args.days, http=http, env_prefix=args.env_prefix or "SPLUNK"
+                )
             elif args.siem == "elastic":
                 export, active = connectors.pull_elastic(
-                    args.url, out_dir, es_url=args.es_url, days=args.days, indices=args.indices, http=http
+                    args.url,
+                    out_dir,
+                    es_url=args.es_url,
+                    days=args.days,
+                    indices=args.indices,
+                    http=http,
+                    env_prefix=args.env_prefix or "ELASTIC",
                 )
             else:
                 export, active = connectors.pull_wazuh(
-                    args.url, out_dir, indexer_url=args.indexer_url, days=args.days, http=http
+                    args.url,
+                    out_dir,
+                    indexer_url=args.indexer_url,
+                    days=args.days,
+                    http=http,
+                    env_prefix=args.env_prefix or "WAZUH",
                 )
         except connectors.ConnectorError as exc:
             raise CliError(str(exc)) from exc
@@ -194,6 +207,18 @@ def cmd_pull(args: argparse.Namespace) -> None:
     finally:
         if temp:
             shutil.rmtree(temp, ignore_errors=True)
+
+
+def cmd_serve(args: argparse.Namespace) -> None:
+    from .server import ConfigError, load_config, serve
+
+    try:
+        cfg = load_config(args.config)
+    except ConfigError as exc:
+        raise CliError(str(exc)) from exc
+    if args.port:
+        cfg.port = args.port
+    serve(cfg, refresh_on_start=not args.no_refresh_on_start)
 
 
 def cmd_diff(args: argparse.Namespace) -> None:
@@ -257,9 +282,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--save-exports", metavar="DIR", help="keep the raw exports in this directory")
     p.add_argument("--ca", metavar="FILE", help="CA bundle for the SIEM's TLS certificate")
     p.add_argument("--insecure", action="store_true", help="skip TLS verification (labs only)")
+    p.add_argument(
+        "--env-prefix", help="read credentials from PREFIX_TOKEN, PREFIX_API_KEY... (default: SPLUNK, ELASTIC, WAZUH)"
+    )
     p.add_argument("--keep-from", help="previous inventory CSV: keep its tested, tuned and owner columns")
     p.add_argument("--out", required=True, help="output inventory CSV")
     p.set_defaults(func=cmd_pull)
+
+    p = sub.add_parser("serve", help="run the web app: scheduled refresh, dashboard, matrix and history")
+    p.add_argument("--config", required=True, help="coveragekit.toml")
+    p.add_argument("--port", type=int, help="override the port in the config")
+    p.add_argument("--no-refresh-on-start", action="store_true", help="start from the inventories on disk")
+    p.set_defaults(func=cmd_serve)
 
     p = sub.add_parser("score", help="score coverage and write coverage.json")
     common(p)

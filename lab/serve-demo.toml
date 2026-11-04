@@ -1,0 +1,36 @@
+# Demo workspace for `coveragekit serve`, built from the lab exports (no SIEM needs to be running).
+# For live SIEMs use type = "splunk" | "elastic" | "wazuh" with url and env_prefix instead of type = "import".
+
+[server]
+title = "Lab SOC"
+data_dir = "out/serve-demo"
+refresh_hours = 6
+port = 8700
+
+[[source]]
+name = "Splunk Producción"
+type = "import"
+siem = "splunk"
+export = "out/splunk/correlation-searches.json"
+data_sources = "out/splunk/active-sources.csv"
+
+[[source]]
+name = "Elastic Cloud"
+type = "import"
+siem = "elastic"
+export = "out/elastic/rules.json"
+data_sources = "out/elastic/active-indices.txt"
+
+[[source]]
+name = "Wazuh Linux"
+type = "import"
+siem = "wazuh"
+export = "out/wazuh/rules-local.json"
+data_sources = "out/wazuh/active-groups.txt"
+
+[[source]]
+name = "Sigma comunidad"
+type = "import"
+siem = "sigma"
+export = "out/sigma-src/rules"
+data_sources = "sigma/active-logsources.txt"
