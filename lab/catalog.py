@@ -1,0 +1,95 @@
+"""Detection catalog for the integration lab.
+
+Each detection is deployed to one or more SIEMs, with the data it reads in each of them. The split is
+deliberate: Splunk carries the Windows endpoint content, Elastic the cloud, network and AI workloads,
+Wazuh the Linux hosts, and a few detections exist in more than one SIEM. Some data sources are never
+loaded in the lab, so those rules come out as dead rules.
+"""
+
+# (key, name, technique ids, {siem: data source})
+#   splunk:  (index, sourcetype)     elastic: index pattern     wazuh: (parent group, extra group)
+DETECTIONS = [
+    ("ps-encoded", "PowerShell encoded command", ["T1059.001"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"), "elastic": "logs-endpoint.events.process-*"}),
+    ("office-child", "Office application spawning a shell", ["T1204.002", "T1059.003"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational")}),
+    ("wmi-remote", "WMI remote process creation", ["T1047"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational")}),
+    ("lsass-access", "LSASS memory access", ["T1003.001"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"), "wazuh": ("sysmon", "credential_access")}),
+    ("kerberoast", "Kerberoasting service ticket requests", ["T1558.003"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Security")}),
+    ("dcsync", "DCSync replication request", ["T1003.006"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Security")}),
+    ("new-service", "Service installed on a host", ["T1543.003"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:System")}),
+    ("run-key", "Registry run key persistence", ["T1547.001"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational")}),
+    ("sched-task", "Scheduled task created", ["T1053.005"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Security"), "wazuh": ("windows", "windows_security")}),
+    ("log-clear", "Security event log cleared", ["T1070.001"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:Security")}),
+    ("psexec", "PsExec service installed remotely", ["T1569.002", "T1021.002"],
+     {"splunk": ("wineventlog", "XmlWinEventLog:System")}),
+    ("rdp-hijack", "RDP session hijacking with tscon", ["T1563.002"],
+     {"splunk": ("edr", "crowdstrike:events")}),
+    ("usb-exec", "Execution from removable media", ["T1091"],
+     {"splunk": ("usb", "usb:events")}),
+    ("dns-tunnel", "DNS tunnelling by query length", ["T1071.004", "T1048"],
+     {"splunk": ("network", "stream:dns"), "elastic": "logs-network.dns-*"}),
+    ("cloudtrail-off", "CloudTrail logging stopped", ["T1562.008"],
+     {"elastic": "logs-aws.cloudtrail-*"}),
+    ("iam-key", "New IAM access key for another user", ["T1098.001"],
+     {"elastic": "logs-aws.cloudtrail-*"}),
+    ("s3-public", "S3 bucket made public", ["T1530"],
+     {"elastic": "logs-aws.cloudtrail-*"}),
+    ("console-nomfa", "Console login without MFA", ["T1078.004"],
+     {"elastic": "logs-aws.cloudtrail-*"}),
+    ("okta-spray", "Password spraying against the IdP", ["T1110.003"],
+     {"elastic": "logs-okta.system-*"}),
+    ("mfa-fatigue", "MFA push fatigue", ["T1621"],
+     {"elastic": "logs-okta.system-*"}),
+    ("beacon", "Periodic beaconing to a rare domain", ["T1071.001"],
+     {"elastic": "logs-network.http-*"}),
+    ("exfil-web", "Large upload to file sharing service", ["T1567.002"],
+     {"elastic": "logs-network.http-*"}),
+    ("discovery-burst", "Burst of discovery commands", ["T1087.002", "T1069.002", "T1482"],
+     {"elastic": "logs-endpoint.events.process-*"}),
+    ("k8s-exec", "Exec into a Kubernetes pod", ["T1609"],
+     {"elastic": "logs-kubernetes.audit-*"}),
+    ("prompt-injection", "Prompt injection against the LLM gateway", ["AML.T0051"],
+     {"elastic": "logs-llm.gateway-*"}),
+    ("llm-jailbreak", "LLM jailbreak attempt", ["AML.T0054"],
+     {"elastic": "logs-llm.gateway-*"}),
+    ("model-exfil", "Model exfiltration through the inference API", ["AML.T0024"],
+     {"elastic": "logs-llm.gateway-*"}),
+    ("ssh-brute", "SSH brute force", ["T1110.001"],
+     {"wazuh": ("sshd", "authentication_failures"), "elastic": "logs-system.auth-*"}),
+    ("sudo-abuse", "Unexpected sudo to root", ["T1548.003"],
+     {"wazuh": ("sudo", "privilege_escalation")}),
+    ("cron-persist", "Crontab modified", ["T1053.003"],
+     {"wazuh": ("syscheck", "cron")}),
+    ("ssh-keys", "authorized_keys modified", ["T1098.004"],
+     {"wazuh": ("syscheck", "ssh_keys")}),
+    ("web-shell", "Web shell written to the web root", ["T1505.003"],
+     {"wazuh": ("syscheck", "web")}),
+    ("rootkit", "Rootkit indicators on host", ["T1014"],
+     {"wazuh": ("rootcheck", "rootkit")}),
+    ("hist-clear", "Shell history cleared", ["T1070.003"],
+     {"wazuh": ("audit", "audit_command")}),
+    ("crypto-miner", "Cryptominer process", ["T1496.001"],
+     {"wazuh": ("audit", "audit_command")}),
+]
+
+# Data the lab actually loads. Everything else is missing on purpose.
+LOADED = {
+    "splunk": [
+        ("wineventlog", "XmlWinEventLog:Security"),
+        ("wineventlog", "XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"),
+        ("network", "stream:dns"),
+    ],
+    "elastic": ["logs-endpoint.events.process-default", "logs-aws.cloudtrail-default", "logs-network.http-default",
+                "logs-llm.gateway-default", "logs-system.auth-default"],
+}
+# Rules deployed but disabled in the SIEM.
+DISABLED = {"splunk": {"new-service"}, "elastic": {"k8s-exec"}, "wazuh": set()}

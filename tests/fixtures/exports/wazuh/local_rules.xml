@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<group name="local,sshd,">
+  <rule id="100100" level="10">
+    <if_sid>5716</if_sid>
+    <description>SSH brute force</description>
+    <mitre><id>T1110.001</id></mitre>
+    <group>authentication_failures,</group>
+  </rule>
+  <rule id="100101" level="0">
+    <description>Silenced noise</description>
+    <mitre><id>T1078</id></mitre>
+  </rule>
+</group>
+<group name="sysmon,">
+  <rule id="100200" level="12">
+    <description>LSASS access</description>
+    <mitre><id>T1003.001</id></mitre>
+  </rule>
+</group>

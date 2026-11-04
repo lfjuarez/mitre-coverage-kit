@@ -1,0 +1,8 @@
+{"resources": [
+ {"type": "Microsoft.OperationalInsights/workspaces/providers/alertRules", "name": "[concat(parameters('workspace'),'/Microsoft.SecurityInsights/abc')]", "kind": "Scheduled",
+  "properties": {"displayName": "Brute force against Azure AD", "enabled": true, "tactics": ["CredentialAccess"], "techniques": ["T1110"], "subTechniques": ["T1110.003"],
+   "query": "let threshold = 10;\nSigninLogs\n| where ResultType != 0\n| summarize count() by UserPrincipalName\n| join kind=inner (AuditLogs | where OperationName == 'Reset password') on $left.UserPrincipalName == $right.Identity"}},
+ {"type": "Microsoft.OperationalInsights/workspaces/providers/alertRules", "name": "x/y/fusion", "kind": "Fusion", "properties": {"displayName": "Fusion", "enabled": true}},
+ {"type": "Microsoft.OperationalInsights/workspaces/providers/alertRules", "name": "ws/Microsoft.SecurityInsights/def", "kind": "Scheduled",
+  "properties": {"displayName": "Rare process", "enabled": false, "techniques": ["T1059"], "query": "union SecurityEvent, DeviceProcessEvents\n| where TimeGenerated > ago(1d)"}}
+]}

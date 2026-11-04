@@ -1,6 +1,6 @@
 # mitre-coverage-kit
 
-Detection coverage is usually a belief: someone says "we cover credential access" and nobody can say how many techniques, how well, or whether the data behind the rules even arrives. `mitre-coverage-kit` turns that belief into a measurement. It reads your SIEM rule inventory, scores every MITRE ATT&CK Enterprise technique and every MITRE ATLAS technique from 0 to 3, exports an ATT&CK Navigator layer you can show the SOC, and renders a heat-map SVG. It also lists dead rules, the ones that are enabled but can never fire because their data source is missing.
+Detection coverage is usually a belief: someone says "we cover credential access" and nobody can say how many techniques, how well, or whether the data behind the rules even arrives. `mitre-coverage-kit` turns that belief into a measurement. It reads the rules of one or several SIEMs (Splunk ES, Elastic Security, Wazuh, Microsoft Sentinel or Sigma), scores every MITRE ATT&CK Enterprise technique and every MITRE ATLAS technique from 0 to 3, exports an ATT&CK Navigator layer you can show the SOC, and renders a heat-map SVG. It also lists dead rules, the ones that are enabled but can never fire because their data source is missing.
 
 ![ATT&CK coverage heat map for the synthetic example inventory](examples/output/coverage-attack.svg)
 
@@ -38,6 +38,50 @@ R-080,LLM - sensitive data leaked in completion,AML.T0057,true,false,false,false
 
 `techniques` is a semicolon-separated list of ATT&CK or ATLAS ids; sub-technique ids such as `T1059.001` or `AML.T0051.000` are accepted. Booleans accept `true/false`, `yes/no` and `1/0`. Rule ids must be unique and every rule needs at least one well-formed technique id. Ids that are well-formed but absent from the loaded matrices are reported as warnings, not errors. The required columns are `rule_id`, `techniques`, `enabled` and `data_available`; the rest are optional.
 
+## Import from your SIEM
+
+You do not have to build the CSV by hand. `coveragekit import` reads the native export of each SIEM, takes the ATT&CK and ATLAS ids the rules already carry, and writes the inventory:
+
+```bash
+coveragekit import splunk   --export correlation-searches.json --data-sources active-sources.csv --out splunk.csv
+coveragekit import elastic  --export rules.ndjson              --data-sources active-indices.txt --out elastic.csv
+coveragekit import wazuh    --export rules.json                --data-sources active-groups.txt  --out wazuh.csv
+coveragekit import sigma    --export sigma/rules/              --data-sources logsources.txt     --out sigma.csv
+coveragekit import sentinel --export analytics-rules.json      --data-sources tables.txt         --out sentinel.csv
+```
+
+| SIEM | Export (`--export`) | Techniques from | Data sources a rule needs | Active sources (`--data-sources`) |
+|---|---|---|---|---|
+| Splunk ES | REST `GET /servicesNS/-/-/saved/searches?output_mode=json&count=0`, or a CSV from `\| rest` | `action.correlationsearch.annotations` (`mitre_attack`, `mitre_atlas`) | `index`, `sourcetype` and `datamodel` in the SPL (all of them) | `\| tstats count where index=* by index sourcetype` with `earliest_time=-7d`, exported as CSV |
+| Elastic Security | `GET /api/detection_engine/rules/_find?per_page=10000`, or the `_export` NDJSON | `threat[]` (MITRE ATT&CK and MITRE ATLAS, sub-techniques included) | `index` patterns, or `FROM` in ES\|QL rules (any of them) | `terms` aggregation on `_index` over `logs-*` for the last 7 days; backing indices count as their data stream |
+| Wazuh | API `GET /rules?limit=100000`, or rule XML files / a directory | `<mitre><id>` | rule groups (any of them); level 0 rules count as disabled | rule groups seen in `alerts.json` (or `wazuh-alerts-*`) in the last 7 days |
+| Sigma | a rule file or a directory | `attack.tNNNN` tags (`atlas.aml.tNNNN` also accepted) | `logsource` as `product/category` or `product/service` | the log sources you collect, for example `windows/process_creation` |
+| Microsoft Sentinel | ARM template export or REST `alertRules` JSON | `techniques` and `subTechniques` | tables read by the KQL query (all of them) | `union withsource=T * \| where TimeGenerated > ago(7d) \| distinct T` |
+
+`--data-sources` takes a CSV whose header uses `index`, `sourcetype`, `datamodel`, `table`, `group` or `logsource`, or plain text with one source per line, optionally prefixed with its kind (`datamodel:Endpoint`). Wildcards work in both directions. Without `--data-sources` every rule is assumed to have data and the command warns about it; that is the column that finds dead rules, so it is worth the extra query. Rules with no technique id are counted and left out. SIEMs do not record whether a rule was tested against an emulated attack or tuned, so those columns start as `false`: fill them in, and pass `--keep-from previous.csv` on the next import to keep them.
+
+## Several SIEMs, one coverage
+
+Pass one inventory per SIEM and they are merged:
+
+```bash
+coveragekit report --rules splunk.csv elastic.csv wazuh.csv --out-dir out/
+```
+
+Each technique takes the best level across all SIEMs, so the matrix shows what the organisation detects as a whole. The summary adds one row per SIEM with its rules, the techniques it covers and how many techniques only that SIEM covers, which is the number to look at before decommissioning one. `coverage.json` carries the same table under `sources`. Rule ids that repeat across files are qualified with their source.
+
+## Integration lab
+
+`lab/` runs the importers against real SIEMs in containers, one at a time: Splunk Enterprise with 14 correlation searches, Elastic Security with 16 detection rules (three of them mapped to ATLAS) and a Wazuh manager with 10 custom rules on top of its default ruleset. The detections come from one catalog (`lab/catalog.py`) with different TTPs per SIEM and some overlap, and some of the data sources they need are never loaded, so dead rules appear on purpose. Each `lab/<siem>/run.sh` starts the container, loads rules and sample events, and writes the export and the active sources to `lab/out/<siem>/`. The importers were also run against the full Wazuh default ruleset (4,499 rules) and the public SigmaHQ repository (3,162 rules).
+
+![Importing the lab exports from Splunk, Elastic, Wazuh and SigmaHQ](lab/screenshots/terminal-import.png)
+
+![One coverage view across Splunk, Elastic and Wazuh](lab/screenshots/terminal-unified.png)
+
+![The Elastic lab rules in Kibana](lab/screenshots/elastic-kibana-rules.png)
+
+The run also surfaced a real migration issue: ATT&CK v20 retired T1562 (Impair Defenses), so rules still tagged `T1562.*` are reported as unmapped until they are remapped to the new Defense Impairment techniques.
+
 ## How scoring works
 
 Each rule gets a quality level:
@@ -61,6 +105,7 @@ Dead rules are enabled rules whose `data_available` is false. They look like cov
 - `tactics`: per tactic, the technique count, covered count, percent and mean level.
 - `cells`: one entry per tactic and technique with `framework`, `tactic`, `tactic_id`, `id`, `name`, `level` and the `rules` that reference it.
 - `dead_rules` and `unmapped_rules`.
+- `sources`: with more than one SIEM, rules, techniques covered and techniques covered only there, per SIEM.
 
 `attack-layer.json` is an ATT&CK Navigator layer (layer format 4.5, Enterprise domain) with scores 0, 33, 66 and 100 and a comment per technique that lists the contributing rules. To use it, open the [ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/), choose Open Existing Layer, then Upload from local, and select the file.
 

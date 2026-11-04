@@ -1,0 +1,13 @@
+{"entry": [
+ {"name": "ESCU - Windows PowerShell Encoded Command", "content": {"disabled": false, "action.correlationsearch.enabled": "1",
+  "action.correlationsearch.annotations": "{\"mitre_attack\": [\"T1059.001\"], \"kill_chain_phases\": [\"Installation\"]}",
+  "search": "| tstats `security_content_summariesonly` count from datamodel=Endpoint.Processes where Processes.process=\"*-enc*\" by Processes.dest"}},
+ {"name": "ESCU - Linux Sudo Brute Force", "content": {"disabled": false, "action.correlationsearch.enabled": "1",
+  "action.correlationsearch.annotations": "{\"mitre_attack\": [\"T1110\", \"T1548.003\"]}",
+  "search": "index=linux sourcetype=linux_secure \"authentication failure\" | stats count by host"}},
+ {"name": "ESCU - Disabled USB Rule", "content": {"disabled": true, "action.correlationsearch.enabled": "1",
+  "action.correlationsearch.annotations": "{\"mitre_attack\": [\"T1091\"]}", "search": "index=usb sourcetype=usb:events"}},
+ {"name": "Weekly license report", "content": {"disabled": false, "search": "index=_internal source=*license_usage.log"}},
+ {"name": "ESCU - No Mapping", "content": {"disabled": false, "action.correlationsearch.enabled": "1",
+  "action.correlationsearch.annotations": "{}", "search": "index=main"}}
+]}

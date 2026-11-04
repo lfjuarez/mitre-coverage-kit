@@ -158,3 +158,25 @@ def unknown_technique_warnings(rules: list[Rule], known: set[str]) -> list[str]:
         for tid in rule.invalid_techniques:
             warnings.append(f"{rule.rule_id}: '{tid}' is not a valid technique id and was ignored")
     return warnings
+
+
+def merge_inventories(paths: str | Path | list[str | Path]) -> list[Rule]:
+    """Load one or several inventories (for example one per SIEM) into a single list.
+
+    A rule id that repeats across files is qualified with its source (or file name) so both rules count.
+    """
+    if isinstance(paths, (str, Path)):
+        paths = [paths]
+    merged: list[Rule] = []
+    seen: set[str] = set()
+    for path in paths:
+        for rule in load_rules(path):
+            if not rule.source and len(paths) > 1:
+                rule.source = Path(path).stem
+            if rule.rule_id in seen:
+                rule.rule_id = f"{rule.source or Path(path).stem}:{rule.rule_id}"
+                if rule.rule_id in seen:
+                    raise RuleError(f"{path}: duplicate rule_id '{rule.rule_id}'")
+            seen.add(rule.rule_id)
+            merged.append(rule)
+    return merged
