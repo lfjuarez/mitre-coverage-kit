@@ -1,0 +1,86 @@
+rule_id,name,techniques,enabled,data_available,tested,tuned,owner,source
+R-001,ESCU - Suspicious PowerShell Encoded Command,T1059.001,true,true,true,true,detection-eng,Splunk ES
+R-002,ESCU - Windows Command Shell Spawned by Office Application,T1059.003;T1204.002,true,true,true,true,detection-eng,Splunk ES
+R-003,EDR - WMI Process Call Create Remote,T1047,true,true,true,true,edr-team,EDR
+R-004,ESCU - Python Script Execution from Temp Directory,T1059.006,true,true,true,false,detection-eng,Splunk ES
+R-005,ESCU - Windows Scheduled Task Created via Schtasks,T1053.005,true,true,true,true,detection-eng,Splunk ES
+R-006,ESCU - Cron Job Created by Non-Root User,T1053.003,true,true,true,false,linux-secops,Splunk ES
+R-007,EDR - Mshta Spawning Script Interpreter,T1218.005;T1059.005,true,true,true,false,edr-team,EDR
+R-008,ESCU - Rundll32 Loading DLL from User Profile,T1218.011,true,true,false,false,detection-eng,Splunk ES
+R-009,ESCU - Windows Service Created with Suspicious Binary Path,T1569.002;T1543.003,true,true,true,true,detection-eng,Splunk ES
+R-010,Container - Exec into Running Pod from External Address,T1609,true,true,false,false,cloud-secops,Kubernetes audit
+R-011,EDR - Remote Thread Created in Foreign Process,T1055,true,true,true,false,edr-team,EDR
+R-012,EDR - Bitsadmin or Certutil Download and Execute,T1197;T1105,true,true,true,false,edr-team,EDR
+R-013,ESCU - DCOM Object Instantiated by Office Application,T1559.001,true,true,true,false,detection-eng,Splunk ES
+R-014,ESCU - Exploit Code Executed from Browser Child Process,T1203;T1204,true,true,false,false,endpoint-team,Splunk ES
+R-015,ESCU - Native API Call from Unsigned Module,T1106;T1129,true,true,true,true,edr-team,EDR
+R-016,ESCU - Msbuild Spawned by Office Application,T1127.001;T1204.002,true,true,true,false,detection-eng,Splunk ES
+R-017,ESCU - Remote Software Deployment Tool Pushing Script,T1072,true,true,false,false,endpoint-team,Splunk ES
+R-018,ESCU - Registry Run Key Modified by Script Host,T1547.001,true,true,true,true,detection-eng,Splunk ES
+R-019,ESCU - New Local Administrator Account Created,T1136.001;T1098,true,true,true,true,identity-team,Splunk ES
+R-020,ESCU - WMI Event Subscription Created,T1546.003,true,true,true,false,detection-eng,Splunk ES
+R-021,ESCU - Web Shell Written to IIS Directory,T1505.003,true,true,true,false,web-secops,Splunk ES
+R-022,Entra ID - Application Credential Added to Service Principal,T1098.001,true,true,true,false,identity-team,Entra ID
+R-023,ESCU - Browser Extension Installed by Non-Admin,T1176,true,true,false,false,endpoint-team,Splunk ES
+R-024,ESCU - Systemd Service Created from Writable Path,T1543,true,true,false,false,linux-secops,Splunk ES
+R-025,ESCU - Authentication Package Registered in LSA,T1547.002;T1556,true,false,false,false,detection-eng,Splunk ES
+R-026,ESCU - Windows LSASS Memory Access by Non-System Process,T1003.001,true,true,true,true,detection-eng,Splunk ES
+R-027,ESCU - Kerberoasting Spn Request with RC4 Encryption,T1558.003,true,true,true,true,identity-team,Splunk ES
+R-028,Okta - MFA fatigue (repeated push denials then approve),T1621,true,true,true,true,identity-team,Okta
+R-029,ESCU - Password Spraying Against Multiple Accounts,T1110.003,true,true,true,true,identity-team,Splunk ES
+R-030,ESCU - NTDS.dit Access via Shadow Copy,T1003.003,true,true,true,false,detection-eng,Splunk ES
+R-031,ESCU - Unsecured Credentials in Command Line,T1552.001,true,true,true,false,detection-eng,Splunk ES
+R-032,ESCU - DCSync Replication Request from Non-DC,T1003.006,true,true,true,false,identity-team,Splunk ES
+R-033,AWS - Access Key Used from New ASN,T1078.004;T1552.005,true,true,false,false,cloud-secops,CloudTrail
+R-034,Entra ID - OAuth Token Theft via Device Code Flow,T1528;T1550.001,true,true,true,false,identity-team,Entra ID
+R-035,ESCU - Credentials from Web Browsers Accessed,T1555.003,true,true,false,false,endpoint-team,Splunk ES
+R-036,ESCU - Forced NTLM Authentication to External SMB Share,T1187,true,true,true,false,identity-team,Splunk ES
+R-037,NDR - LLMNR or ARP Poisoning Responder Activity,T1557.001;T1040,true,true,true,false,network-team,Zeek
+R-038,Okta - Session Cookie Replayed from New Device,T1539;T1606,true,true,true,false,identity-team,Okta
+R-039,ESCU - Spearphishing Attachment with Macro-Enabled Document,T1566.001,true,true,true,false,email-secops,Proofpoint
+R-040,ESCU - Web Application Exploit Attempt Log4Shell,T1190,true,true,true,false,web-secops,WAF
+R-041,VPN - Impossible Travel for Valid Account,T1078;T1133,true,true,false,false,identity-team,VPN
+R-042,Email - Spearphishing Link to Newly Registered Domain,T1566.002,true,true,false,false,email-secops,Proofpoint
+R-043,USB - Removable Media Execution Detected,T1091;T1200,true,false,false,false,endpoint-team,EDR
+R-044,ESCU - Windows Event Log Cleared,T1070.001,true,true,true,true,detection-eng,Splunk ES
+R-045,ESCU - Process Hollowing Detected,T1055.012,true,true,true,false,edr-team,EDR
+R-046,ESCU - Suspicious Obfuscated Script Content,T1027;T1140,true,true,false,false,detection-eng,Splunk ES
+R-047,ESCU - Masquerading System Binary in User Directory,T1036.005,true,true,true,false,detection-eng,Splunk ES
+R-048,EDR - Security Tool Service Stopped,T1489,true,true,true,false,edr-team,EDR
+R-049,ESCU - Windows Defender Exclusion Added via Registry,T1112,true,true,false,false,detection-eng,Splunk ES
+R-050,ESCU - Timestomping of Executable,T1070.006,true,false,false,false,detection-eng,Splunk ES
+R-051,Cloud - Audit Logging Disabled in Tenant,T1578,true,true,false,false,cloud-secops,CloudTrail
+R-052,ESCU - UAC Bypass via Fodhelper,T1548.002,true,true,true,false,detection-eng,Splunk ES
+R-053,ESCU - Token Impersonation via Named Pipe,T1134.001,true,true,false,false,edr-team,EDR
+R-054,ESCU - Sudo Abuse with Shell Spawn,T1548.003,true,true,false,false,linux-secops,Splunk ES
+R-055,ESCU - Network Share Discovery via Net.exe,T1135,true,true,false,false,detection-eng,Splunk ES
+R-056,ESCU - AD Enumeration with AdFind,T1087.002;T1018,true,true,true,false,detection-eng,Splunk ES
+R-057,ESCU - Internal Port Scan from Single Host,T1046,true,true,true,false,network-team,Zeek
+R-058,ESCU - Remote Desktop Logon from Workstation to Server,T1021.001,true,true,true,false,detection-eng,Splunk ES
+R-059,ESCU - SMB Admin Share Accessed over the Network,T1021.002,true,true,true,true,detection-eng,Splunk ES
+R-060,ESCU - Pass the Hash NTLM Logon Pattern,T1550.002,true,true,false,false,identity-team,Splunk ES
+R-061,ESCU - PsExec Service Installed Remotely,T1570;T1021.002,true,false,false,false,detection-eng,Splunk ES
+R-062,NDR - DNS Tunneling High Entropy Queries,T1071.004;T1572,true,true,true,false,network-team,Zeek
+R-063,NDR - Beaconing to Rare External Host,T1071.001;T1573,true,true,false,false,network-team,Zeek
+R-064,Proxy - Download of Executable from Paste Site,T1105,true,true,false,false,network-team,Proxy
+R-065,Proxy - Large Upload to Personal Cloud Storage,T1567.002,true,true,false,false,data-protection,Proxy
+R-066,DLP - Archive Created Then Sent to External Address,T1560.001;T1048,true,false,false,false,data-protection,DLP
+R-067,ESCU - Clipboard Data Read by Unsigned Process,T1115,true,false,false,false,endpoint-team,EDR
+R-068,ESCU - Ransomware File Encryption Burst,T1486,true,true,true,true,detection-eng,Splunk ES
+R-069,ESCU - Volume Shadow Copy Deleted,T1490,true,true,true,true,detection-eng,Splunk ES
+R-070,Web - Repeated Failed Logins from Scanner User Agent,T1595.002,true,true,false,false,web-secops,WAF
+R-071,Email - Mailbox Collection Rule Forwarding Externally,T1114.003,false,true,true,false,email-secops,Proofpoint
+R-072,ESCU - Disk Wipe Utility Execution,T1561,false,true,true,false,detection-eng,Splunk ES
+R-073,Threat Intel - Domain Match on Victim Brand Typosquat,T1583.001,false,true,true,false,threat-intel,TIP
+R-074,LLM - prompt injection pattern in chat logs,AML.T0051,true,true,true,true,ai-secops,LLM gateway
+R-075,LLM - indirect prompt injection in retrieved document,AML.T0051.001,true,true,true,false,ai-secops,LLM gateway
+R-076,LLM - jailbreak phrase detected in user prompt,AML.T0054,true,true,true,false,ai-secops,LLM gateway
+R-077,LLM - model inference API burst from single key,AML.T0040,true,true,true,false,ai-secops,API gateway
+R-078,LLM - high-volume extraction of model outputs,AML.T0024,true,true,false,false,ai-secops,API gateway
+R-079,LLM - system prompt disclosure in model response,AML.T0056,true,true,false,false,ai-secops,LLM gateway
+R-080,LLM - sensitive data leaked in completion,AML.T0057,true,false,false,false,ai-secops,DLP
+R-081,Agent - tool invocation outside allow-list,AML.T0053,true,true,false,false,ai-secops,Agent runtime
+R-082,Agent - exfiltration via tool call to external URL,AML.T0086,true,false,false,false,ai-secops,Agent runtime
+R-083,MLOps - model artifact downloaded outside registry,AML.T0035;AML.T0010,true,true,false,false,ml-platform,Model registry
+R-084,MLOps - training dataset modified after approval,AML.T0020,true,true,false,false,ml-platform,Model registry
+R-085,LLM - denial of service by oversized prompts,AML.T0029,true,false,false,false,ai-secops,API gateway

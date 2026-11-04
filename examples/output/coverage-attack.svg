@@ -1,0 +1,349 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1142" viewBox="0 0 1100 1142" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif" role="img" aria-label="MITRE ATT&amp;CK Enterprise detection coverage heat map">
+  <rect width="1100" height="1142" fill="#fcfcfb"/>
+  <text x="40" y="54" font-size="18" fill="#0b0b0b" font-weight="600">MITRE ATT&amp;CK Enterprise detection coverage</text>
+  <text x="40" y="74" font-size="12" fill="#52514e">One cell per technique, one column per tactic, coloured by detection level</text>
+  <text transform="translate(78,230) rotate(-90)" font-size="11" fill="#52514e">Reconnaissance</text>
+  <text transform="translate(146,230) rotate(-90)" font-size="11" fill="#52514e">Resource Development</text>
+  <text transform="translate(214,230) rotate(-90)" font-size="11" fill="#52514e">Initial Access</text>
+  <text transform="translate(282,230) rotate(-90)" font-size="11" fill="#52514e">Execution</text>
+  <text transform="translate(350,230) rotate(-90)" font-size="11" fill="#52514e">Persistence</text>
+  <text transform="translate(418,230) rotate(-90)" font-size="11" fill="#52514e">Privilege Escalation</text>
+  <text transform="translate(486,230) rotate(-90)" font-size="11" fill="#52514e">Stealth</text>
+  <text transform="translate(554,230) rotate(-90)" font-size="11" fill="#52514e">Defense Impairment</text>
+  <text transform="translate(622,230) rotate(-90)" font-size="11" fill="#52514e">Credential Access</text>
+  <text transform="translate(690,230) rotate(-90)" font-size="11" fill="#52514e">Discovery</text>
+  <text transform="translate(758,230) rotate(-90)" font-size="11" fill="#52514e">Lateral Movement</text>
+  <text transform="translate(826,230) rotate(-90)" font-size="11" fill="#52514e">Collection</text>
+  <text transform="translate(894,230) rotate(-90)" font-size="11" fill="#52514e">Command and Control</text>
+  <text transform="translate(962,230) rotate(-90)" font-size="11" fill="#52514e">Exfiltration</text>
+  <text transform="translate(1030,230) rotate(-90)" font-size="11" fill="#52514e">Impact</text>
+  <rect x="63" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1589 Gather Victim Identity Information - None</title></rect>
+  <rect x="63" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1590 Gather Victim Network Information - None</title></rect>
+  <rect x="63" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1591 Gather Victim Org Information - None</title></rect>
+  <rect x="63" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1592 Gather Victim Host Information - None</title></rect>
+  <rect x="63" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1593 Search Open Websites/Domains - None</title></rect>
+  <rect x="63" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1594 Search Victim-Owned Websites - None</title></rect>
+  <rect x="63" y="308" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1595 Active Scanning - Low</title></rect>
+  <rect x="63" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1596 Search Open Technical Databases - None</title></rect>
+  <rect x="63" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1597 Search Closed Sources - None</title></rect>
+  <rect x="63" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1598 Phishing for Information - None</title></rect>
+  <rect x="63" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1681 Search Threat Vendor Data - None</title></rect>
+  <rect x="63" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1682 Query Public AI Services - None</title></rect>
+  <rect x="131" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1583 Acquire Infrastructure - None</title></rect>
+  <rect x="131" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1584 Compromise Infrastructure - None</title></rect>
+  <rect x="131" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1585 Establish Accounts - None</title></rect>
+  <rect x="131" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1586 Compromise Accounts - None</title></rect>
+  <rect x="131" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1587 Develop Capabilities - None</title></rect>
+  <rect x="131" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1588 Obtain Capabilities - None</title></rect>
+  <rect x="131" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1608 Stage Capabilities - None</title></rect>
+  <rect x="131" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1650 Acquire Access - None</title></rect>
+  <rect x="131" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1683 Generate Content - None</title></rect>
+  <rect x="199" y="242" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1078 Valid Accounts - Low</title></rect>
+  <rect x="199" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1091 Replication Through Removable Media - None</title></rect>
+  <rect x="199" y="264" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1133 External Remote Services - Low</title></rect>
+  <rect x="199" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1189 Drive-by Compromise - None</title></rect>
+  <rect x="199" y="286" width="22" height="8" rx="3" fill="#3987e5"><title>T1190 Exploit Public-Facing Application - Medium</title></rect>
+  <rect x="199" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1195 Supply Chain Compromise - None</title></rect>
+  <rect x="199" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1199 Trusted Relationship - None</title></rect>
+  <rect x="199" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1200 Hardware Additions - None</title></rect>
+  <rect x="199" y="330" width="22" height="8" rx="3" fill="#3987e5"><title>T1566 Phishing - Medium</title></rect>
+  <rect x="199" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1659 Content Injection - None</title></rect>
+  <rect x="199" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1669 Wi-Fi Networks - None</title></rect>
+  <rect x="267" y="242" width="22" height="8" rx="3" fill="#184f95"><title>T1047 Windows Management Instrumentation - High</title></rect>
+  <rect x="267" y="253" width="22" height="8" rx="3" fill="#184f95"><title>T1053 Scheduled Task/Job - High</title></rect>
+  <rect x="267" y="264" width="22" height="8" rx="3" fill="#184f95"><title>T1059 Command and Scripting Interpreter - High</title></rect>
+  <rect x="267" y="275" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1072 Software Deployment Tools - Low</title></rect>
+  <rect x="267" y="286" width="22" height="8" rx="3" fill="#184f95"><title>T1106 Native API - High</title></rect>
+  <rect x="267" y="297" width="22" height="8" rx="3" fill="#3987e5"><title>T1127 Trusted Developer Utilities Proxy Execution - Medium</title></rect>
+  <rect x="267" y="308" width="22" height="8" rx="3" fill="#184f95"><title>T1129 Shared Modules - High</title></rect>
+  <rect x="267" y="319" width="22" height="8" rx="3" fill="#3987e5"><title>T1197 BITS Jobs - Medium</title></rect>
+  <rect x="267" y="330" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1203 Exploitation for Client Execution - Low</title></rect>
+  <rect x="267" y="341" width="22" height="8" rx="3" fill="#184f95"><title>T1204 User Execution - High</title></rect>
+  <rect x="267" y="352" width="22" height="8" rx="3" fill="#3987e5"><title>T1559 Inter-Process Communication - Medium</title></rect>
+  <rect x="267" y="363" width="22" height="8" rx="3" fill="#184f95"><title>T1569 System Services - High</title></rect>
+  <rect x="267" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1574 Hijack Execution Flow - None</title></rect>
+  <rect x="267" y="385" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1609 Container Administration Command - Low</title></rect>
+  <rect x="267" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1610 Deploy Container - None</title></rect>
+  <rect x="267" y="407" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1648 Serverless Execution - None</title></rect>
+  <rect x="267" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1651 Cloud Administration Command - None</title></rect>
+  <rect x="267" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1674 Input Injection - None</title></rect>
+  <rect x="267" y="440" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1675 ESXi Administration Command - None</title></rect>
+  <rect x="267" y="451" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1677 Poisoned Pipeline Execution - None</title></rect>
+  <rect x="267" y="462" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1698 Indirect Prompt Injection - None</title></rect>
+  <rect x="267" y="473" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1699 Direct Prompt Injection - None</title></rect>
+  <rect x="335" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1037 Boot or Logon Initialization Scripts - None</title></rect>
+  <rect x="335" y="253" width="22" height="8" rx="3" fill="#184f95"><title>T1053 Scheduled Task/Job - High</title></rect>
+  <rect x="335" y="264" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1078 Valid Accounts - Low</title></rect>
+  <rect x="335" y="275" width="22" height="8" rx="3" fill="#184f95"><title>T1098 Account Manipulation - High</title></rect>
+  <rect x="335" y="286" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1112 Modify Registry - Low</title></rect>
+  <rect x="335" y="297" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1133 External Remote Services - Low</title></rect>
+  <rect x="335" y="308" width="22" height="8" rx="3" fill="#184f95"><title>T1136 Create Account - High</title></rect>
+  <rect x="335" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1137 Office Application Startup - None</title></rect>
+  <rect x="335" y="330" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1176 Software Extensions - Low</title></rect>
+  <rect x="335" y="341" width="22" height="8" rx="3" fill="#3987e5"><title>T1197 BITS Jobs - Medium</title></rect>
+  <rect x="335" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1205 Traffic Signaling - None</title></rect>
+  <rect x="335" y="363" width="22" height="8" rx="3" fill="#3987e5"><title>T1505 Server Software Component - Medium</title></rect>
+  <rect x="335" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1525 Implant Internal Image - None</title></rect>
+  <rect x="335" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1542 Pre-OS Boot - None</title></rect>
+  <rect x="335" y="396" width="22" height="8" rx="3" fill="#184f95"><title>T1543 Create or Modify System Process - High</title></rect>
+  <rect x="335" y="407" width="22" height="8" rx="3" fill="#3987e5"><title>T1546 Event Triggered Execution - Medium</title></rect>
+  <rect x="335" y="418" width="22" height="8" rx="3" fill="#184f95"><title>T1547 Boot or Logon Autostart Execution - High</title></rect>
+  <rect x="335" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1554 Compromise Host Software Binary - None</title></rect>
+  <rect x="335" y="440" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1556 Modify Authentication Process - None</title></rect>
+  <rect x="335" y="451" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1653 Power Settings - None</title></rect>
+  <rect x="335" y="462" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1668 Exclusive Control - None</title></rect>
+  <rect x="335" y="473" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1671 Cloud Application Integration - None</title></rect>
+  <rect x="403" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1037 Boot or Logon Initialization Scripts - None</title></rect>
+  <rect x="403" y="253" width="22" height="8" rx="3" fill="#184f95"><title>T1053 Scheduled Task/Job - High</title></rect>
+  <rect x="403" y="264" width="22" height="8" rx="3" fill="#3987e5"><title>T1055 Process Injection - Medium</title></rect>
+  <rect x="403" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1068 Exploitation for Privilege Escalation - None</title></rect>
+  <rect x="403" y="286" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1078 Valid Accounts - Low</title></rect>
+  <rect x="403" y="297" width="22" height="8" rx="3" fill="#184f95"><title>T1098 Account Manipulation - High</title></rect>
+  <rect x="403" y="308" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1134 Access Token Manipulation - Low</title></rect>
+  <rect x="403" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1484 Domain or Tenant Policy Modification - None</title></rect>
+  <rect x="403" y="330" width="22" height="8" rx="3" fill="#184f95"><title>T1543 Create or Modify System Process - High</title></rect>
+  <rect x="403" y="341" width="22" height="8" rx="3" fill="#3987e5"><title>T1546 Event Triggered Execution - Medium</title></rect>
+  <rect x="403" y="352" width="22" height="8" rx="3" fill="#184f95"><title>T1547 Boot or Logon Autostart Execution - High</title></rect>
+  <rect x="403" y="363" width="22" height="8" rx="3" fill="#3987e5"><title>T1548 Abuse Elevation Control Mechanism - Medium</title></rect>
+  <rect x="403" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1611 Escape to Host - None</title></rect>
+  <rect x="471" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1006 Direct Volume Access - None</title></rect>
+  <rect x="471" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1014 Rootkit - None</title></rect>
+  <rect x="471" y="264" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1027 Obfuscated Files or Information - Low</title></rect>
+  <rect x="471" y="275" width="22" height="8" rx="3" fill="#3987e5"><title>T1036 Masquerading - Medium</title></rect>
+  <rect x="471" y="286" width="22" height="8" rx="3" fill="#3987e5"><title>T1055 Process Injection - Medium</title></rect>
+  <rect x="471" y="297" width="22" height="8" rx="3" fill="#184f95"><title>T1070 Indicator Removal - High</title></rect>
+  <rect x="471" y="308" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1078 Valid Accounts - Low</title></rect>
+  <rect x="471" y="319" width="22" height="8" rx="3" fill="#3987e5"><title>T1127 Trusted Developer Utilities Proxy Execution - Medium</title></rect>
+  <rect x="471" y="330" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1134 Access Token Manipulation - Low</title></rect>
+  <rect x="471" y="341" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1140 Deobfuscate/Decode Files or Information - Low</title></rect>
+  <rect x="471" y="352" width="22" height="8" rx="3" fill="#3987e5"><title>T1197 BITS Jobs - Medium</title></rect>
+  <rect x="471" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1202 Indirect Command Execution - None</title></rect>
+  <rect x="471" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1205 Traffic Signaling - None</title></rect>
+  <rect x="471" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1211 Exploitation for Stealth - None</title></rect>
+  <rect x="471" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1216 System Script Proxy Execution - None</title></rect>
+  <rect x="471" y="407" width="22" height="8" rx="3" fill="#3987e5"><title>T1218 System Binary Proxy Execution - Medium</title></rect>
+  <rect x="471" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1220 XSL Script Processing - None</title></rect>
+  <rect x="471" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1221 Template Injection - None</title></rect>
+  <rect x="471" y="440" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1480 Execution Guardrails - None</title></rect>
+  <rect x="471" y="451" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1497 Virtualization/Sandbox Evasion - None</title></rect>
+  <rect x="471" y="462" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1535 Unused/Unsupported Cloud Regions - None</title></rect>
+  <rect x="471" y="473" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1542 Pre-OS Boot - None</title></rect>
+  <rect x="471" y="484" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1564 Hide Artifacts - None</title></rect>
+  <rect x="471" y="495" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1574 Hijack Execution Flow - None</title></rect>
+  <rect x="471" y="506" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1612 Build Image on Host - None</title></rect>
+  <rect x="471" y="517" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1620 Reflective Code Loading - None</title></rect>
+  <rect x="471" y="528" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1622 Debugger Evasion - None</title></rect>
+  <rect x="471" y="539" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1678 Delay Execution - None</title></rect>
+  <rect x="471" y="550" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1679 Selective Exclusion - None</title></rect>
+  <rect x="471" y="561" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1684 Social Engineering - None</title></rect>
+  <rect x="471" y="572" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1696 Anti-Automation Evasion - None</title></rect>
+  <rect x="539" y="242" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1112 Modify Registry - Low</title></rect>
+  <rect x="539" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1207 Rogue Domain Controller - None</title></rect>
+  <rect x="539" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1222 File and Directory Permissions Modification - None</title></rect>
+  <rect x="539" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1484 Domain or Tenant Policy Modification - None</title></rect>
+  <rect x="539" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1553 Subvert Trust Controls - None</title></rect>
+  <rect x="539" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1556 Modify Authentication Process - None</title></rect>
+  <rect x="539" y="308" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1578 Modify Cloud Compute Infrastructure - Low</title></rect>
+  <rect x="539" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1599 Network Boundary Bridging - None</title></rect>
+  <rect x="539" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1600 Weaken Encryption - None</title></rect>
+  <rect x="539" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1601 Modify System Image - None</title></rect>
+  <rect x="539" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1647 Plist File Modification - None</title></rect>
+  <rect x="539" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1666 Modify Cloud Resource Hierarchy - None</title></rect>
+  <rect x="539" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1685 Disable or Modify Tools - None</title></rect>
+  <rect x="539" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1686 Disable or Modify System Firewall - None</title></rect>
+  <rect x="539" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1687 Exploitation for Defense Impairment - None</title></rect>
+  <rect x="539" y="407" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1688 Safe Mode Boot - None</title></rect>
+  <rect x="539" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1689 Downgrade Attack - None</title></rect>
+  <rect x="539" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1690 Prevent Command History Logging - None</title></rect>
+  <rect x="607" y="242" width="22" height="8" rx="3" fill="#184f95"><title>T1003 OS Credential Dumping - High</title></rect>
+  <rect x="607" y="253" width="22" height="8" rx="3" fill="#3987e5"><title>T1040 Network Sniffing - Medium</title></rect>
+  <rect x="607" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1056 Input Capture - None</title></rect>
+  <rect x="607" y="275" width="22" height="8" rx="3" fill="#184f95"><title>T1110 Brute Force - High</title></rect>
+  <rect x="607" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1111 Multi-Factor Authentication Interception - None</title></rect>
+  <rect x="607" y="297" width="22" height="8" rx="3" fill="#3987e5"><title>T1187 Forced Authentication - Medium</title></rect>
+  <rect x="607" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1212 Exploitation for Credential Access - None</title></rect>
+  <rect x="607" y="319" width="22" height="8" rx="3" fill="#3987e5"><title>T1528 Steal Application Access Token - Medium</title></rect>
+  <rect x="607" y="330" width="22" height="8" rx="3" fill="#3987e5"><title>T1539 Steal Web Session Cookie - Medium</title></rect>
+  <rect x="607" y="341" width="22" height="8" rx="3" fill="#3987e5"><title>T1552 Unsecured Credentials - Medium</title></rect>
+  <rect x="607" y="352" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1555 Credentials from Password Stores - Low</title></rect>
+  <rect x="607" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1556 Modify Authentication Process - None</title></rect>
+  <rect x="607" y="374" width="22" height="8" rx="3" fill="#3987e5"><title>T1557 Adversary-in-the-Middle - Medium</title></rect>
+  <rect x="607" y="385" width="22" height="8" rx="3" fill="#184f95"><title>T1558 Steal or Forge Kerberos Tickets - High</title></rect>
+  <rect x="607" y="396" width="22" height="8" rx="3" fill="#3987e5"><title>T1606 Forge Web Credentials - Medium</title></rect>
+  <rect x="607" y="407" width="22" height="8" rx="3" fill="#184f95"><title>T1621 Multi-Factor Authentication Request Generation - High</title></rect>
+  <rect x="607" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1649 Steal or Forge Authentication Certificates - None</title></rect>
+  <rect x="607" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1697 Steal Application Specific Passwords - None</title></rect>
+  <rect x="675" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1007 System Service Discovery - None</title></rect>
+  <rect x="675" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1010 Application Window Discovery - None</title></rect>
+  <rect x="675" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1012 Query Registry - None</title></rect>
+  <rect x="675" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1016 System Network Configuration Discovery - None</title></rect>
+  <rect x="675" y="286" width="22" height="8" rx="3" fill="#3987e5"><title>T1018 Remote System Discovery - Medium</title></rect>
+  <rect x="675" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1033 System Owner/User Discovery - None</title></rect>
+  <rect x="675" y="308" width="22" height="8" rx="3" fill="#3987e5"><title>T1040 Network Sniffing - Medium</title></rect>
+  <rect x="675" y="319" width="22" height="8" rx="3" fill="#3987e5"><title>T1046 Network Service Discovery - Medium</title></rect>
+  <rect x="675" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1049 System Network Connections Discovery - None</title></rect>
+  <rect x="675" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1057 Process Discovery - None</title></rect>
+  <rect x="675" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1069 Permission Groups Discovery - None</title></rect>
+  <rect x="675" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1082 System Information Discovery - None</title></rect>
+  <rect x="675" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1083 File and Directory Discovery - None</title></rect>
+  <rect x="675" y="385" width="22" height="8" rx="3" fill="#3987e5"><title>T1087 Account Discovery - Medium</title></rect>
+  <rect x="675" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1120 Peripheral Device Discovery - None</title></rect>
+  <rect x="675" y="407" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1124 System Time Discovery - None</title></rect>
+  <rect x="675" y="418" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1135 Network Share Discovery - Low</title></rect>
+  <rect x="675" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1201 Password Policy Discovery - None</title></rect>
+  <rect x="675" y="440" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1217 Browser Information Discovery - None</title></rect>
+  <rect x="675" y="451" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1482 Domain Trust Discovery - None</title></rect>
+  <rect x="675" y="462" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1497 Virtualization/Sandbox Evasion - None</title></rect>
+  <rect x="675" y="473" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1518 Software Discovery - None</title></rect>
+  <rect x="675" y="484" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1526 Cloud Service Discovery - None</title></rect>
+  <rect x="675" y="495" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1538 Cloud Service Dashboard - None</title></rect>
+  <rect x="675" y="506" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1580 Cloud Infrastructure Discovery - None</title></rect>
+  <rect x="675" y="517" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1613 Container and Resource Discovery - None</title></rect>
+  <rect x="675" y="528" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1614 System Location Discovery - None</title></rect>
+  <rect x="675" y="539" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1615 Group Policy Discovery - None</title></rect>
+  <rect x="675" y="550" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1619 Cloud Storage Object Discovery - None</title></rect>
+  <rect x="675" y="561" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1622 Debugger Evasion - None</title></rect>
+  <rect x="675" y="572" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1652 Device Driver Discovery - None</title></rect>
+  <rect x="675" y="583" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1654 Log Enumeration - None</title></rect>
+  <rect x="675" y="594" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1673 Virtual Machine Discovery - None</title></rect>
+  <rect x="675" y="605" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1680 Local Storage Discovery - None</title></rect>
+  <rect x="743" y="242" width="22" height="8" rx="3" fill="#184f95"><title>T1021 Remote Services - High</title></rect>
+  <rect x="743" y="253" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1072 Software Deployment Tools - Low</title></rect>
+  <rect x="743" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1080 Taint Shared Content - None</title></rect>
+  <rect x="743" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1091 Replication Through Removable Media - None</title></rect>
+  <rect x="743" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1210 Exploitation of Remote Services - None</title></rect>
+  <rect x="743" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1534 Internal Spearphishing - None</title></rect>
+  <rect x="743" y="308" width="22" height="8" rx="3" fill="#3987e5"><title>T1550 Use Alternate Authentication Material - Medium</title></rect>
+  <rect x="743" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1563 Remote Service Session Hijacking - None</title></rect>
+  <rect x="743" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1570 Lateral Tool Transfer - None</title></rect>
+  <rect x="811" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1005 Data from Local System - None</title></rect>
+  <rect x="811" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1025 Data from Removable Media - None</title></rect>
+  <rect x="811" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1039 Data from Network Shared Drive - None</title></rect>
+  <rect x="811" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1056 Input Capture - None</title></rect>
+  <rect x="811" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1074 Data Staged - None</title></rect>
+  <rect x="811" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1113 Screen Capture - None</title></rect>
+  <rect x="811" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1114 Email Collection - None</title></rect>
+  <rect x="811" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1115 Clipboard Data - None</title></rect>
+  <rect x="811" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1119 Automated Collection - None</title></rect>
+  <rect x="811" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1123 Audio Capture - None</title></rect>
+  <rect x="811" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1125 Video Capture - None</title></rect>
+  <rect x="811" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1185 Browser Session Hijacking - None</title></rect>
+  <rect x="811" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1213 Data from Information Repositories - None</title></rect>
+  <rect x="811" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1530 Data from Cloud Storage - None</title></rect>
+  <rect x="811" y="396" width="22" height="8" rx="3" fill="#3987e5"><title>T1557 Adversary-in-the-Middle - Medium</title></rect>
+  <rect x="811" y="407" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1560 Archive Collected Data - None</title></rect>
+  <rect x="811" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1602 Data from Configuration Repository - None</title></rect>
+  <rect x="879" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1001 Data Obfuscation - None</title></rect>
+  <rect x="879" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1008 Fallback Channels - None</title></rect>
+  <rect x="879" y="264" width="22" height="8" rx="3" fill="#3987e5"><title>T1071 Application Layer Protocol - Medium</title></rect>
+  <rect x="879" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1090 Proxy - None</title></rect>
+  <rect x="879" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1092 Communication Through Removable Media - None</title></rect>
+  <rect x="879" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1095 Non-Application Layer Protocol - None</title></rect>
+  <rect x="879" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1102 Web Service - None</title></rect>
+  <rect x="879" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1104 Multi-Stage Channels - None</title></rect>
+  <rect x="879" y="330" width="22" height="8" rx="3" fill="#3987e5"><title>T1105 Ingress Tool Transfer - Medium</title></rect>
+  <rect x="879" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1132 Data Encoding - None</title></rect>
+  <rect x="879" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1205 Traffic Signaling - None</title></rect>
+  <rect x="879" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1219 Remote Access Tools - None</title></rect>
+  <rect x="879" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1568 Dynamic Resolution - None</title></rect>
+  <rect x="879" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1571 Non-Standard Port - None</title></rect>
+  <rect x="879" y="396" width="22" height="8" rx="3" fill="#3987e5"><title>T1572 Protocol Tunneling - Medium</title></rect>
+  <rect x="879" y="407" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1573 Encrypted Channel - Low</title></rect>
+  <rect x="879" y="418" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1659 Content Injection - None</title></rect>
+  <rect x="879" y="429" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1665 Hide Infrastructure - None</title></rect>
+  <rect x="947" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1011 Exfiltration Over Other Network Medium - None</title></rect>
+  <rect x="947" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1020 Automated Exfiltration - None</title></rect>
+  <rect x="947" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1029 Scheduled Transfer - None</title></rect>
+  <rect x="947" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1030 Data Transfer Size Limits - None</title></rect>
+  <rect x="947" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1041 Exfiltration Over C2 Channel - None</title></rect>
+  <rect x="947" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1048 Exfiltration Over Alternative Protocol - None</title></rect>
+  <rect x="947" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1052 Exfiltration Over Physical Medium - None</title></rect>
+  <rect x="947" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1537 Transfer Data to Cloud Account - None</title></rect>
+  <rect x="947" y="330" width="22" height="8" rx="3" fill="#9ec5f4"><title>T1567 Exfiltration Over Web Service - Low</title></rect>
+  <rect x="947" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1700 AI-Enabled Exfiltration - None</title></rect>
+  <rect x="1015" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1485 Data Destruction - None</title></rect>
+  <rect x="1015" y="253" width="22" height="8" rx="3" fill="#184f95"><title>T1486 Data Encrypted for Impact - High</title></rect>
+  <rect x="1015" y="264" width="22" height="8" rx="3" fill="#3987e5"><title>T1489 Service Stop - Medium</title></rect>
+  <rect x="1015" y="275" width="22" height="8" rx="3" fill="#184f95"><title>T1490 Inhibit System Recovery - High</title></rect>
+  <rect x="1015" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1491 Defacement - None</title></rect>
+  <rect x="1015" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1495 Firmware Corruption - None</title></rect>
+  <rect x="1015" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1496 Resource Hijacking - None</title></rect>
+  <rect x="1015" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1498 Network Denial of Service - None</title></rect>
+  <rect x="1015" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1499 Endpoint Denial of Service - None</title></rect>
+  <rect x="1015" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1529 System Shutdown/Reboot - None</title></rect>
+  <rect x="1015" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1531 Account Access Removal - None</title></rect>
+  <rect x="1015" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1561 Disk Wipe - None</title></rect>
+  <rect x="1015" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1565 Data Manipulation - None</title></rect>
+  <rect x="1015" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1657 Financial Theft - None</title></rect>
+  <rect x="1015" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>T1667 Email Bombing - None</title></rect>
+  <text x="40" y="644" font-size="14" fill="#0b0b0b" font-weight="600">Techniques with at least one detection, by tactic</text>
+  <text x="40" y="677" font-size="11" fill="#52514e">Reconnaissance</text>
+  <line x1="210" y1="662" x2="210" y2="684" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,667H267.42A4,4 0 0 1 271.42,671V675A4,4 0 0 1 267.42,679H210Z" fill="#2a78d6"/>
+  <text x="279.42" y="677" font-size="11" fill="#52514e">8% · 1/12</text>
+  <text x="40" y="703" font-size="11" fill="#52514e">Resource Development</text>
+  <line x1="210" y1="688" x2="210" y2="710" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="703" font-size="11" fill="#52514e">0% · 0/9</text>
+  <text x="40" y="729" font-size="11" fill="#52514e">Initial Access</text>
+  <line x1="210" y1="714" x2="210" y2="736" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,719H475.36A4,4 0 0 1 479.36,723V727A4,4 0 0 1 475.36,731H210Z" fill="#2a78d6"/>
+  <text x="487.36" y="729" font-size="11" fill="#52514e">36% · 4/11</text>
+  <text x="40" y="755" font-size="11" fill="#52514e">Execution</text>
+  <line x1="210" y1="740" x2="210" y2="762" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,745H643.34A4,4 0 0 1 647.34,749V753A4,4 0 0 1 643.34,757H210Z" fill="#2a78d6"/>
+  <text x="655.34" y="755" font-size="11" fill="#52514e">59% · 13/22</text>
+  <text x="40" y="781" font-size="11" fill="#52514e">Persistence</text>
+  <line x1="210" y1="766" x2="210" y2="788" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,771H609.3A4,4 0 0 1 613.3,775V779A4,4 0 0 1 609.3,783H210Z" fill="#2a78d6"/>
+  <text x="621.3" y="781" font-size="11" fill="#52514e">54% · 12/22</text>
+  <text x="40" y="807" font-size="11" fill="#52514e">Privilege Escalation</text>
+  <line x1="210" y1="792" x2="210" y2="814" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,797H718.08A4,4 0 0 1 722.08,801V805A4,4 0 0 1 718.08,809H210Z" fill="#2a78d6"/>
+  <text x="730.08" y="807" font-size="11" fill="#52514e">69% · 9/13</text>
+  <text x="40" y="833" font-size="11" fill="#52514e">Stealth</text>
+  <line x1="210" y1="818" x2="210" y2="840" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,823H445.02A4,4 0 0 1 449.02,827V831A4,4 0 0 1 445.02,835H210Z" fill="#2a78d6"/>
+  <text x="457.02" y="833" font-size="11" fill="#52514e">32% · 10/31</text>
+  <text x="40" y="859" font-size="11" fill="#52514e">Defense Impairment</text>
+  <line x1="210" y1="844" x2="210" y2="866" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,849H288.14A4,4 0 0 1 292.14,853V857A4,4 0 0 1 288.14,861H210Z" fill="#2a78d6"/>
+  <text x="300.14" y="859" font-size="11" fill="#52514e">11% · 2/18</text>
+  <text x="40" y="885" font-size="11" fill="#52514e">Credential Access</text>
+  <line x1="210" y1="870" x2="210" y2="892" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,875H699.58A4,4 0 0 1 703.58,879V883A4,4 0 0 1 699.58,887H210Z" fill="#2a78d6"/>
+  <text x="711.58" y="885" font-size="11" fill="#52514e">67% · 12/18</text>
+  <text x="40" y="911" font-size="11" fill="#52514e">Discovery</text>
+  <line x1="210" y1="896" x2="210" y2="918" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,901H314.78A4,4 0 0 1 318.78,905V909A4,4 0 0 1 314.78,913H210Z" fill="#2a78d6"/>
+  <text x="326.78" y="911" font-size="11" fill="#52514e">15% · 5/34</text>
+  <text x="40" y="937" font-size="11" fill="#52514e">Lateral Movement</text>
+  <line x1="210" y1="922" x2="210" y2="944" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,927H452.42A4,4 0 0 1 456.42,931V935A4,4 0 0 1 452.42,939H210Z" fill="#2a78d6"/>
+  <text x="464.42" y="937" font-size="11" fill="#52514e">33% · 3/9</text>
+  <text x="40" y="963" font-size="11" fill="#52514e">Collection</text>
+  <line x1="210" y1="948" x2="210" y2="970" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,953H249.66A4,4 0 0 1 253.66,957V961A4,4 0 0 1 249.66,965H210Z" fill="#2a78d6"/>
+  <text x="261.66" y="963" font-size="11" fill="#52514e">6% · 1/17</text>
+  <text x="40" y="989" font-size="11" fill="#52514e">Command and Control</text>
+  <line x1="210" y1="974" x2="210" y2="996" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,979H370.28A4,4 0 0 1 374.28,983V987A4,4 0 0 1 370.28,991H210Z" fill="#2a78d6"/>
+  <text x="382.28" y="989" font-size="11" fill="#52514e">22% · 4/18</text>
+  <text x="40" y="1015" font-size="11" fill="#52514e">Exfiltration</text>
+  <line x1="210" y1="1000" x2="210" y2="1022" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,1005H280A4,4 0 0 1 284,1009V1013A4,4 0 0 1 280,1017H210Z" fill="#2a78d6"/>
+  <text x="292" y="1015" font-size="11" fill="#52514e">10% · 1/10</text>
+  <text x="40" y="1041" font-size="11" fill="#52514e">Impact</text>
+  <line x1="210" y1="1026" x2="210" y2="1048" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,1031H354A4,4 0 0 1 358,1035V1039A4,4 0 0 1 354,1043H210Z" fill="#2a78d6"/>
+  <text x="366" y="1041" font-size="11" fill="#52514e">20% · 3/15</text>
+  <rect x="40" y="1071" width="22" height="10" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="70" y="1080" font-size="11" fill="#52514e">None (166)</text>
+  <rect x="161" y="1071" width="22" height="10" rx="3" fill="#9ec5f4"/>
+  <text x="191" y="1080" font-size="11" fill="#52514e">Low (16)</text>
+  <rect x="269" y="1071" width="22" height="10" rx="3" fill="#3987e5"/>
+  <text x="299" y="1080" font-size="11" fill="#52514e">Medium (26)</text>
+  <rect x="396" y="1071" width="22" height="10" rx="3" fill="#184f95"/>
+  <text x="426" y="1080" font-size="11" fill="#52514e">High (19)</text>
+  <line x1="40" y1="1096" x2="1060" y2="1096" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="40" y="1112" font-size="10" fill="#898781">MITRE ATT&amp;CK Enterprise v20.0 · 61/227 techniques covered (27%) · 6 dead rules · generated by mitre-coverage-kit</text>
+</svg>

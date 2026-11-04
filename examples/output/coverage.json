@@ -1,0 +1,3925 @@
+{
+  "generator": "mitre-coverage-kit 0.1.0",
+  "attack": {
+    "framework": "attack",
+    "version": "20.0",
+    "totals": {
+      "tactics": 15,
+      "cells": 259,
+      "cells_covered": 80,
+      "distinct_techniques": 227,
+      "distinct_covered": 61,
+      "percent": 26.9,
+      "by_level": {
+        "None": 166,
+        "Low": 16,
+        "Medium": 26,
+        "High": 19
+      }
+    },
+    "tactics": [
+      {
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "techniques": 12,
+        "covered": 1,
+        "percent": 8.3,
+        "mean_level": 0.08
+      },
+      {
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "techniques": 9,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "techniques": 11,
+        "covered": 4,
+        "percent": 36.4,
+        "mean_level": 0.55
+      },
+      {
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "techniques": 22,
+        "covered": 13,
+        "percent": 59.1,
+        "mean_level": 1.36
+      },
+      {
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "techniques": 22,
+        "covered": 12,
+        "percent": 54.5,
+        "mean_level": 1.14
+      },
+      {
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "techniques": 13,
+        "covered": 9,
+        "percent": 69.2,
+        "mean_level": 1.54
+      },
+      {
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "techniques": 31,
+        "covered": 10,
+        "percent": 32.3,
+        "mean_level": 0.55
+      },
+      {
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "techniques": 18,
+        "covered": 2,
+        "percent": 11.1,
+        "mean_level": 0.11
+      },
+      {
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "techniques": 18,
+        "covered": 12,
+        "percent": 66.7,
+        "mean_level": 1.5
+      },
+      {
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "techniques": 34,
+        "covered": 5,
+        "percent": 14.7,
+        "mean_level": 0.26
+      },
+      {
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "techniques": 9,
+        "covered": 3,
+        "percent": 33.3,
+        "mean_level": 0.67
+      },
+      {
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "techniques": 17,
+        "covered": 1,
+        "percent": 5.9,
+        "mean_level": 0.12
+      },
+      {
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "techniques": 18,
+        "covered": 4,
+        "percent": 22.2,
+        "mean_level": 0.39
+      },
+      {
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "techniques": 10,
+        "covered": 1,
+        "percent": 10.0,
+        "mean_level": 0.1
+      },
+      {
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "techniques": 15,
+        "covered": 3,
+        "percent": 20.0,
+        "mean_level": 0.53
+      }
+    ],
+    "cells": [
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1589",
+        "name": "Gather Victim Identity Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1590",
+        "name": "Gather Victim Network Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1591",
+        "name": "Gather Victim Org Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1592",
+        "name": "Gather Victim Host Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1593",
+        "name": "Search Open Websites/Domains",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1594",
+        "name": "Search Victim-Owned Websites",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1595",
+        "name": "Active Scanning",
+        "level": 1,
+        "rules": [
+          "R-070"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1596",
+        "name": "Search Open Technical Databases",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1597",
+        "name": "Search Closed Sources",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1598",
+        "name": "Phishing for Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1681",
+        "name": "Search Threat Vendor Data",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Reconnaissance",
+        "tactic_id": "TA0043",
+        "id": "T1682",
+        "name": "Query Public AI Services",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1583",
+        "name": "Acquire Infrastructure",
+        "level": 0,
+        "rules": [
+          "R-073"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1584",
+        "name": "Compromise Infrastructure",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1585",
+        "name": "Establish Accounts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1586",
+        "name": "Compromise Accounts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1587",
+        "name": "Develop Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1588",
+        "name": "Obtain Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1608",
+        "name": "Stage Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1650",
+        "name": "Acquire Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Resource Development",
+        "tactic_id": "TA0042",
+        "id": "T1683",
+        "name": "Generate Content",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1078",
+        "name": "Valid Accounts",
+        "level": 1,
+        "rules": [
+          "R-033",
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1091",
+        "name": "Replication Through Removable Media",
+        "level": 0,
+        "rules": [
+          "R-043"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1133",
+        "name": "External Remote Services",
+        "level": 1,
+        "rules": [
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1189",
+        "name": "Drive-by Compromise",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1190",
+        "name": "Exploit Public-Facing Application",
+        "level": 2,
+        "rules": [
+          "R-040"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1195",
+        "name": "Supply Chain Compromise",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1199",
+        "name": "Trusted Relationship",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1200",
+        "name": "Hardware Additions",
+        "level": 0,
+        "rules": [
+          "R-043"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1566",
+        "name": "Phishing",
+        "level": 2,
+        "rules": [
+          "R-039",
+          "R-042"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1659",
+        "name": "Content Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Initial Access",
+        "tactic_id": "TA0001",
+        "id": "T1669",
+        "name": "Wi-Fi Networks",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1047",
+        "name": "Windows Management Instrumentation",
+        "level": 3,
+        "rules": [
+          "R-003"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1053",
+        "name": "Scheduled Task/Job",
+        "level": 3,
+        "rules": [
+          "R-005",
+          "R-006"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1059",
+        "name": "Command and Scripting Interpreter",
+        "level": 3,
+        "rules": [
+          "R-001",
+          "R-002",
+          "R-004",
+          "R-007"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1072",
+        "name": "Software Deployment Tools",
+        "level": 1,
+        "rules": [
+          "R-017"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1106",
+        "name": "Native API",
+        "level": 3,
+        "rules": [
+          "R-015"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1127",
+        "name": "Trusted Developer Utilities Proxy Execution",
+        "level": 2,
+        "rules": [
+          "R-016"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1129",
+        "name": "Shared Modules",
+        "level": 3,
+        "rules": [
+          "R-015"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1197",
+        "name": "BITS Jobs",
+        "level": 2,
+        "rules": [
+          "R-012"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1203",
+        "name": "Exploitation for Client Execution",
+        "level": 1,
+        "rules": [
+          "R-014"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1204",
+        "name": "User Execution",
+        "level": 3,
+        "rules": [
+          "R-002",
+          "R-014",
+          "R-016"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1559",
+        "name": "Inter-Process Communication",
+        "level": 2,
+        "rules": [
+          "R-013"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1569",
+        "name": "System Services",
+        "level": 3,
+        "rules": [
+          "R-009"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1574",
+        "name": "Hijack Execution Flow",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1609",
+        "name": "Container Administration Command",
+        "level": 1,
+        "rules": [
+          "R-010"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1610",
+        "name": "Deploy Container",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1648",
+        "name": "Serverless Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1651",
+        "name": "Cloud Administration Command",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1674",
+        "name": "Input Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1675",
+        "name": "ESXi Administration Command",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1677",
+        "name": "Poisoned Pipeline Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1698",
+        "name": "Indirect Prompt Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Execution",
+        "tactic_id": "TA0002",
+        "id": "T1699",
+        "name": "Direct Prompt Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1037",
+        "name": "Boot or Logon Initialization Scripts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1053",
+        "name": "Scheduled Task/Job",
+        "level": 3,
+        "rules": [
+          "R-005",
+          "R-006"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1078",
+        "name": "Valid Accounts",
+        "level": 1,
+        "rules": [
+          "R-033",
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1098",
+        "name": "Account Manipulation",
+        "level": 3,
+        "rules": [
+          "R-019",
+          "R-022"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1112",
+        "name": "Modify Registry",
+        "level": 1,
+        "rules": [
+          "R-049"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1133",
+        "name": "External Remote Services",
+        "level": 1,
+        "rules": [
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1136",
+        "name": "Create Account",
+        "level": 3,
+        "rules": [
+          "R-019"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1137",
+        "name": "Office Application Startup",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1176",
+        "name": "Software Extensions",
+        "level": 1,
+        "rules": [
+          "R-023"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1197",
+        "name": "BITS Jobs",
+        "level": 2,
+        "rules": [
+          "R-012"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1205",
+        "name": "Traffic Signaling",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1505",
+        "name": "Server Software Component",
+        "level": 2,
+        "rules": [
+          "R-021"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1525",
+        "name": "Implant Internal Image",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1542",
+        "name": "Pre-OS Boot",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1543",
+        "name": "Create or Modify System Process",
+        "level": 3,
+        "rules": [
+          "R-009",
+          "R-024"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1546",
+        "name": "Event Triggered Execution",
+        "level": 2,
+        "rules": [
+          "R-020"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1547",
+        "name": "Boot or Logon Autostart Execution",
+        "level": 3,
+        "rules": [
+          "R-018",
+          "R-025"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1554",
+        "name": "Compromise Host Software Binary",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1556",
+        "name": "Modify Authentication Process",
+        "level": 0,
+        "rules": [
+          "R-025"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1653",
+        "name": "Power Settings",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1668",
+        "name": "Exclusive Control",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Persistence",
+        "tactic_id": "TA0003",
+        "id": "T1671",
+        "name": "Cloud Application Integration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1037",
+        "name": "Boot or Logon Initialization Scripts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1053",
+        "name": "Scheduled Task/Job",
+        "level": 3,
+        "rules": [
+          "R-005",
+          "R-006"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1055",
+        "name": "Process Injection",
+        "level": 2,
+        "rules": [
+          "R-011",
+          "R-045"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1068",
+        "name": "Exploitation for Privilege Escalation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1078",
+        "name": "Valid Accounts",
+        "level": 1,
+        "rules": [
+          "R-033",
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1098",
+        "name": "Account Manipulation",
+        "level": 3,
+        "rules": [
+          "R-019",
+          "R-022"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1134",
+        "name": "Access Token Manipulation",
+        "level": 1,
+        "rules": [
+          "R-053"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1484",
+        "name": "Domain or Tenant Policy Modification",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1543",
+        "name": "Create or Modify System Process",
+        "level": 3,
+        "rules": [
+          "R-009",
+          "R-024"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1546",
+        "name": "Event Triggered Execution",
+        "level": 2,
+        "rules": [
+          "R-020"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1547",
+        "name": "Boot or Logon Autostart Execution",
+        "level": 3,
+        "rules": [
+          "R-018",
+          "R-025"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1548",
+        "name": "Abuse Elevation Control Mechanism",
+        "level": 2,
+        "rules": [
+          "R-052",
+          "R-054"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "TA0004",
+        "id": "T1611",
+        "name": "Escape to Host",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1006",
+        "name": "Direct Volume Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1014",
+        "name": "Rootkit",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1027",
+        "name": "Obfuscated Files or Information",
+        "level": 1,
+        "rules": [
+          "R-046"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1036",
+        "name": "Masquerading",
+        "level": 2,
+        "rules": [
+          "R-047"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1055",
+        "name": "Process Injection",
+        "level": 2,
+        "rules": [
+          "R-011",
+          "R-045"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1070",
+        "name": "Indicator Removal",
+        "level": 3,
+        "rules": [
+          "R-044",
+          "R-050"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1078",
+        "name": "Valid Accounts",
+        "level": 1,
+        "rules": [
+          "R-033",
+          "R-041"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1127",
+        "name": "Trusted Developer Utilities Proxy Execution",
+        "level": 2,
+        "rules": [
+          "R-016"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1134",
+        "name": "Access Token Manipulation",
+        "level": 1,
+        "rules": [
+          "R-053"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1140",
+        "name": "Deobfuscate/Decode Files or Information",
+        "level": 1,
+        "rules": [
+          "R-046"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1197",
+        "name": "BITS Jobs",
+        "level": 2,
+        "rules": [
+          "R-012"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1202",
+        "name": "Indirect Command Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1205",
+        "name": "Traffic Signaling",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1211",
+        "name": "Exploitation for Stealth",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1216",
+        "name": "System Script Proxy Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1218",
+        "name": "System Binary Proxy Execution",
+        "level": 2,
+        "rules": [
+          "R-007",
+          "R-008"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1220",
+        "name": "XSL Script Processing",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1221",
+        "name": "Template Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1480",
+        "name": "Execution Guardrails",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1497",
+        "name": "Virtualization/Sandbox Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1535",
+        "name": "Unused/Unsupported Cloud Regions",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1542",
+        "name": "Pre-OS Boot",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1564",
+        "name": "Hide Artifacts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1574",
+        "name": "Hijack Execution Flow",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1612",
+        "name": "Build Image on Host",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1620",
+        "name": "Reflective Code Loading",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1622",
+        "name": "Debugger Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1678",
+        "name": "Delay Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1679",
+        "name": "Selective Exclusion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1684",
+        "name": "Social Engineering",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Stealth",
+        "tactic_id": "TA0005",
+        "id": "T1696",
+        "name": "Anti-Automation Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1112",
+        "name": "Modify Registry",
+        "level": 1,
+        "rules": [
+          "R-049"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1207",
+        "name": "Rogue Domain Controller",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1222",
+        "name": "File and Directory Permissions Modification",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1484",
+        "name": "Domain or Tenant Policy Modification",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1553",
+        "name": "Subvert Trust Controls",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1556",
+        "name": "Modify Authentication Process",
+        "level": 0,
+        "rules": [
+          "R-025"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1578",
+        "name": "Modify Cloud Compute Infrastructure",
+        "level": 1,
+        "rules": [
+          "R-051"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1599",
+        "name": "Network Boundary Bridging",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1600",
+        "name": "Weaken Encryption",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1601",
+        "name": "Modify System Image",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1647",
+        "name": "Plist File Modification",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1666",
+        "name": "Modify Cloud Resource Hierarchy",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1685",
+        "name": "Disable or Modify Tools",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1686",
+        "name": "Disable or Modify System Firewall",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1687",
+        "name": "Exploitation for Defense Impairment",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1688",
+        "name": "Safe Mode Boot",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1689",
+        "name": "Downgrade Attack",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Defense Impairment",
+        "tactic_id": "TA0112",
+        "id": "T1690",
+        "name": "Prevent Command History Logging",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1003",
+        "name": "OS Credential Dumping",
+        "level": 3,
+        "rules": [
+          "R-026",
+          "R-030",
+          "R-032"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1040",
+        "name": "Network Sniffing",
+        "level": 2,
+        "rules": [
+          "R-037"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1056",
+        "name": "Input Capture",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1110",
+        "name": "Brute Force",
+        "level": 3,
+        "rules": [
+          "R-029"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1111",
+        "name": "Multi-Factor Authentication Interception",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1187",
+        "name": "Forced Authentication",
+        "level": 2,
+        "rules": [
+          "R-036"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1212",
+        "name": "Exploitation for Credential Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1528",
+        "name": "Steal Application Access Token",
+        "level": 2,
+        "rules": [
+          "R-034"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1539",
+        "name": "Steal Web Session Cookie",
+        "level": 2,
+        "rules": [
+          "R-038"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1552",
+        "name": "Unsecured Credentials",
+        "level": 2,
+        "rules": [
+          "R-031",
+          "R-033"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1555",
+        "name": "Credentials from Password Stores",
+        "level": 1,
+        "rules": [
+          "R-035"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1556",
+        "name": "Modify Authentication Process",
+        "level": 0,
+        "rules": [
+          "R-025"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1557",
+        "name": "Adversary-in-the-Middle",
+        "level": 2,
+        "rules": [
+          "R-037"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1558",
+        "name": "Steal or Forge Kerberos Tickets",
+        "level": 3,
+        "rules": [
+          "R-027"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1606",
+        "name": "Forge Web Credentials",
+        "level": 2,
+        "rules": [
+          "R-038"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1621",
+        "name": "Multi-Factor Authentication Request Generation",
+        "level": 3,
+        "rules": [
+          "R-028"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1649",
+        "name": "Steal or Forge Authentication Certificates",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Credential Access",
+        "tactic_id": "TA0006",
+        "id": "T1697",
+        "name": "Steal Application Specific Passwords",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1007",
+        "name": "System Service Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1010",
+        "name": "Application Window Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1012",
+        "name": "Query Registry",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1016",
+        "name": "System Network Configuration Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1018",
+        "name": "Remote System Discovery",
+        "level": 2,
+        "rules": [
+          "R-056"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1033",
+        "name": "System Owner/User Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1040",
+        "name": "Network Sniffing",
+        "level": 2,
+        "rules": [
+          "R-037"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1046",
+        "name": "Network Service Discovery",
+        "level": 2,
+        "rules": [
+          "R-057"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1049",
+        "name": "System Network Connections Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1057",
+        "name": "Process Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1069",
+        "name": "Permission Groups Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1082",
+        "name": "System Information Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1083",
+        "name": "File and Directory Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1087",
+        "name": "Account Discovery",
+        "level": 2,
+        "rules": [
+          "R-056"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1120",
+        "name": "Peripheral Device Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1124",
+        "name": "System Time Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1135",
+        "name": "Network Share Discovery",
+        "level": 1,
+        "rules": [
+          "R-055"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1201",
+        "name": "Password Policy Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1217",
+        "name": "Browser Information Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1482",
+        "name": "Domain Trust Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1497",
+        "name": "Virtualization/Sandbox Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1518",
+        "name": "Software Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1526",
+        "name": "Cloud Service Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1538",
+        "name": "Cloud Service Dashboard",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1580",
+        "name": "Cloud Infrastructure Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1613",
+        "name": "Container and Resource Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1614",
+        "name": "System Location Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1615",
+        "name": "Group Policy Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1619",
+        "name": "Cloud Storage Object Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1622",
+        "name": "Debugger Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1652",
+        "name": "Device Driver Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1654",
+        "name": "Log Enumeration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1673",
+        "name": "Virtual Machine Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Discovery",
+        "tactic_id": "TA0007",
+        "id": "T1680",
+        "name": "Local Storage Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1021",
+        "name": "Remote Services",
+        "level": 3,
+        "rules": [
+          "R-058",
+          "R-059",
+          "R-061"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1072",
+        "name": "Software Deployment Tools",
+        "level": 1,
+        "rules": [
+          "R-017"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1080",
+        "name": "Taint Shared Content",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1091",
+        "name": "Replication Through Removable Media",
+        "level": 0,
+        "rules": [
+          "R-043"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1210",
+        "name": "Exploitation of Remote Services",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1534",
+        "name": "Internal Spearphishing",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1550",
+        "name": "Use Alternate Authentication Material",
+        "level": 2,
+        "rules": [
+          "R-034",
+          "R-060"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1563",
+        "name": "Remote Service Session Hijacking",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Lateral Movement",
+        "tactic_id": "TA0008",
+        "id": "T1570",
+        "name": "Lateral Tool Transfer",
+        "level": 0,
+        "rules": [
+          "R-061"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1005",
+        "name": "Data from Local System",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1025",
+        "name": "Data from Removable Media",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1039",
+        "name": "Data from Network Shared Drive",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1056",
+        "name": "Input Capture",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1074",
+        "name": "Data Staged",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1113",
+        "name": "Screen Capture",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1114",
+        "name": "Email Collection",
+        "level": 0,
+        "rules": [
+          "R-071"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1115",
+        "name": "Clipboard Data",
+        "level": 0,
+        "rules": [
+          "R-067"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1119",
+        "name": "Automated Collection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1123",
+        "name": "Audio Capture",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1125",
+        "name": "Video Capture",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1185",
+        "name": "Browser Session Hijacking",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1213",
+        "name": "Data from Information Repositories",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1530",
+        "name": "Data from Cloud Storage",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1557",
+        "name": "Adversary-in-the-Middle",
+        "level": 2,
+        "rules": [
+          "R-037"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1560",
+        "name": "Archive Collected Data",
+        "level": 0,
+        "rules": [
+          "R-066"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Collection",
+        "tactic_id": "TA0009",
+        "id": "T1602",
+        "name": "Data from Configuration Repository",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1001",
+        "name": "Data Obfuscation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1008",
+        "name": "Fallback Channels",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1071",
+        "name": "Application Layer Protocol",
+        "level": 2,
+        "rules": [
+          "R-062",
+          "R-063"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1090",
+        "name": "Proxy",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1092",
+        "name": "Communication Through Removable Media",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1095",
+        "name": "Non-Application Layer Protocol",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1102",
+        "name": "Web Service",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1104",
+        "name": "Multi-Stage Channels",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1105",
+        "name": "Ingress Tool Transfer",
+        "level": 2,
+        "rules": [
+          "R-012",
+          "R-064"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1132",
+        "name": "Data Encoding",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1205",
+        "name": "Traffic Signaling",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1219",
+        "name": "Remote Access Tools",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1568",
+        "name": "Dynamic Resolution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1571",
+        "name": "Non-Standard Port",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1572",
+        "name": "Protocol Tunneling",
+        "level": 2,
+        "rules": [
+          "R-062"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1573",
+        "name": "Encrypted Channel",
+        "level": 1,
+        "rules": [
+          "R-063"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1659",
+        "name": "Content Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Command and Control",
+        "tactic_id": "TA0011",
+        "id": "T1665",
+        "name": "Hide Infrastructure",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1011",
+        "name": "Exfiltration Over Other Network Medium",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1020",
+        "name": "Automated Exfiltration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1029",
+        "name": "Scheduled Transfer",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1030",
+        "name": "Data Transfer Size Limits",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1041",
+        "name": "Exfiltration Over C2 Channel",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1048",
+        "name": "Exfiltration Over Alternative Protocol",
+        "level": 0,
+        "rules": [
+          "R-066"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1052",
+        "name": "Exfiltration Over Physical Medium",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1537",
+        "name": "Transfer Data to Cloud Account",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1567",
+        "name": "Exfiltration Over Web Service",
+        "level": 1,
+        "rules": [
+          "R-065"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Exfiltration",
+        "tactic_id": "TA0010",
+        "id": "T1700",
+        "name": "AI-Enabled Exfiltration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1485",
+        "name": "Data Destruction",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1486",
+        "name": "Data Encrypted for Impact",
+        "level": 3,
+        "rules": [
+          "R-068"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1489",
+        "name": "Service Stop",
+        "level": 2,
+        "rules": [
+          "R-048"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1490",
+        "name": "Inhibit System Recovery",
+        "level": 3,
+        "rules": [
+          "R-069"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1491",
+        "name": "Defacement",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1495",
+        "name": "Firmware Corruption",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1496",
+        "name": "Resource Hijacking",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1498",
+        "name": "Network Denial of Service",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1499",
+        "name": "Endpoint Denial of Service",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1529",
+        "name": "System Shutdown/Reboot",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1531",
+        "name": "Account Access Removal",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1561",
+        "name": "Disk Wipe",
+        "level": 0,
+        "rules": [
+          "R-072"
+        ]
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1565",
+        "name": "Data Manipulation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1657",
+        "name": "Financial Theft",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "attack",
+        "tactic": "Impact",
+        "tactic_id": "TA0040",
+        "id": "T1667",
+        "name": "Email Bombing",
+        "level": 0,
+        "rules": []
+      }
+    ],
+    "dead_rules": [
+      {
+        "rule_id": "R-025",
+        "name": "ESCU - Authentication Package Registered in LSA",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-043",
+        "name": "USB - Removable Media Execution Detected",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-050",
+        "name": "ESCU - Timestomping of Executable",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-061",
+        "name": "ESCU - PsExec Service Installed Remotely",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-066",
+        "name": "DLP - Archive Created Then Sent to External Address",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-067",
+        "name": "ESCU - Clipboard Data Read by Unsigned Process",
+        "reason": "enabled but no data available"
+      }
+    ],
+    "unmapped_rules": []
+  },
+  "atlas": {
+    "framework": "atlas",
+    "version": "5.6.0",
+    "totals": {
+      "tactics": 16,
+      "cells": 111,
+      "cells_covered": 12,
+      "distinct_techniques": 101,
+      "distinct_covered": 9,
+      "percent": 8.9,
+      "by_level": {
+        "None": 92,
+        "Low": 6,
+        "Medium": 2,
+        "High": 1
+      }
+    },
+    "tactics": [
+      {
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "techniques": 8,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "techniques": 13,
+        "covered": 1,
+        "percent": 7.7,
+        "mean_level": 0.08
+      },
+      {
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "techniques": 7,
+        "covered": 1,
+        "percent": 14.3,
+        "mean_level": 0.14
+      },
+      {
+        "tactic": "AI Model Access",
+        "tactic_id": "AML.TA0000",
+        "techniques": 4,
+        "covered": 1,
+        "percent": 25.0,
+        "mean_level": 0.5
+      },
+      {
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "techniques": 6,
+        "covered": 2,
+        "percent": 33.3,
+        "mean_level": 0.67
+      },
+      {
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "techniques": 9,
+        "covered": 1,
+        "percent": 11.1,
+        "mean_level": 0.11
+      },
+      {
+        "tactic": "Privilege Escalation",
+        "tactic_id": "AML.TA0012",
+        "techniques": 4,
+        "covered": 2,
+        "percent": 50.0,
+        "mean_level": 0.75
+      },
+      {
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "techniques": 15,
+        "covered": 1,
+        "percent": 6.7,
+        "mean_level": 0.13
+      },
+      {
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "techniques": 6,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "techniques": 9,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Lateral Movement",
+        "tactic_id": "AML.TA0015",
+        "techniques": 2,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Collection",
+        "tactic_id": "AML.TA0009",
+        "techniques": 4,
+        "covered": 1,
+        "percent": 25.0,
+        "mean_level": 0.25
+      },
+      {
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "techniques": 6,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Command and Control",
+        "tactic_id": "AML.TA0014",
+        "techniques": 3,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      },
+      {
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "techniques": 6,
+        "covered": 2,
+        "percent": 33.3,
+        "mean_level": 0.33
+      },
+      {
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "techniques": 9,
+        "covered": 0,
+        "percent": 0.0,
+        "mean_level": 0.0
+      }
+    ],
+    "cells": [
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0000",
+        "name": "Search Open Technical Databases",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0001",
+        "name": "Search Open AI Vulnerability Analysis",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0003",
+        "name": "Search Victim-Owned Websites",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0004",
+        "name": "Search Application Repositories",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0006",
+        "name": "Active Scanning",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0064",
+        "name": "Gather RAG-Indexed Targets",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0087",
+        "name": "Gather Victim Identity Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Reconnaissance",
+        "tactic_id": "AML.TA0002",
+        "id": "AML.T0095",
+        "name": "Search Open Websites/Domains",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0002",
+        "name": "Acquire Public AI Artifacts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0008",
+        "name": "Acquire Infrastructure",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0016",
+        "name": "Obtain Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0017",
+        "name": "Develop Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0019",
+        "name": "Publish Poisoned Datasets",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0020",
+        "name": "Poison Training Data",
+        "level": 1,
+        "rules": [
+          "R-084"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0021",
+        "name": "Establish Accounts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0058",
+        "name": "Publish Poisoned Models",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0060",
+        "name": "Publish Hallucinated Entities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0065",
+        "name": "LLM Prompt Crafting",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0066",
+        "name": "Retrieval Content Crafting",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0079",
+        "name": "Stage Capabilities",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Resource Development",
+        "tactic_id": "AML.TA0003",
+        "id": "AML.T0104",
+        "name": "Publish Poisoned AI Agent Tool",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0010",
+        "name": "AI Supply Chain Compromise",
+        "level": 1,
+        "rules": [
+          "R-083"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0012",
+        "name": "Valid Accounts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0015",
+        "name": "Evade AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0049",
+        "name": "Exploit Public-Facing Application",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0052",
+        "name": "Phishing",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0078",
+        "name": "Drive-by Compromise",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Initial Access",
+        "tactic_id": "AML.TA0004",
+        "id": "AML.T0093",
+        "name": "Prompt Infiltration via Public-Facing Application",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Model Access",
+        "tactic_id": "AML.TA0000",
+        "id": "AML.T0040",
+        "name": "AI Model Inference API Access",
+        "level": 2,
+        "rules": [
+          "R-077"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Model Access",
+        "tactic_id": "AML.TA0000",
+        "id": "AML.T0041",
+        "name": "Physical Environment Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Model Access",
+        "tactic_id": "AML.TA0000",
+        "id": "AML.T0044",
+        "name": "Full AI Model Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Model Access",
+        "tactic_id": "AML.TA0000",
+        "id": "AML.T0047",
+        "name": "AI-Enabled Product or Service",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0011",
+        "name": "User Execution",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0050",
+        "name": "Command and Scripting Interpreter",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0051",
+        "name": "LLM Prompt Injection",
+        "level": 3,
+        "rules": [
+          "R-074",
+          "R-075"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0053",
+        "name": "AI Agent Tool Invocation",
+        "level": 1,
+        "rules": [
+          "R-081"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0100",
+        "name": "AI Agent Clickbait",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Execution",
+        "tactic_id": "AML.TA0005",
+        "id": "AML.T0103",
+        "name": "Deploy AI Agent",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0018",
+        "name": "Manipulate AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0020",
+        "name": "Poison Training Data",
+        "level": 1,
+        "rules": [
+          "R-084"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0061",
+        "name": "LLM Prompt Self-Replication",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0070",
+        "name": "RAG Poisoning",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0080",
+        "name": "AI Agent Context Poisoning",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0081",
+        "name": "Modify AI Agent Configuration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0093",
+        "name": "Prompt Infiltration via Public-Facing Application",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0099",
+        "name": "AI Agent Tool Data Poisoning",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Persistence",
+        "tactic_id": "AML.TA0006",
+        "id": "AML.T0110",
+        "name": "AI Agent Tool Poisoning",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "AML.TA0012",
+        "id": "AML.T0012",
+        "name": "Valid Accounts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "AML.TA0012",
+        "id": "AML.T0053",
+        "name": "AI Agent Tool Invocation",
+        "level": 1,
+        "rules": [
+          "R-081"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "AML.TA0012",
+        "id": "AML.T0054",
+        "name": "LLM Jailbreak",
+        "level": 2,
+        "rules": [
+          "R-076"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Privilege Escalation",
+        "tactic_id": "AML.TA0012",
+        "id": "AML.T0105",
+        "name": "Escape to Host",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0015",
+        "name": "Evade AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0054",
+        "name": "LLM Jailbreak",
+        "level": 2,
+        "rules": [
+          "R-076"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0067",
+        "name": "LLM Trusted Output Components Manipulation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0068",
+        "name": "LLM Prompt Obfuscation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0071",
+        "name": "False RAG Entry Injection",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0073",
+        "name": "Impersonation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0074",
+        "name": "Masquerading",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0076",
+        "name": "Corrupt AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0081",
+        "name": "Modify AI Agent Configuration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0092",
+        "name": "Manipulate User LLM Chat History",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0094",
+        "name": "Delay Execution of LLM Instructions",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0097",
+        "name": "Virtualization/Sandbox Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0107",
+        "name": "Exploitation for Defense Evasion",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0109",
+        "name": "AI Supply Chain Rug Pull",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Defense Evasion",
+        "tactic_id": "AML.TA0007",
+        "id": "AML.T0111",
+        "name": "AI Supply Chain Reputation Inflation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0055",
+        "name": "Unsecured Credentials",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0082",
+        "name": "RAG Credential Harvesting",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0083",
+        "name": "Credentials from AI Agent Configuration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0090",
+        "name": "OS Credential Dumping",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0098",
+        "name": "AI Agent Tool Credential Harvesting",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Credential Access",
+        "tactic_id": "AML.TA0013",
+        "id": "AML.T0106",
+        "name": "Exploitation for Credential Access",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0007",
+        "name": "Discover AI Artifacts",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0013",
+        "name": "Discover AI Model Ontology",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0014",
+        "name": "Discover AI Model Family",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0062",
+        "name": "Discover LLM Hallucinations",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0063",
+        "name": "Discover AI Model Outputs",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0069",
+        "name": "Discover LLM System Information",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0075",
+        "name": "Cloud Service Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0084",
+        "name": "Discover AI Agent Configuration",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Discovery",
+        "tactic_id": "AML.TA0008",
+        "id": "AML.T0089",
+        "name": "Process Discovery",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Lateral Movement",
+        "tactic_id": "AML.TA0015",
+        "id": "AML.T0052",
+        "name": "Phishing",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Lateral Movement",
+        "tactic_id": "AML.TA0015",
+        "id": "AML.T0091",
+        "name": "Use Alternate Authentication Material",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Collection",
+        "tactic_id": "AML.TA0009",
+        "id": "AML.T0035",
+        "name": "AI Artifact Collection",
+        "level": 1,
+        "rules": [
+          "R-083"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Collection",
+        "tactic_id": "AML.TA0009",
+        "id": "AML.T0036",
+        "name": "Data from Information Repositories",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Collection",
+        "tactic_id": "AML.TA0009",
+        "id": "AML.T0037",
+        "name": "Data from Local System",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Collection",
+        "tactic_id": "AML.TA0009",
+        "id": "AML.T0085",
+        "name": "Data from AI Services",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0005",
+        "name": "Create Proxy AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0018",
+        "name": "Manipulate AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0042",
+        "name": "Verify Attack",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0043",
+        "name": "Craft Adversarial Data",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0088",
+        "name": "Generate Deepfakes",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "AI Attack Staging",
+        "tactic_id": "AML.TA0001",
+        "id": "AML.T0102",
+        "name": "Generate Malicious Commands",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Command and Control",
+        "tactic_id": "AML.TA0014",
+        "id": "AML.T0072",
+        "name": "Reverse Shell",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Command and Control",
+        "tactic_id": "AML.TA0014",
+        "id": "AML.T0096",
+        "name": "AI Service API",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Command and Control",
+        "tactic_id": "AML.TA0014",
+        "id": "AML.T0108",
+        "name": "AI Agent",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0024",
+        "name": "Exfiltration via AI Inference API",
+        "level": 1,
+        "rules": [
+          "R-078"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0025",
+        "name": "Exfiltration via Cyber Means",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0056",
+        "name": "Extract LLM System Prompt",
+        "level": 1,
+        "rules": [
+          "R-079"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0057",
+        "name": "LLM Data Leakage",
+        "level": 0,
+        "rules": [
+          "R-080"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0077",
+        "name": "LLM Response Rendering",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Exfiltration",
+        "tactic_id": "AML.TA0010",
+        "id": "AML.T0086",
+        "name": "Exfiltration via AI Agent Tool Invocation",
+        "level": 0,
+        "rules": [
+          "R-082"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0015",
+        "name": "Evade AI Model",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0029",
+        "name": "Denial of AI Service",
+        "level": 0,
+        "rules": [
+          "R-085"
+        ]
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0031",
+        "name": "Erode AI Model Integrity",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0034",
+        "name": "Cost Harvesting",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0046",
+        "name": "Spamming AI System with Chaff Data",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0048",
+        "name": "External Harms",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0059",
+        "name": "Erode Dataset Integrity",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0101",
+        "name": "Data Destruction via AI Agent Tool Invocation",
+        "level": 0,
+        "rules": []
+      },
+      {
+        "framework": "atlas",
+        "tactic": "Impact",
+        "tactic_id": "AML.TA0011",
+        "id": "AML.T0112",
+        "name": "Machine Compromise",
+        "level": 0,
+        "rules": []
+      }
+    ],
+    "dead_rules": [
+      {
+        "rule_id": "R-080",
+        "name": "LLM - sensitive data leaked in completion",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-082",
+        "name": "Agent - exfiltration via tool call to external URL",
+        "reason": "enabled but no data available"
+      },
+      {
+        "rule_id": "R-085",
+        "name": "LLM - denial of service by oversized prompts",
+        "reason": "enabled but no data available"
+      }
+    ],
+    "unmapped_rules": []
+  }
+}

@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="959" viewBox="0 0 1100 959" font-family="Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif" role="img" aria-label="MITRE ATLAS detection coverage heat map">
+  <rect width="1100" height="959" fill="#fcfcfb"/>
+  <text x="40" y="54" font-size="18" fill="#0b0b0b" font-weight="600">MITRE ATLAS detection coverage</text>
+  <text x="40" y="74" font-size="12" fill="#52514e">One cell per technique, one column per tactic, coloured by detection level</text>
+  <text transform="translate(75.875,230) rotate(-90)" font-size="11" fill="#52514e">Reconnaissance</text>
+  <text transform="translate(139.625,230) rotate(-90)" font-size="11" fill="#52514e">Resource Development</text>
+  <text transform="translate(203.375,230) rotate(-90)" font-size="11" fill="#52514e">Initial Access</text>
+  <text transform="translate(267.125,230) rotate(-90)" font-size="11" fill="#52514e">AI Model Access</text>
+  <text transform="translate(330.875,230) rotate(-90)" font-size="11" fill="#52514e">Execution</text>
+  <text transform="translate(394.625,230) rotate(-90)" font-size="11" fill="#52514e">Persistence</text>
+  <text transform="translate(458.375,230) rotate(-90)" font-size="11" fill="#52514e">Privilege Escalation</text>
+  <text transform="translate(522.125,230) rotate(-90)" font-size="11" fill="#52514e">Defense Evasion</text>
+  <text transform="translate(585.875,230) rotate(-90)" font-size="11" fill="#52514e">Credential Access</text>
+  <text transform="translate(649.625,230) rotate(-90)" font-size="11" fill="#52514e">Discovery</text>
+  <text transform="translate(713.375,230) rotate(-90)" font-size="11" fill="#52514e">Lateral Movement</text>
+  <text transform="translate(777.125,230) rotate(-90)" font-size="11" fill="#52514e">Collection</text>
+  <text transform="translate(840.875,230) rotate(-90)" font-size="11" fill="#52514e">AI Attack Staging</text>
+  <text transform="translate(904.625,230) rotate(-90)" font-size="11" fill="#52514e">Command and Control</text>
+  <text transform="translate(968.375,230) rotate(-90)" font-size="11" fill="#52514e">Exfiltration</text>
+  <text transform="translate(1032.12,230) rotate(-90)" font-size="11" fill="#52514e">Impact</text>
+  <rect x="60.875" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0000 Search Open Technical Databases - None</title></rect>
+  <rect x="60.875" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0001 Search Open AI Vulnerability Analysis - None</title></rect>
+  <rect x="60.875" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0003 Search Victim-Owned Websites - None</title></rect>
+  <rect x="60.875" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0004 Search Application Repositories - None</title></rect>
+  <rect x="60.875" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0006 Active Scanning - None</title></rect>
+  <rect x="60.875" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0064 Gather RAG-Indexed Targets - None</title></rect>
+  <rect x="60.875" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0087 Gather Victim Identity Information - None</title></rect>
+  <rect x="60.875" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0095 Search Open Websites/Domains - None</title></rect>
+  <rect x="124.625" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0002 Acquire Public AI Artifacts - None</title></rect>
+  <rect x="124.625" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0008 Acquire Infrastructure - None</title></rect>
+  <rect x="124.625" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0016 Obtain Capabilities - None</title></rect>
+  <rect x="124.625" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0017 Develop Capabilities - None</title></rect>
+  <rect x="124.625" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0019 Publish Poisoned Datasets - None</title></rect>
+  <rect x="124.625" y="297" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0020 Poison Training Data - Low</title></rect>
+  <rect x="124.625" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0021 Establish Accounts - None</title></rect>
+  <rect x="124.625" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0058 Publish Poisoned Models - None</title></rect>
+  <rect x="124.625" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0060 Publish Hallucinated Entities - None</title></rect>
+  <rect x="124.625" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0065 LLM Prompt Crafting - None</title></rect>
+  <rect x="124.625" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0066 Retrieval Content Crafting - None</title></rect>
+  <rect x="124.625" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0079 Stage Capabilities - None</title></rect>
+  <rect x="124.625" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0104 Publish Poisoned AI Agent Tool - None</title></rect>
+  <rect x="188.375" y="242" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0010 AI Supply Chain Compromise - Low</title></rect>
+  <rect x="188.375" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0012 Valid Accounts - None</title></rect>
+  <rect x="188.375" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0015 Evade AI Model - None</title></rect>
+  <rect x="188.375" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0049 Exploit Public-Facing Application - None</title></rect>
+  <rect x="188.375" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0052 Phishing - None</title></rect>
+  <rect x="188.375" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0078 Drive-by Compromise - None</title></rect>
+  <rect x="188.375" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0093 Prompt Infiltration via Public-Facing Application - None</title></rect>
+  <rect x="252.125" y="242" width="22" height="8" rx="3" fill="#3987e5"><title>AML.T0040 AI Model Inference API Access - Medium</title></rect>
+  <rect x="252.125" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0041 Physical Environment Access - None</title></rect>
+  <rect x="252.125" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0044 Full AI Model Access - None</title></rect>
+  <rect x="252.125" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0047 AI-Enabled Product or Service - None</title></rect>
+  <rect x="315.875" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0011 User Execution - None</title></rect>
+  <rect x="315.875" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0050 Command and Scripting Interpreter - None</title></rect>
+  <rect x="315.875" y="264" width="22" height="8" rx="3" fill="#184f95"><title>AML.T0051 LLM Prompt Injection - High</title></rect>
+  <rect x="315.875" y="275" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0053 AI Agent Tool Invocation - Low</title></rect>
+  <rect x="315.875" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0100 AI Agent Clickbait - None</title></rect>
+  <rect x="315.875" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0103 Deploy AI Agent - None</title></rect>
+  <rect x="379.625" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0018 Manipulate AI Model - None</title></rect>
+  <rect x="379.625" y="253" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0020 Poison Training Data - Low</title></rect>
+  <rect x="379.625" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0061 LLM Prompt Self-Replication - None</title></rect>
+  <rect x="379.625" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0070 RAG Poisoning - None</title></rect>
+  <rect x="379.625" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0080 AI Agent Context Poisoning - None</title></rect>
+  <rect x="379.625" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0081 Modify AI Agent Configuration - None</title></rect>
+  <rect x="379.625" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0093 Prompt Infiltration via Public-Facing Application - None</title></rect>
+  <rect x="379.625" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0099 AI Agent Tool Data Poisoning - None</title></rect>
+  <rect x="379.625" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0110 AI Agent Tool Poisoning - None</title></rect>
+  <rect x="443.375" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0012 Valid Accounts - None</title></rect>
+  <rect x="443.375" y="253" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0053 AI Agent Tool Invocation - Low</title></rect>
+  <rect x="443.375" y="264" width="22" height="8" rx="3" fill="#3987e5"><title>AML.T0054 LLM Jailbreak - Medium</title></rect>
+  <rect x="443.375" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0105 Escape to Host - None</title></rect>
+  <rect x="507.125" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0015 Evade AI Model - None</title></rect>
+  <rect x="507.125" y="253" width="22" height="8" rx="3" fill="#3987e5"><title>AML.T0054 LLM Jailbreak - Medium</title></rect>
+  <rect x="507.125" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0067 LLM Trusted Output Components Manipulation - None</title></rect>
+  <rect x="507.125" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0068 LLM Prompt Obfuscation - None</title></rect>
+  <rect x="507.125" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0071 False RAG Entry Injection - None</title></rect>
+  <rect x="507.125" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0073 Impersonation - None</title></rect>
+  <rect x="507.125" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0074 Masquerading - None</title></rect>
+  <rect x="507.125" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0076 Corrupt AI Model - None</title></rect>
+  <rect x="507.125" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0081 Modify AI Agent Configuration - None</title></rect>
+  <rect x="507.125" y="341" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0092 Manipulate User LLM Chat History - None</title></rect>
+  <rect x="507.125" y="352" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0094 Delay Execution of LLM Instructions - None</title></rect>
+  <rect x="507.125" y="363" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0097 Virtualization/Sandbox Evasion - None</title></rect>
+  <rect x="507.125" y="374" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0107 Exploitation for Defense Evasion - None</title></rect>
+  <rect x="507.125" y="385" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0109 AI Supply Chain Rug Pull - None</title></rect>
+  <rect x="507.125" y="396" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0111 AI Supply Chain Reputation Inflation - None</title></rect>
+  <rect x="570.875" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0055 Unsecured Credentials - None</title></rect>
+  <rect x="570.875" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0082 RAG Credential Harvesting - None</title></rect>
+  <rect x="570.875" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0083 Credentials from AI Agent Configuration - None</title></rect>
+  <rect x="570.875" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0090 OS Credential Dumping - None</title></rect>
+  <rect x="570.875" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0098 AI Agent Tool Credential Harvesting - None</title></rect>
+  <rect x="570.875" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0106 Exploitation for Credential Access - None</title></rect>
+  <rect x="634.625" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0007 Discover AI Artifacts - None</title></rect>
+  <rect x="634.625" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0013 Discover AI Model Ontology - None</title></rect>
+  <rect x="634.625" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0014 Discover AI Model Family - None</title></rect>
+  <rect x="634.625" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0062 Discover LLM Hallucinations - None</title></rect>
+  <rect x="634.625" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0063 Discover AI Model Outputs - None</title></rect>
+  <rect x="634.625" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0069 Discover LLM System Information - None</title></rect>
+  <rect x="634.625" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0075 Cloud Service Discovery - None</title></rect>
+  <rect x="634.625" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0084 Discover AI Agent Configuration - None</title></rect>
+  <rect x="634.625" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0089 Process Discovery - None</title></rect>
+  <rect x="698.375" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0052 Phishing - None</title></rect>
+  <rect x="698.375" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0091 Use Alternate Authentication Material - None</title></rect>
+  <rect x="762.125" y="242" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0035 AI Artifact Collection - Low</title></rect>
+  <rect x="762.125" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0036 Data from Information Repositories - None</title></rect>
+  <rect x="762.125" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0037 Data from Local System - None</title></rect>
+  <rect x="762.125" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0085 Data from AI Services - None</title></rect>
+  <rect x="825.875" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0005 Create Proxy AI Model - None</title></rect>
+  <rect x="825.875" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0018 Manipulate AI Model - None</title></rect>
+  <rect x="825.875" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0042 Verify Attack - None</title></rect>
+  <rect x="825.875" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0043 Craft Adversarial Data - None</title></rect>
+  <rect x="825.875" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0088 Generate Deepfakes - None</title></rect>
+  <rect x="825.875" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0102 Generate Malicious Commands - None</title></rect>
+  <rect x="889.625" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0072 Reverse Shell - None</title></rect>
+  <rect x="889.625" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0096 AI Service API - None</title></rect>
+  <rect x="889.625" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0108 AI Agent - None</title></rect>
+  <rect x="953.375" y="242" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0024 Exfiltration via AI Inference API - Low</title></rect>
+  <rect x="953.375" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0025 Exfiltration via Cyber Means - None</title></rect>
+  <rect x="953.375" y="264" width="22" height="8" rx="3" fill="#9ec5f4"><title>AML.T0056 Extract LLM System Prompt - Low</title></rect>
+  <rect x="953.375" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0057 LLM Data Leakage - None</title></rect>
+  <rect x="953.375" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0077 LLM Response Rendering - None</title></rect>
+  <rect x="953.375" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0086 Exfiltration via AI Agent Tool Invocation - None</title></rect>
+  <rect x="1017.12" y="242" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0015 Evade AI Model - None</title></rect>
+  <rect x="1017.12" y="253" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0029 Denial of AI Service - None</title></rect>
+  <rect x="1017.12" y="264" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0031 Erode AI Model Integrity - None</title></rect>
+  <rect x="1017.12" y="275" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0034 Cost Harvesting - None</title></rect>
+  <rect x="1017.12" y="286" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0046 Spamming AI System with Chaff Data - None</title></rect>
+  <rect x="1017.12" y="297" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0048 External Harms - None</title></rect>
+  <rect x="1017.12" y="308" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0059 Erode Dataset Integrity - None</title></rect>
+  <rect x="1017.12" y="319" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0101 Data Destruction via AI Agent Tool Invocation - None</title></rect>
+  <rect x="1017.12" y="330" width="22" height="8" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"><title>AML.T0112 Machine Compromise - None</title></rect>
+  <text x="40" y="435" font-size="14" fill="#0b0b0b" font-weight="600">Techniques with at least one detection, by tactic</text>
+  <text x="40" y="468" font-size="11" fill="#52514e">Reconnaissance</text>
+  <line x1="210" y1="453" x2="210" y2="475" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="468" font-size="11" fill="#52514e">0% · 0/8</text>
+  <text x="40" y="494" font-size="11" fill="#52514e">Resource Development</text>
+  <line x1="210" y1="479" x2="210" y2="501" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,484H262.98A4,4 0 0 1 266.98,488V492A4,4 0 0 1 262.98,496H210Z" fill="#2a78d6"/>
+  <text x="274.98" y="494" font-size="11" fill="#52514e">8% · 1/13</text>
+  <text x="40" y="520" font-size="11" fill="#52514e">Initial Access</text>
+  <line x1="210" y1="505" x2="210" y2="527" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,510H311.82A4,4 0 0 1 315.82,514V518A4,4 0 0 1 311.82,522H210Z" fill="#2a78d6"/>
+  <text x="323.82" y="520" font-size="11" fill="#52514e">14% · 1/7</text>
+  <text x="40" y="546" font-size="11" fill="#52514e">AI Model Access</text>
+  <line x1="210" y1="531" x2="210" y2="553" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,536H391A4,4 0 0 1 395,540V544A4,4 0 0 1 391,548H210Z" fill="#2a78d6"/>
+  <text x="403" y="546" font-size="11" fill="#52514e">25% · 1/4</text>
+  <text x="40" y="572" font-size="11" fill="#52514e">Execution</text>
+  <line x1="210" y1="557" x2="210" y2="579" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,562H452.42A4,4 0 0 1 456.42,566V570A4,4 0 0 1 452.42,574H210Z" fill="#2a78d6"/>
+  <text x="464.42" y="572" font-size="11" fill="#52514e">33% · 2/6</text>
+  <text x="40" y="598" font-size="11" fill="#52514e">Persistence</text>
+  <line x1="210" y1="583" x2="210" y2="605" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,588H288.14A4,4 0 0 1 292.14,592V596A4,4 0 0 1 288.14,600H210Z" fill="#2a78d6"/>
+  <text x="300.14" y="598" font-size="11" fill="#52514e">11% · 1/9</text>
+  <text x="40" y="624" font-size="11" fill="#52514e">Privilege Escalation</text>
+  <line x1="210" y1="609" x2="210" y2="631" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,614H576A4,4 0 0 1 580,618V622A4,4 0 0 1 576,626H210Z" fill="#2a78d6"/>
+  <text x="588" y="624" font-size="11" fill="#52514e">50% · 2/4</text>
+  <text x="40" y="650" font-size="11" fill="#52514e">Defense Evasion</text>
+  <line x1="210" y1="635" x2="210" y2="657" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,640H255.58A4,4 0 0 1 259.58,644V648A4,4 0 0 1 255.58,652H210Z" fill="#2a78d6"/>
+  <text x="267.58" y="650" font-size="11" fill="#52514e">7% · 1/15</text>
+  <text x="40" y="676" font-size="11" fill="#52514e">Credential Access</text>
+  <line x1="210" y1="661" x2="210" y2="683" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="676" font-size="11" fill="#52514e">0% · 0/6</text>
+  <text x="40" y="702" font-size="11" fill="#52514e">Discovery</text>
+  <line x1="210" y1="687" x2="210" y2="709" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="702" font-size="11" fill="#52514e">0% · 0/9</text>
+  <text x="40" y="728" font-size="11" fill="#52514e">Lateral Movement</text>
+  <line x1="210" y1="713" x2="210" y2="735" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="728" font-size="11" fill="#52514e">0% · 0/2</text>
+  <text x="40" y="754" font-size="11" fill="#52514e">Collection</text>
+  <line x1="210" y1="739" x2="210" y2="761" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,744H391A4,4 0 0 1 395,748V752A4,4 0 0 1 391,756H210Z" fill="#2a78d6"/>
+  <text x="403" y="754" font-size="11" fill="#52514e">25% · 1/4</text>
+  <text x="40" y="780" font-size="11" fill="#52514e">AI Attack Staging</text>
+  <line x1="210" y1="765" x2="210" y2="787" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="780" font-size="11" fill="#52514e">0% · 0/6</text>
+  <text x="40" y="806" font-size="11" fill="#52514e">Command and Control</text>
+  <line x1="210" y1="791" x2="210" y2="813" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="806" font-size="11" fill="#52514e">0% · 0/3</text>
+  <text x="40" y="832" font-size="11" fill="#52514e">Exfiltration</text>
+  <line x1="210" y1="817" x2="210" y2="839" stroke="#e1e0d9" stroke-width="1"/>
+  <path d="M210,822H452.42A4,4 0 0 1 456.42,826V830A4,4 0 0 1 452.42,834H210Z" fill="#2a78d6"/>
+  <text x="464.42" y="832" font-size="11" fill="#52514e">33% · 2/6</text>
+  <text x="40" y="858" font-size="11" fill="#52514e">Impact</text>
+  <line x1="210" y1="843" x2="210" y2="865" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="218" y="858" font-size="11" fill="#52514e">0% · 0/9</text>
+  <rect x="40" y="888" width="22" height="10" rx="3" fill="#f0efec" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="70" y="897" font-size="11" fill="#52514e">None (92)</text>
+  <rect x="154" y="888" width="22" height="10" rx="3" fill="#9ec5f4"/>
+  <text x="184" y="897" font-size="11" fill="#52514e">Low (6)</text>
+  <rect x="256" y="888" width="22" height="10" rx="3" fill="#3987e5"/>
+  <text x="286" y="897" font-size="11" fill="#52514e">Medium (2)</text>
+  <rect x="377" y="888" width="22" height="10" rx="3" fill="#184f95"/>
+  <text x="407" y="897" font-size="11" fill="#52514e">High (1)</text>
+  <line x1="40" y1="913" x2="1060" y2="913" stroke="#e1e0d9" stroke-width="1"/>
+  <text x="40" y="929" font-size="10" fill="#898781">MITRE ATLAS v5.6.0 · 9/101 techniques covered (9%) · 3 dead rules · generated by mitre-coverage-kit</text>
+</svg>

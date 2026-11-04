@@ -1,0 +1,142 @@
+"""Dependency-free SVG heat map of detection coverage."""
+
+from __future__ import annotations
+
+from xml.sax.saxutils import escape
+
+from .scoring import LEVEL_NAMES, Coverage
+
+SURFACE = "#fcfcfb"
+TEXT = "#0b0b0b"
+TEXT_2 = "#52514e"
+TEXT_3 = "#898781"
+HAIRLINE = "#e1e0d9"
+LEVEL_FILL = {0: "#f0efec", 1: "#9ec5f4", 2: "#3987e5", 3: "#184f95"}
+BAR = "#2a78d6"
+FONT = "Avenir Next, Helvetica Neue, Helvetica, Arial, sans-serif"
+
+WIDTH = 1100
+MARGIN = 40
+CELL_W, CELL_H, GAP = 22, 8, 3
+FONT_SIZE = 11
+CHAR_W = 6.3  # conservative average glyph width at 11 px
+BAR_H = 12
+ROW_H = 26
+LABEL_W = 170
+
+
+def _text(x: float, y: float, content: str, size: int, fill: str, **attrs: str) -> str:
+    extra = "".join(f' {k.replace("_", "-")}="{v}"' for k, v in attrs.items())
+    return f'<text x="{x:g}" y="{y:g}" font-size="{size}" fill="{fill}"{extra}>{escape(content)}</text>'
+
+
+def _bar_path(x: float, y: float, w: float, h: float, r: float) -> str:
+    """Bar with a square baseline edge (left) and rounded data end (right)."""
+    r = min(r, h / 2, w)
+    if w <= 0:
+        return ""
+    return (
+        f"M{x:g},{y:g}H{x + w - r:g}A{r:g},{r:g} 0 0 1 {x + w:g},{y + r:g}"
+        f"V{y + h - r:g}A{r:g},{r:g} 0 0 1 {x + w - r:g},{y + h:g}H{x:g}Z"
+    )
+
+
+def render_svg(coverage: Coverage) -> str:
+    """Render the coverage as an SVG string (fingerprint matrix, tactic bars, legend, footer)."""
+    tactics = coverage.tactics
+    by_tactic: dict[str, list[dict]] = {}
+    for cell in coverage.cells:
+        by_tactic.setdefault(cell["tactic_id"], []).append(cell)
+
+    framework_name = "MITRE ATT&CK Enterprise" if coverage.framework == "attack" else "MITRE ATLAS"
+    parts: list[str] = []
+
+    # Section 1: fingerprint matrix.
+    longest = max(len(t["tactic"]) for t in tactics)
+    header_h = int(longest * CHAR_W) + 12
+    ncols = len(tactics)
+    col_pitch = (WIDTH - 2 * MARGIN) / ncols
+    x0 = MARGIN + (col_pitch - CELL_W) / 2
+    max_rows = max(len(v) for v in by_tactic.values())
+
+    y = MARGIN
+    parts.append(_text(MARGIN, y + 14, f"{framework_name} detection coverage", 18, TEXT, font_weight="600"))
+    parts.append(
+        _text(MARGIN, y + 34, "One cell per technique, one column per tactic, coloured by detection level", 12, TEXT_2)
+    )
+    y += 56
+    header_base = y + header_h
+    for i, tactic in enumerate(tactics):
+        cx = x0 + i * col_pitch + CELL_W / 2
+        parts.append(
+            f'<text transform="translate({cx + 4:g},{header_base - 4:g}) rotate(-90)" '
+            f'font-size="{FONT_SIZE}" fill="{TEXT_2}">{escape(tactic["tactic"])}</text>'
+        )
+    y = header_base + 8
+    for i, tactic in enumerate(tactics):
+        for r, cell in enumerate(by_tactic[tactic["tactic_id"]]):
+            cx = x0 + i * col_pitch
+            cy = y + r * (CELL_H + GAP)
+            level = cell["level"]
+            stroke = f' stroke="{HAIRLINE}" stroke-width="1"' if level == 0 else ""
+            title = f"{cell['id']} {cell['name']} - {LEVEL_NAMES[level]}"
+            parts.append(
+                f'<rect x="{cx:g}" y="{cy:g}" width="{CELL_W}" height="{CELL_H}" rx="3" '
+                f'fill="{LEVEL_FILL[level]}"{stroke}><title>{escape(title)}</title></rect>'
+            )
+    y += max_rows * (CELL_H + GAP) + 28
+
+    # Section 2: bars.
+    parts.append(_text(MARGIN, y, "Techniques with at least one detection, by tactic", 14, TEXT, font_weight="600"))
+    y += 16
+    bar_x = MARGIN + LABEL_W
+    bar_max = WIDTH - MARGIN - bar_x - 110
+    for t in tactics:
+        row_mid = y + ROW_H / 2
+        parts.append(_text(MARGIN, row_mid + 4, t["tactic"], FONT_SIZE, TEXT_2))
+        parts.append(
+            f'<line x1="{bar_x}" y1="{row_mid - ROW_H / 2 + 2:g}" x2="{bar_x}" '
+            f'y2="{row_mid + ROW_H / 2 - 2:g}" stroke="{HAIRLINE}" stroke-width="1"/>'
+        )
+        width = bar_max * t["percent"] / 100
+        if width > 0:
+            parts.append(f'<path d="{_bar_path(bar_x, row_mid - BAR_H / 2, max(width, 4), BAR_H, 4)}" fill="{BAR}"/>')
+        label = f"{t['percent']:.0f}% · {t['covered']}/{t['techniques']}"
+        parts.append(_text(bar_x + max(width, 0) + 8, row_mid + 4, label, FONT_SIZE, TEXT_2))
+        y += ROW_H
+    y += 30
+
+    # Legend.
+    lx = MARGIN
+    for n in range(4):
+        stroke = f' stroke="{HAIRLINE}" stroke-width="1"' if n == 0 else ""
+        parts.append(
+            f'<rect x="{lx}" y="{y - 9}" width="{CELL_W}" height="{CELL_H + 2}" rx="3" '
+            f'fill="{LEVEL_FILL[n]}"{stroke}/>'
+        )
+        label = f"{LEVEL_NAMES[n]} ({coverage.totals['by_level'][LEVEL_NAMES[n]]})"
+        parts.append(_text(lx + CELL_W + 8, y, label, FONT_SIZE, TEXT_2))
+        lx += CELL_W + 8 + int(len(label) * CHAR_W) + 28
+    y += 30
+
+    # Footer.
+    t = coverage.totals
+    footer = (
+        f"{framework_name} v{coverage.version} · {t['distinct_covered']}/{t['distinct_techniques']} "
+        f"techniques covered ({t['percent']:.0f}%) · {len(coverage.dead_rules)} dead rules · "
+        "generated by mitre-coverage-kit"
+    )
+    parts.append(
+        f'<line x1="{MARGIN}" y1="{y - 14}" x2="{WIDTH - MARGIN}" y2="{y - 14}" '
+        f'stroke="{HAIRLINE}" stroke-width="1"/>'
+    )
+    parts.append(_text(MARGIN, y + 2, footer, 10, TEXT_3))
+    height = y + MARGIN - 8
+
+    body = "\n  ".join(parts)
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{WIDTH}" height="{height}" '
+        f'viewBox="0 0 {WIDTH} {height}" font-family="{FONT}" role="img" '
+        f'aria-label="{escape(framework_name)} detection coverage heat map">\n'
+        f'  <rect width="{WIDTH}" height="{height}" fill="{SURFACE}"/>\n  {body}\n</svg>\n'
+    )
