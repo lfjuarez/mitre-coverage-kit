@@ -4,6 +4,10 @@ Detection coverage is usually a belief: someone says "we cover credential access
 
 ![HTML report for the synthetic example inventory: key figures, coverage by tactic and recommendations](examples/output/report.png)
 
+## Guides
+
+Step-by-step guides with screenshots, from creating a read-only account in each SIEM to the first report: [Splunk](docs/guides/splunk.md), [Elastic Security](docs/guides/elastic.md), [Wazuh](docs/guides/wazuh.md), and [several SIEMs in the web app](docs/guides/serve.md).
+
 ## Quick start
 
 Python 3.11 or newer. Install from the repository with `uv` (or `pipx install .`):
