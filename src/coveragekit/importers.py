@@ -47,6 +47,7 @@ class ImportedRule:
     source: str = ""
     data_available: bool = True
     checked: bool = False
+    missing: list[tuple[str, str]] = field(default_factory=list)
 
 
 # --------------------------------------------------------------------------- helpers
@@ -424,6 +425,7 @@ def apply_data_sources(rules: list[ImportedRule], active: list[tuple[str | None,
         hits = [_satisfied(r, active) for r in rule.requires]
         rule.data_available = all(hits) if rule.match == "all" else any(hits)
         rule.checked = True
+        rule.missing = [] if rule.data_available else [r for r, hit in zip(rule.requires, hits, strict=True) if not hit]
 
 
 # --------------------------------------------------------------------------- output
@@ -446,6 +448,8 @@ def to_rows(rules: list[ImportedRule], keep: dict[str, dict[str, str]] | None = 
                 "tuned": prev.get("tuned") or "false",
                 "owner": prev.get("owner") or "",
                 "source": r.source,
+                "data_sources": ";".join(f"{kind}:{value}" for kind, value in r.requires),
+                "missing_data": ";".join(f"{kind}:{value}" for kind, value in r.missing),
             }
         )
     return rows

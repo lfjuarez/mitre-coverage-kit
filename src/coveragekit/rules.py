@@ -22,6 +22,8 @@ COLUMNS = (
     "tuned",
     "owner",
     "source",
+    "data_sources",
+    "missing_data",
 )
 REQUIRED = ("rule_id", "techniques", "enabled", "data_available")
 
@@ -42,6 +44,8 @@ class Rule:
     owner: str = ""
     source: str = ""
     invalid_techniques: list[str] = field(default_factory=list)
+    data_sources: list[str] = field(default_factory=list)  # what the rule reads, as kind:value (optional)
+    missing_data: list[str] = field(default_factory=list)  # the subset that was not found when the import checked
 
     @property
     def valid_techniques(self) -> list[str]:
@@ -95,6 +99,8 @@ def _build(raw: dict[str, Any], index: int) -> Rule:
         owner=str(raw.get("owner") or "").strip(),
         source=str(raw.get("source") or "").strip(),
         invalid_techniques=invalid,
+        data_sources=[d.strip() for d in str(raw.get("data_sources") or "").split(";") if d.strip()],
+        missing_data=[d.strip() for d in str(raw.get("missing_data") or "").split(";") if d.strip()],
         **flags,
     )
 

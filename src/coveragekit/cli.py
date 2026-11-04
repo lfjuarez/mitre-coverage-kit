@@ -9,9 +9,10 @@ from pathlib import Path
 from typing import Any
 
 from . import __version__, frameworks, importers
+from .html import render_html
 from .navigator import build_layer
 from .render import render_svg
-from .rules import RuleError, merge_inventories, unknown_technique_warnings
+from .rules import Rule, RuleError, merge_inventories, unknown_technique_warnings
 from .scoring import Coverage, score
 
 
@@ -27,7 +28,7 @@ def _write(path: Path, text: str) -> None:
         raise CliError(f"cannot write {path}: {exc}") from exc
 
 
-def _prepare(args: argparse.Namespace, names: list[str]) -> dict[str, Coverage]:
+def _prepare(args: argparse.Namespace, names: list[str]) -> tuple[dict[str, Coverage], list[Rule]]:
     try:
         rules = merge_inventories(args.rules)
         packages = {n: frameworks.load(n, args.frameworks_dir) for n in names}
@@ -38,7 +39,7 @@ def _prepare(args: argparse.Namespace, names: list[str]) -> dict[str, Coverage]:
         known |= frameworks.technique_ids(package)
     for warning in unknown_technique_warnings(rules, known):
         print(f"warning: {warning}", file=sys.stderr)
-    return {n: score(rules, p) for n, p in packages.items()}
+    return {n: score(rules, p) for n, p in packages.items()}, rules
 
 
 def _names(choice: str) -> list[str]:
@@ -78,7 +79,7 @@ def cmd_fetch(args: argparse.Namespace) -> None:
 
 
 def cmd_score(args: argparse.Namespace) -> None:
-    results = _prepare(args, _names(args.framework))
+    results, _ = _prepare(args, _names(args.framework))
     for cov in results.values():
         _print_summary(cov)
     _write(Path(args.out), _coverage_json(results))
@@ -86,20 +87,26 @@ def cmd_score(args: argparse.Namespace) -> None:
 
 
 def cmd_layer(args: argparse.Namespace) -> None:
-    cov = _prepare(args, ["attack"])["attack"]
+    cov = _prepare(args, ["attack"])[0]["attack"]
     layer = build_layer(cov, name=args.name)
     _write(Path(args.out), json.dumps(layer, indent=2, ensure_ascii=False) + "\n")
     print(f"wrote {args.out}")
 
 
 def cmd_render(args: argparse.Namespace) -> None:
-    cov = _prepare(args, [args.framework])[args.framework]
+    cov = _prepare(args, [args.framework])[0][args.framework]
     _write(Path(args.out), render_svg(cov))
     print(f"wrote {args.out}")
 
 
+def cmd_html(args: argparse.Namespace) -> None:
+    results, rules = _prepare(args, ["attack", "atlas"])
+    _write(Path(args.out), render_html(results, rules, title=args.title))
+    print(f"wrote {args.out}")
+
+
 def cmd_report(args: argparse.Namespace) -> None:
-    results = _prepare(args, ["attack", "atlas"])
+    results, rules = _prepare(args, ["attack", "atlas"])
     out = Path(args.out_dir)
     for cov in results.values():
         _print_summary(cov)
@@ -108,7 +115,8 @@ def cmd_report(args: argparse.Namespace) -> None:
     _write(out / "attack-layer.json", json.dumps(layer, indent=2, ensure_ascii=False) + "\n")
     _write(out / "coverage-attack.svg", render_svg(results["attack"]))
     _write(out / "coverage-atlas.svg", render_svg(results["atlas"]))
-    print(f"wrote coverage.json, attack-layer.json, coverage-attack.svg, coverage-atlas.svg to {out}")
+    _write(out / "report.html", render_html(results, rules, title=args.title))
+    print(f"wrote coverage.json, attack-layer.json, coverage-attack.svg, coverage-atlas.svg, report.html to {out}")
 
 
 def _keep_rows(path: str | None) -> dict[str, dict[str, str]]:
@@ -187,10 +195,17 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out", required=True, help="output SVG file")
     p.set_defaults(func=cmd_render)
 
-    p = sub.add_parser("report", help="write coverage.json, the layer and both SVGs")
+    p = sub.add_parser("html", help="write a self-contained HTML report with statistics and recommendations")
+    common(p)
+    p.add_argument("--out", required=True, help="output HTML file")
+    p.add_argument("--title", default="Detection coverage report", help="report title")
+    p.set_defaults(func=cmd_html)
+
+    p = sub.add_parser("report", help="write coverage.json, the layer, both SVGs and the HTML report")
     common(p)
     p.add_argument("--out-dir", required=True, help="output directory")
     p.add_argument("--name", default="SIEM detection coverage", help="layer name")
+    p.add_argument("--title", default="Detection coverage report", help="HTML report title")
     p.set_defaults(func=cmd_report)
     return parser
 

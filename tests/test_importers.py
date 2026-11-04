@@ -187,3 +187,26 @@ def test_elastic_backing_indices_count_as_their_data_stream(tmp_path):
     active = importers.load_data_sources(f)
     assert active == [(None, "logs-aws.cloudtrail-default")]
     assert importers._satisfied(("index", "logs-aws.cloudtrail-*"), active)
+
+
+def test_import_writes_data_sources_column(tmp_path):
+    out = tmp_path / "rules.csv"
+    assert main(["import", "splunk", "--export", str(EXPORTS / "splunk-rest.json"), "--out", str(out)]) == 0
+    rows = {r["rule_id"]: r for r in csv.DictReader(open(out))}
+    assert rows["ESCU - Windows PowerShell Encoded Command"]["data_sources"] == "datamodel:Endpoint"
+    assert rows["ESCU - Linux Sudo Brute Force"]["data_sources"] == "index:linux;sourcetype:linux_secure"
+    assert load_rules(out)[0].data_sources  # the column round-trips through the loader
+    assert all(not r["missing_data"] for r in rows.values())  # nothing was checked
+
+
+def test_import_records_the_missing_sources(tmp_path):
+    active = tmp_path / "active.txt"
+    active.write_text("datamodel:Endpoint\nindex:linux\n")  # linux_secure sourcetype is not arriving
+    out = tmp_path / "rules.csv"
+    args = ["import", "splunk", "--export", str(EXPORTS / "splunk-rest.json"), "--data-sources", str(active)]
+    assert main(args + ["--out", str(out)]) == 0
+    rows = {r["rule_id"]: r for r in csv.DictReader(open(out))}
+    sudo = rows["ESCU - Linux Sudo Brute Force"]
+    assert sudo["data_available"] == "false" and sudo["missing_data"] == "sourcetype:linux_secure"
+    assert rows["ESCU - Windows PowerShell Encoded Command"]["missing_data"] == ""
+    assert load_rules(out)[1].missing_data == ["sourcetype:linux_secure"]

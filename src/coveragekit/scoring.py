@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from .analysis import analyze
 from .frameworks import cell_count, parent_id, technique_ids
 from .rules import Rule
 
@@ -31,6 +32,7 @@ class Coverage:
     totals: dict[str, Any] = field(default_factory=dict)
     dead_rules: list[dict[str, str]] = field(default_factory=list)
     sources: list[dict[str, Any]] = field(default_factory=list)
+    analysis: dict[str, Any] = field(default_factory=dict)
     unmapped_rules: list[dict[str, str]] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
@@ -42,6 +44,7 @@ class Coverage:
             "cells": self.cells,
             "dead_rules": self.dead_rules,
             "sources": self.sources,
+            "analysis": self.analysis,
             "unmapped_rules": self.unmapped_rules,
         }
 
@@ -153,6 +156,7 @@ def score(rules: list[Rule], package: dict[str, Any]) -> Coverage:
     ]
     return Coverage(
         sources=source_breakdown(own, known),
+        analysis=analyze(own, cells, tactic_stats, dead, unmapped, framework, package["version"]),
         framework=framework,
         version=package["version"],
         cells=cells,
