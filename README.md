@@ -61,6 +61,49 @@ coveragekit import sentinel --export analytics-rules.json      --data-sources ta
 
 `--data-sources` takes a CSV whose header uses `index`, `sourcetype`, `datamodel`, `table`, `group` or `logsource`, or plain text with one source per line, optionally prefixed with its kind (`datamodel:Endpoint`). Wildcards work in both directions. Without `--data-sources` every rule is assumed to have data and the command warns about it; that is the column that finds dead rules, so it is worth the extra query. Rules with no technique id are counted and left out. SIEMs do not record whether a rule was tested against an emulated attack or tuned, so those columns start as `false`: fill them in, and pass `--keep-from previous.csv` on the next import to keep them.
 
+## Pull straight from the SIEM
+
+`coveragekit pull` does the export for you: it makes the two reads the table above describes (the rules, and the sources with events in the last `--days`), writes the inventory, and keeps nothing else unless you pass `--save-exports DIR`.
+
+```bash
+export SPLUNK_TOKEN=...      # Settings > Tokens, for a user whose role can read saved searches and run tstats
+coveragekit pull splunk  --url https://splunk.example.com:8089 --out splunk.csv
+
+export ELASTIC_API_KEY=...   # the encoded key Kibana shows, or id:key
+coveragekit pull elastic --url https://kibana.example.com:5601 --es-url https://es.example.com:9200 --out elastic.csv
+
+export WAZUH_USER=coverage-ro WAZUH_PASSWORD=...           # a user with the built-in readonly role
+export WAZUH_INDEXER_USER=... WAZUH_INDEXER_PASSWORD=...    # read on wazuh-alerts-*
+coveragekit pull wazuh   --url https://wazuh.example.com:55000 --indexer-url https://wazuh.example.com:9200 --out wazuh.csv
+```
+
+How credentials are handled:
+
+- Only environment variables, never flags, so they do not land in shell history or `ps`. They go in request headers and are never written to disk or printed; the tests check both.
+- Use the narrowest credential each SIEM offers. Splunk: an authentication token for a user whose role imports `user` and can search all indexes (`SPLUNK_USER` and `SPLUNK_PASSWORD` are the fallback; tokens need the KV store). Splunk has no strictly read-only built-in role, since `user` can still save private searches, so coveragekit itself only issues GETs and one `tstats` search. Elastic: an API key limited to `feature_siem.read` in Kibana and `read` on the log indices, for example:
+
+  ```json
+  POST /_security/api_key
+  {"name": "coveragekit", "expiration": "30d", "role_descriptors": {"coverage_reader": {
+    "indices": [{"names": ["logs-*"], "privileges": ["read", "view_index_metadata"]}],
+    "applications": [{"application": "kibana-.kibana", "privileges": ["feature_siem.read"], "resources": ["*"]}]}}}
+  ```
+
+  Wazuh has no API keys, so a `readonly` user gets a short-lived token for each run.
+- Every read is a GET or a search; nothing is created or changed in the SIEM. In the lab, the Elastic key above gets 403 when it tries to create a rule or write a document.
+- TLS is verified by default. Pass `--ca FILE` for a private CA; `--insecure` exists for labs and prints a warning.
+
+## Track coverage over time
+
+`--history DIR` on `score` or `report` saves a dated copy of `coverage.json`, and `diff` compares two of them:
+
+```bash
+coveragekit report --rules splunk.csv elastic.csv --out-dir out/ --history history/
+coveragekit diff history/coverage-2026-10-01T0900.json history/coverage-2026-11-04T0900.json
+```
+
+It lists the techniques that improved or regressed with their levels, the tactics whose percentage changed, the rules that died and the dead rules that came back. Run `pull` and `report --history` from cron or a CI schedule and the diff becomes a weekly change log for the SOC.
+
 ## Several SIEMs, one coverage
 
 Pass one inventory per SIEM and they are merged:
