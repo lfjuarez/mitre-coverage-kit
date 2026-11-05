@@ -4,6 +4,7 @@ import base64
 import csv
 import json
 import threading
+import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -18,6 +19,8 @@ SECRET = "s3cr3t-value-never-on-disk"
 
 class Fake(BaseHTTPRequestHandler):
     seen: list[tuple[str, str, str]] = []
+    searches: list[str] = []
+    models: dict[str, int] = {"Endpoint": 12}
 
     def log_message(self, *a):
         pass
@@ -44,7 +47,15 @@ class Fake(BaseHTTPRequestHandler):
                 return self._send(401, {"messages": [{"text": "unauthorized"}]})
             return self._send(200, (EXPORTS / "splunk-rest.json").read_bytes())
         if p == "/services/search/jobs/export":
-            assert b"earliest_time=-3d" in self.body
+            assert b"earliest_time=-3d" in self.body or b"earliest_time=-7d" in self.body
+            form = urllib.parse.parse_qs(self.body.decode())
+            search = form["search"][0]
+            Fake.searches.append(search)
+            if "datamodel=" in search:
+                model = search.split("datamodel=")[1]
+                if model in Fake.models:
+                    return self._send(200, f"count\n{Fake.models[model]}\n".encode(), "text/csv")
+                return self._send(400, {"messages": [{"text": "Error in tstats: unknown data model"}]})
             return self._send(200, b"index,sourcetype,count\nlinux,linux_secure,4\n", "text/csv")
         # Kibana / Elasticsearch
         if p.startswith("/api/detection_engine/rules/_find"):
@@ -83,7 +94,7 @@ class Fake(BaseHTTPRequestHandler):
 
 @pytest.fixture()
 def fake():
-    Fake.seen = []
+    Fake.seen, Fake.searches, Fake.models = [], [], {"Endpoint": 12}
     server = ThreadingHTTPServer(("127.0.0.1", 0), Fake)
     threading.Thread(target=server.serve_forever, daemon=True).start()
     yield f"http://127.0.0.1:{server.server_port}"
@@ -103,10 +114,40 @@ def test_pull_splunk_with_token(fake, tmp_path, monkeypatch, capsys):
     assert main(args) == 0
     rows = {r["rule_id"]: r for r in csv.DictReader(open(out))}
     assert rows["ESCU - Linux Sudo Brute Force"]["data_available"] == "true"
-    assert rows["ESCU - Windows PowerShell Encoded Command"]["missing_data"] == "datamodel:Endpoint"
+    # the rule reads the Endpoint data model, which had events: it is not dead
+    assert rows["ESCU - Windows PowerShell Encoded Command"]["data_available"] == "true"
+    assert "| tstats count from datamodel=Endpoint" in Fake.searches
     assert (tmp_path / "raw" / "correlation-searches.json").is_file()
+    active = list(csv.DictReader(open(tmp_path / "raw" / "active-sources.csv")))
+    assert {"index": "", "sourcetype": "", "datamodel": "Endpoint", "count": "12"} in active
     no_secret_in(tmp_path)
     assert SECRET not in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("models", [{"Endpoint": 0}, {}], ids=["no-events", "unknown-model"])
+def test_pull_splunk_datamodel_without_data_is_dead(fake, tmp_path, monkeypatch, models):
+    Fake.models = models
+    monkeypatch.setenv("SPLUNK_TOKEN", SECRET)
+    out = tmp_path / "splunk.csv"
+    assert main(["pull", "splunk", "--url", fake, "--days", "3", "--out", str(out)]) == 0
+    rows = {r["rule_id"]: r for r in csv.DictReader(open(out))}
+    assert rows["ESCU - Windows PowerShell Encoded Command"]["data_available"] == "false"
+    assert rows["ESCU - Windows PowerShell Encoded Command"]["missing_data"] == "datamodel:Endpoint"
+    assert rows["ESCU - Linux Sudo Brute Force"]["data_available"] == "true"
+
+
+def test_splunk_datamodel_names_are_validated():
+    raw = json.dumps(
+        {
+            "entry": [
+                {"content": {"search": "| tstats count from datamodel=Network_Traffic.All_Traffic by x"}},
+                {"content": {"search": "| datamodel Authentication search | stats count"}},
+                {"content": {"search": "index=main sourcetype=foo"}},
+            ]
+        }
+    ).encode()
+    assert connectors._splunk_datamodels(raw) == ["Authentication", "Network_Traffic"]
+    assert connectors._splunk_datamodels(b"not json") == []
 
 
 def test_pull_splunk_bad_token_is_a_clean_error(fake, tmp_path, monkeypatch, capsys):

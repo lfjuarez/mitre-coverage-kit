@@ -4,7 +4,7 @@ Ten minutes. You create a role that can search, a user with only that role, and 
 
 ## What the tool reads
 
-Splunk ES stores the ATT&CK techniques of each correlation search in its annotations. `coveragekit` reads them over the REST API, parses the `index`, `sourcetype` and `datamodel` each search uses, and runs one `tstats` search to see which of those sources had events recently.
+Splunk ES stores the ATT&CK techniques of each correlation search in its annotations. `coveragekit` reads them over the REST API, parses the `index`, `sourcetype` and `datamodel` each search uses, and runs `tstats` searches to see which of those sources had events recently: one by index and sourcetype, and one per data model the searches use. Most ES correlation searches read a data model, so without the second check they would all look dead.
 
 ![The lab correlation searches with their MITRE annotations](img/splunk-00-correlation-searches.png)
 
@@ -51,7 +51,7 @@ The URL is the management port (8089), not Splunk Web. The lab uses a self-signe
 
 ## About the role
 
-Splunk has no strictly read-only built-in role: `user` can still save private searches. `coveragekit` itself only issues GET requests and one `tstats` search, and it never saves anything. If your policy requires it, restrict the role further with **Restrictions** and **Resources** (search concurrency, time window).
+Splunk has no strictly read-only built-in role: `user` can still save private searches. `coveragekit` itself only issues GET requests and `tstats` searches, and it never saves anything. If your policy requires it, restrict the role further with **Restrictions** and **Resources** (search concurrency, time window).
 
 ## Without network access
 
@@ -62,7 +62,11 @@ curl -k -H "Authorization: Bearer $SPLUNK_TOKEN" \
   "https://splunk.example.com:8089/servicesNS/-/-/saved/searches?output_mode=json&count=0&search=action.correlationsearch.enabled%3D1" \
   -o correlation-searches.json
 curl -k -H "Authorization: Bearer $SPLUNK_TOKEN" https://splunk.example.com:8089/services/search/jobs/export \
-  --data-urlencode 'search=| tstats count where index=* by index sourcetype' -d earliest_time=-7d -d output_mode=csv \
-  -o active-sources.csv
+  --data-urlencode 'search=| tstats count where index=* by index sourcetype
+    | append [| tstats count from datamodel=Endpoint | eval datamodel="Endpoint"]
+    | where count>0 | table index sourcetype datamodel count' \
+  -d earliest_time=-7d -d output_mode=csv -o active-sources.csv
 coveragekit import splunk --export correlation-searches.json --data-sources active-sources.csv --out splunk.csv
 ```
+
+Add one `append` line per data model your correlation searches use (`Endpoint`, `Network_Traffic`, `Authentication` and so on). `coveragekit pull` does this for you.
