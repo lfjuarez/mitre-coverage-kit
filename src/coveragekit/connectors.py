@@ -18,8 +18,11 @@ Authentication, from most to least preferred:
 from __future__ import annotations
 
 import base64
+import csv
+import io
 import json
 import os
+import re
 import ssl
 import time
 import urllib.error
@@ -28,6 +31,8 @@ import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
+_DM_NAME = re.compile(r"[A-Za-z_]\w{0,99}")
 
 
 class ConnectorError(Exception):
@@ -161,17 +166,57 @@ def pull_splunk(
     rules = http.request("GET", f"{url}/servicesNS/-/-/saved/searches?{query}", auth)
     if b'"entry"' not in rules:
         raise ConnectorError(f"{_host(url)} returned no saved searches; check the role can read them")
-    active = http.request(
-        "POST",
-        f"{url}/services/search/jobs/export",
-        auth,
-        form={
-            "search": "| tstats count where index=* by index sourcetype",
-            "earliest_time": f"-{days}d",
-            "output_mode": "csv",
-        },
-    )
-    return _write(out_dir / "correlation-searches.json", rules), _write(out_dir / "active-sources.csv", active)
+
+    def export(search: str) -> list[dict[str, str]]:
+        raw = http.request(
+            "POST",
+            f"{url}/services/search/jobs/export",
+            auth,
+            form={"search": search, "earliest_time": f"-{days}d", "output_mode": "csv"},
+        )
+        return list(csv.DictReader(io.StringIO(raw.decode("utf-8", "replace"))))
+
+    rows = [
+        {
+            "index": r.get("index", ""),
+            "sourcetype": r.get("sourcetype", ""),
+            "datamodel": "",
+            "count": r.get("count", ""),
+        }
+        for r in export("| tstats count where index=* by index sourcetype")
+    ]
+    # Most ES correlation searches read a data model, which the index/sourcetype count cannot show.
+    # Ask each data model the rules use whether it had events in the same window.
+    for model in _splunk_datamodels(rules):
+        try:
+            found = export(f"| tstats count from datamodel={model}")
+        except ConnectorError as exc:
+            if not re.match(r"4(0[02]|0[4-9]|[1-9]\d) from", str(exc)):
+                raise  # auth, network and server errors stop the pull
+            continue  # Splunk rejected the search (unknown data model): no data
+        count = sum(int(r.get("count") or 0) for r in found if (r.get("count") or "").isdigit())
+        if count:
+            rows.append({"index": "", "sourcetype": "", "datamodel": model, "count": str(count)})
+    out = io.StringIO()
+    writer = csv.DictWriter(out, fieldnames=["index", "sourcetype", "datamodel", "count"], lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return _write(out_dir / "correlation-searches.json", rules), _write(out_dir / "active-sources.csv", out.getvalue())
+
+
+def _splunk_datamodels(raw: bytes) -> list[str]:
+    """Data model names used by the enabled correlation searches, validated as plain identifiers."""
+    from .importers import spl_requirements
+
+    try:
+        entries = json.loads(raw).get("entry") or []
+    except (ValueError, AttributeError):
+        return []
+    models: set[str] = set()
+    for e in entries:
+        search = (e.get("content") or {}).get("search") or ""
+        models.update(v for k, v in spl_requirements(search) if k == "datamodel" and _DM_NAME.fullmatch(v))
+    return sorted(models)
 
 
 # --------------------------------------------------------------------------- Elastic Security

@@ -57,7 +57,7 @@ coveragekit import sentinel --export analytics-rules.json      --data-sources ta
 
 | SIEM | Export (`--export`) | Techniques from | Data sources a rule needs | Active sources (`--data-sources`) |
 |---|---|---|---|---|
-| Splunk ES | REST `GET /servicesNS/-/-/saved/searches?output_mode=json&count=0`, or a CSV from `\| rest` | `action.correlationsearch.annotations` (`mitre_attack`, `mitre_atlas`) | `index`, `sourcetype` and `datamodel` in the SPL (all of them) | `\| tstats count where index=* by index sourcetype` with `earliest_time=-7d`, exported as CSV |
+| Splunk ES | REST `GET /servicesNS/-/-/saved/searches?output_mode=json&count=0`, or a CSV from `\| rest` | `action.correlationsearch.annotations` (`mitre_attack`, `mitre_atlas`) | `index`, `sourcetype` and `datamodel` in the SPL (all of them) | `\| tstats count where index=* by index sourcetype`, plus `\| tstats count from datamodel=<name>` for each data model the rules use, with `earliest_time=-7d`, exported as CSV |
 | Elastic Security | `GET /api/detection_engine/rules/_find?per_page=10000`, or the `_export` NDJSON | `threat[]` (MITRE ATT&CK and MITRE ATLAS, sub-techniques included) | `index` patterns, or `FROM` in ES\|QL rules (any of them) | `terms` aggregation on `_index` over `logs-*` for the last 7 days; backing indices count as their data stream |
 | Wazuh | API `GET /rules?limit=100000`, or rule XML files / a directory | `<mitre><id>` | rule groups (any of them); level 0 rules count as disabled | rule groups seen in `alerts.json` (or `wazuh-alerts-*`) in the last 7 days |
 | Sigma | a rule file or a directory | `attack.tNNNN` tags (`atlas.aml.tNNNN` also accepted) | `logsource` as `product/category` or `product/service` | the log sources you collect, for example `windows/process_creation` |
@@ -84,7 +84,7 @@ coveragekit pull wazuh   --url https://wazuh.example.com:55000 --indexer-url htt
 How credentials are handled:
 
 - Only environment variables, never flags, so they do not land in shell history or `ps`. They go in request headers and are never written to disk or printed; the tests check both.
-- Use the narrowest credential each SIEM offers. Splunk: an authentication token for a user whose role imports `user` and can search all indexes (`SPLUNK_USER` and `SPLUNK_PASSWORD` are the fallback; tokens need the KV store). Splunk has no strictly read-only built-in role, since `user` can still save private searches, so coveragekit itself only issues GETs and one `tstats` search. Elastic: an API key limited to `feature_siem.read` in Kibana and `read` on the log indices, for example:
+- Use the narrowest credential each SIEM offers. Splunk: an authentication token for a user whose role imports `user` and can search all indexes (`SPLUNK_USER` and `SPLUNK_PASSWORD` are the fallback; tokens need the KV store). Splunk has no strictly read-only built-in role, since `user` can still save private searches, so coveragekit itself only issues GETs and `tstats` searches. Elastic: an API key limited to `feature_siem.read` in Kibana and `read` on the log indices, for example:
 
   ```json
   POST /_security/api_key
